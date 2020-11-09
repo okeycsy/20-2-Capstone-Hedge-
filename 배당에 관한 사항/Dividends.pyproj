@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>750ccd6b-f9a4-412b-8d83-ddea3e5cd72d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Dividends.py</StartupFile>
+    <StartupFile>combine.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="combine.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Dividends.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

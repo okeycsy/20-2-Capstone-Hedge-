@@ -3,6 +3,7 @@ import zipfile
 import xml.etree.ElementTree as ET
 import numpy as np
 import pandas as pd
+import time
 
 # 배당에 관한 사항 저장
 api_key = "e9ec2d8efa17f86f2bb20230037c6340b47ed902"
@@ -51,7 +52,7 @@ def download_dividend(crtfc_key, corp_code, bsns_year, reprt_code):
     api_url = "https://opendart.fss.or.kr/api/alotMatter.xml"
     request_url = (api_url + '?crtfc_key=' + crtfc_key + '&corp_code=' +
                    corp_code + '&bsns_year=' + bsns_year + '&reprt_code=' + reprt_code)
-    #print(request_url)
+    print(request_url)
     name_dividend = 'dividend.xml'
     content_dividend = requests.get(request_url).content
     file_dividend = open(name_dividend, 'wb')
@@ -68,8 +69,12 @@ def download_dividend(crtfc_key, corp_code, bsns_year, reprt_code):
     se_list = ['회사명']
     for branch in root_dividend:
         if branch.tag == "status":
+            #print(branch.text)
             if branch.text == "013":
                 print("no data")
+                return False, result, se_list
+            if branch.text == "020":
+                print("초과")
                 return False, result, se_list
         se_name = ""
         for b in branch:
@@ -111,6 +116,7 @@ def download_dividend(crtfc_key, corp_code, bsns_year, reprt_code):
 #download_dividend(api_key, '00126380', '2018', '11011')
 
 listed_company_list = listed_company()
+print(len(listed_company_list))
 
 dividend_info_columns = []
 dividend_df = pd.DataFrame(columns = dividend_info_columns)
@@ -118,11 +124,12 @@ count = 0
 limit = 500
 for company in listed_company_list:
     count += 1
-    #if count < 300:
+    #if count < 1005:
     #    continue
     print(count)
     #if count == limit:
     #    break
+    time.sleep(5)
 
     for year in range(2019, 2020):
         result, dividend_info, se_list = download_dividend(api_key, company, str(year), '11011')
