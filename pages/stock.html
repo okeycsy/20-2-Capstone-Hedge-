@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href='./css/stock.css'>
+</head>
+<body>
+    <!--로고-->
+    <div>
+        <div class="container">
+            <a href="./main.html">logo</a>
+        </div>
+    </div>
+    <hr>
+    <p>이름</p>
+    <!--차트-->
+    <div>
+        <div class="container">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <!--기타 정보-->
+    <div>
+        <div class="container">
+            <a class="myButton" id="b0" onclick="clicked(this)">MACD 오실레이터</a>
+            <a class="myButton" id="b1" onclick="clicked(this)">슬로우 스토캐스틱</a>
+            <a class="myButton" id="b2" onclick="clicked(this)">RSI</a>
+            <a class="myButton" id="b3" onclick="clicked(this)">볼린저밴드</a>
+            <a class="myButton" id="b4" onclick="clicked(this)">모멘텀</a>
+        
+            <canvas id="info"></canvas>
+        </div>
+    </div>
+
+
+    <!--스크립트-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script>
+        // 차트 그리기
+        let ctx = document.getElementById("myChart").getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [120, 190, 30, 50],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+        /*보조지표 그리기*/
+        let click = [false, false, false, false, false];
+        let origin_style = document.getElementById("b4").style;
+        function _clicked(){
+            for(let i = 0; i < 5; i++){
+                let btn = document.getElementById("b" + String(i));
+                if(click[i] == true) btn.style.color = "gray";
+                else btn.style = origin_style;
+            }
+        }
+        function _draw(j){
+            // j 값, 0:macd, 1:slow, 2:rsi, 3:bol, 4:moment
+            // 그리기
+        }
+        function clicked(obj){
+            let j = parseInt(obj.id[1]);
+            for(let i = 0; i < 5; i++){
+                if(i == j) click[i] = true;
+                else click[i] = false;
+            }
+            _clicked();
+            _draw(j);
+        }
+        
+                
+        </script>
+</body>
+</html>
