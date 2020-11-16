@@ -33,29 +33,28 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4">삼성전자</td>
+                        <td colspan="4"><%= data.Name %></td>
                     </tr>
                     <tr>
-                        <td>(연결) 당기순이익 (백만원)</a></td><td>21505054</td><td>43890877</td><td>41344569</td>
+                        <td>당기순이익 (백만원)</a></td><td><%= data.Income.Thstrm %></td><td><%= data.Income.Frmtrm %></td><td><%= data.Income.Lwfr %></td>
                     </tr>
                     <tr>
-                        <td>(별도) 당기순이익 (백만원)</a></td><td>15353323</td><td>32815127</td><td>28800837</td>
+                        <td>(연결) 당기순이익 (백만원)</a></td><td><%= data.NetIncome.Thstrm %></td><td><%= data.NetIncome.Frmtrm %></td><td><%= data.NetIncome.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td>(별도) 당기순이익 (백만원)</a></td><td><%= data.SeparateIncome.Thstrm %></td><td><%= data.SeparateIncome.Frmtrm %></td><td><%= data.SeparateIncome.Lwfr %></td>
                     </tr>
                     <tr>
                         <td colspan="4">배당 정보</td>
                     </tr>
                     <tr>
-                        <td>주당 현금배당금(원)보통주(1)당기</a></td><td>1416</td><td>1416</td><td>850</td>
+                        <td><%= data.stock1.name %></a></td><td><%= data.stock1.Thstrm %></td><td><%= data.stock1.Frmtrm %></td><td><%= data.stock1.Lwfr %></td>
                     </tr>
                     <tr>
-                        <td>주당 현금배당금(원)우선주(1)당기</a></td><td>2077</td><td>1417</td><td>1417</td>
+                        <td><%= data.stock2.name %></a></td><td><%= data.stock2.Thstrm %></td><td><%= data.stock2.Frmtrm %></td><td><%= data.stock2.Lwfr %></td>
                     </tr>
                     <tr>
-                        <td></a></td><td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></a></td><td></td><td></td><td></td>
-                    </tr>
+                        <td><%= data.stock3.name %></a></td><td><%= data.stock3.Thstrm %></td><td><%= data.stock3.Frmtrm %></td><td><%= data.stock3.Lwfr %></td>                    </tr>
                 </tbody>
             </table>
         </div>

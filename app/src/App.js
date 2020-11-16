@@ -2,18 +2,50 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 
-function App() {
-  function Welcome(props) {
-    return <h1>Hello, {props.name}</h1>;
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
   }
 
-  const element = <Welcome name="Hedger" />;
-  
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <WarningBanner warn={this.state.showWarning} />
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        </button>
+      </div>
+    );
+  }
+}
+
+function Main() {  
   ReactDOM.render(
-    element,
+    <Page />,
     document.getElementById('root')
     );
+
   return 0;
 }
 
-export default App;
+export default Main;
