@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <meta charset= "utf-8">
+        <style>
+           
+
+        </style>
+    </head>
+    <body>
+        <form action = "/bond" method = "GET">
+            <button type = "submit">국채 1년물</button>
+            <input type = "button" name = "ctest" value = "Show By Graph" onclick="window.open('/chatbot')"></button>
+        </form>
+        
+        <br>
+        <h2>Bond 1 year</h3>
+        <br>
+        <hr>
+        <br>
+        
+        <% if(locals.data){ %>
+            <% data.forEach(function(val){ %>
+                날짜 : <%= val.Days %>, 금리 : <%= val.Bond_rate %><br>
+            <% }) %>
+        <% } %>
+
+    </body>
+</html>
