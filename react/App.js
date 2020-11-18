@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const onPress = () => setCount(prevCount => prevCount + 1);
   const DATA = [
     {
       id: '1',
@@ -51,14 +49,11 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.countContainer}>
-        <Text>Count: {count}</Text>
-      </View>
       <View style={styles.rowContainer}>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={styles.button}>
           <Text>주식 신호분석</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={styles.button}>
           <Text>금융상품 비교</Text>
         </TouchableOpacity>
       </View>
@@ -113,10 +108,6 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '30%',
     height: '100%',
-  },
-  countContainer: {
-    alignItems: 'center',
-    padding: 10,
   },
 });
 
