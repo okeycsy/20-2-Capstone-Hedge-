@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import Stockcharts from 'Stockcharts-tutorial';
-import { getData } from "Stockcharts-utils"
+import Stockcharts from './src/Stockcharts-tutorial';
+import { getData } from "./src/Stockcharts-utils"
 
 import { TypeChooser } from "react-stockcharts/lib/helper";
 

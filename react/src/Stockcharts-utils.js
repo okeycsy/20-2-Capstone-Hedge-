@@ -20,6 +20,14 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%d");
 
+/* original code
+export function getData() {
+	const promiseMSFT = fetch("https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv")
+		.then(response => response.text())
+		.then(data => tsvParse(data, parseData(parseDate)))
+	return promiseMSFT;
+*/
+
 export function getData() {
 	const promiseMSFT = d3.csv(data, parseData(parseDate))
 	return promiseMSFT;
