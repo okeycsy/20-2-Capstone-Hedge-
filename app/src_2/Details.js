@@ -43,7 +43,6 @@ class Details extends Component {
         }
       });
     } catch(err) {
-      // error
       alert('init Favorite Error');
     }
   }
@@ -62,7 +61,6 @@ class Details extends Component {
         });
       });
     } catch(error) {
-      // error
       alert('Favorite Error');
     }
   }
@@ -80,7 +78,7 @@ class Details extends Component {
         });
       });
     } catch(error) {
-
+      alert('deFavorite Error');
     }
   }
 
