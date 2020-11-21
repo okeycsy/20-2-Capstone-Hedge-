@@ -25,6 +25,7 @@ class Details extends Component {
   }
 
   componentDidMount(){
+    // fetch code
     this.init_favorite();
   }
 
