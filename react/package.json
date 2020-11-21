@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/native": "^5.8.10",
     "chart.js": "^2.9.4",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
