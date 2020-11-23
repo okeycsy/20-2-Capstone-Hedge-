@@ -34,6 +34,9 @@ export default function App() {
   const test = () => {
     // 깊은 복사 후, 수정하고 setter함수에 전달
     // 비효율적인 방법이지만, 다른 방법을 아직 모르겠음
+    // data.shift(); setData(data)는 안됨...
+    // 하지만, 예를 들어 data가 숫자고, 1을 증가시키고 싶다면,
+    // setData(prevData => prevData + 1); 이렇게 하면 숫자가 1 증가
     let temp_data = JSON.parse(JSON.stringify(data)) 
     temp_data.shift()
     setData(temp_data)
