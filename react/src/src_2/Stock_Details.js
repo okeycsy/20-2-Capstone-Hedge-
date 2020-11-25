@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
+import ChartCompontent from '../Charts'
+
 const stock_data = {
   yesterday_close:37300,
   high:377500,
@@ -23,8 +25,10 @@ export default function App() {
 
   return (
     <View>
-      {isLoading ? <ActivityIndicator/> : (
+      {isLoading ? <ActivityIndicator/> : (        
         <View>
+          <View><ChartCompontent/></View>
+
           <View style={styles.row}><Text>전날 종가</Text><Text>{data.yesterday_close}</Text></View>
           <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
           <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
