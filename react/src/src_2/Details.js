@@ -4,13 +4,14 @@ import {
     Text, 
     Button, 
     TouchableOpacity,
+    ScrollView,
     StyleSheet
  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class Details extends Component {
+class Signal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,14 +86,15 @@ class Details extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <FlatList
+      <View style={styles.container}>
+        <Text style={styles.title}>즐겨찾기</Text>
+        <FlatList style={styles.flatlist}
             data={this.state.favorite}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.item}>
-                <Text>{item.name}</Text>
-                <Text>{item.sig}</Text>
-                <Button
+                <Text style={styles.text}>{item.name}</Text>
+                <Text style={styles.text}>{item.sig}</Text>
+                <Button style={styles.button}
                   onPress={() => this.defavorite(item)}
                   title="★"
                 />
@@ -101,14 +103,14 @@ class Details extends Component {
             keyExtractor={item => item.name}
         />
 
-        
-        <FlatList
+        <Text style={styles.title}>전체 목록</Text>
+        <FlatList style={styles.flatlist}
             data={this.state.data}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.item}>
-                <Text>{item.name}</Text>
-                <Text>{item.sig}</Text>
-                <Button
+                <Text style={styles.text}>{item.name}</Text>
+                <Text style={styles.text}>{item.sig}</Text>
+                <Button style={styles.button}
                   onPress={() => this.favorite(item)}
                   title="☆"
                 />
@@ -122,10 +124,39 @@ class Details extends Component {
 }
 
 const styles = StyleSheet.create({
-    item: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    }
-})
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '5%',
+  },
+  flatlist: {
+    width: '70%',
+  },
+  item: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    backgroundColor: 'lightgray',
+    borderRadius: 5,
+    marginBottom: 5
+  },
+  text : {
+    color: 'black',
+    marginLeft: '5%',
+    marginTop: '1%',
+    marginBottom: '1%'
 
-export default Details;
+  },
+  button: {
+    marginRight: '10%',
+  },
+  title: {
+    fontWeight: "bold",
+    marginBottom: "5%"
+  }
+});
+
+export default Signal;
