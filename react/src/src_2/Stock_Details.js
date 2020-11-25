@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     marginBottom: 5,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexDirection: 'row'
   }
 });

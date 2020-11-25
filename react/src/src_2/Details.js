@@ -17,10 +17,10 @@ class Signal extends Component {
       data: [
         {name:'카카오', sig:0.571},
         {name:'삼성전자', sig:0.624},
-        {name:'카카오게임즈', sig:0.0},
-        {name:'넷마블', sig:-0.43},
-        {name:'네이버', sig:0.00},
-        {name:'메드팩토', sig:0.9342},
+        {name:'카카오게임즈', sig:0.001},
+        {name:'넷마블', sig:-0.431},
+        {name:'네이버', sig:0.001},
+        {name:'메드팩토', sig:0.934},
         {name:'넥슨', sig:0.353},
       ],
       favorite: []
@@ -100,8 +100,8 @@ class Signal extends Component {
                 style={styles.item}
                 onPress={() => navigation.push('Stock_Details')}
               >
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.text}>{item.sig}</Text>
+                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
                 <Button style={styles.button}
                   onPress={() => this.defavorite(item)}
                   title="★"
@@ -119,8 +119,8 @@ class Signal extends Component {
                 style={styles.item}
                 onPress={() => navigation.push('Stock_Details')}
               >
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.text}>{item.sig}</Text>
+                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
                 <Button style={styles.button}
                   onPress={() => this.favorite(item)}
                   title="☆"
