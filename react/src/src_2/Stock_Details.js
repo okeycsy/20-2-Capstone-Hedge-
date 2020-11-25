@@ -1,6 +1,7 @@
+import { style } from 'd3';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import ChartCompontent from '../Charts'
 
@@ -12,11 +13,10 @@ const stock_data = {
   volume: 700638,
 }
 
-export default function App() {
+export default function Stock_Details( ) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  
   useEffect(() => {
     setData(stock_data)
     setLoading(false)
@@ -27,13 +27,15 @@ export default function App() {
     <View>
       {isLoading ? <ActivityIndicator/> : (        
         <View>
-          <View><ChartCompontent/></View>
-
-          <View style={styles.row}><Text>전날 종가</Text><Text>{data.yesterday_close}</Text></View>
-          <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
-          <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
-          <View style={styles.row}><Text>당일 저가</Text><Text>{data.low}</Text></View>
-          <View style={styles.row}><Text>거래량</Text><Text>{data.volume}</Text></View>
+          <View style={styles.chart}><ChartCompontent/></View>
+        
+          <View style={styles.container}>
+            <View style={styles.row}><Text>전날 종가</Text><Text>{data.yesterday_close}</Text></View>
+            <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
+            <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
+            <View style={styles.row}><Text>당일 저가</Text><Text>{data.low}</Text></View>
+            <View style={styles.row}><Text>거래량</Text><Text>{data.volume}</Text></View>
+          </View>
         </View>
       )}
     </View>
@@ -47,11 +49,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  chart:{
+      width:'100%'
+  },
   row: {
+    width: '50%',
     flex: 1,
     marginBottom: 5,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     flexDirection: 'row'
   }
 });

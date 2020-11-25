@@ -11,8 +11,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from "./src/Home";
-import DetailsScreen from "./src/Dividend";
+import DetailsScreen from "./src/ProductChart";
 import StockScreen from "./src/src_2/Details";
+import Stock_Details from "./src/src_2/Stock_Details";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ function App() {
 				<Stack.Screen name="Home" component={HomeScreen} />
 				<Stack.Screen name="Details" component={DetailsScreen} />
 				<Stack.Screen name="Stocks" component={StockScreen} />
+        <Stack.Screen name="Stock_Details" component={Stock_Details} />
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>

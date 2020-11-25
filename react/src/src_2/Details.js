@@ -15,19 +15,13 @@ class Signal extends Component {
     super(props);
     this.state = {
       data: [
-        {name:'test_1', sig:0.99999},
-        {name:'test_2', sig:-0.1},
-        {name:'test_4', sig:0.01},
-        {name:'test_5', sig:0.01},
-        {name:'test_6', sig:0.01},
-        {name:'test_7', sig:0.01},
-        {name:'test_8', sig:0.01},
-        {name:'test_9', sig:0.01},
-        {name:'test_10', sig:0.01},
-        {name:'test_11', sig:0.01},
-        {name:'test_12', sig:0.01},
-        {name:'test_13', sig:0.01},
-        {name:'test_14', sig:0.01},
+        {name:'카카오', sig:0.571},
+        {name:'삼성전자', sig:0.624},
+        {name:'카카오게임즈', sig:0.001},
+        {name:'넷마블', sig:-0.431},
+        {name:'네이버', sig:0.001},
+        {name:'메드팩토', sig:0.934},
+        {name:'넥슨', sig:0.353},
       ],
       favorite: []
     };
@@ -93,6 +87,8 @@ class Signal extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         
@@ -100,9 +96,12 @@ class Signal extends Component {
         <FlatList style={styles.flatlist}
             data={this.state.favorite}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.item}>
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.text}>{item.sig}</Text>
+              <TouchableOpacity 
+                style={styles.item}
+                onPress={() => navigation.push('Stock_Details')}
+              >
+                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
                 <Button style={styles.button}
                   onPress={() => this.defavorite(item)}
                   title="★"
@@ -116,9 +115,12 @@ class Signal extends Component {
         <FlatList style={styles.flatlist}
             data={this.state.data}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.item}>
-                <Text style={styles.text}>{item.name}</Text>
-                <Text style={styles.text}>{item.sig}</Text>
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => navigation.push('Stock_Details')}
+              >
+                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
                 <Button style={styles.button}
                   onPress={() => this.favorite(item)}
                   title="☆"
