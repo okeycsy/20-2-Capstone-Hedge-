@@ -18,9 +18,18 @@ class Signal extends Component {
       data: [
         {name:'test_1', sig:0.99999},
         {name:'test_2', sig:-0.1},
-        {name:'test_3', sig:0.01}
+        {name:'test_4', sig:0.01},
+        {name:'test_5', sig:0.01},
+        {name:'test_6', sig:0.01},
+        {name:'test_7', sig:0.01},
+        {name:'test_8', sig:0.01},
+        {name:'test_9', sig:0.01},
+        {name:'test_10', sig:0.01},
+        {name:'test_11', sig:0.01},
+        {name:'test_12', sig:0.01},
+        {name:'test_13', sig:0.01},
+        {name:'test_14', sig:0.01},
       ],
-
       favorite: []
     };
   }
@@ -87,6 +96,7 @@ class Signal extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <Text style={styles.title}>즐겨찾기</Text>
         <FlatList style={styles.flatlist}
             data={this.state.favorite}
@@ -130,9 +140,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '5%',
+    marginBottom: '5%'
   },
   flatlist: {
     width: '70%',
+    height: '50%'
   },
   item: {
     flex: 1,
