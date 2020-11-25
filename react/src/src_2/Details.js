@@ -87,6 +87,8 @@ class Signal extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         
@@ -94,7 +96,10 @@ class Signal extends Component {
         <FlatList style={styles.flatlist}
             data={this.state.favorite}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.item}>
+              <TouchableOpacity 
+                style={styles.item}
+                onPress={() => navigation.push('Stock_Details')}
+              >
                 <Text style={styles.text}>{item.name}</Text>
                 <Text style={styles.text}>{item.sig}</Text>
                 <Button style={styles.button}
@@ -110,7 +115,10 @@ class Signal extends Component {
         <FlatList style={styles.flatlist}
             data={this.state.data}
             renderItem={({ item }) => (
-              <TouchableOpacity style={styles.item}>
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => navigation.push('Stock_Details')}
+              >
                 <Text style={styles.text}>{item.name}</Text>
                 <Text style={styles.text}>{item.sig}</Text>
                 <Button style={styles.button}

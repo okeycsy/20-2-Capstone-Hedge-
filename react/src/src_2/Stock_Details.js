@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import ChartCompontent from '../Charts'
 
@@ -12,11 +12,10 @@ const stock_data = {
   volume: 700638,
 }
 
-export default function App() {
+export default function Stock_Details( ) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
-  
   useEffect(() => {
     setData(stock_data)
     setLoading(false)
