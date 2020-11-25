@@ -50,7 +50,7 @@ function App({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.rowContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
           <Text>주식 신호분석</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
