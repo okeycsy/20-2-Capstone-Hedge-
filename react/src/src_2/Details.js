@@ -15,19 +15,13 @@ class Signal extends Component {
     super(props);
     this.state = {
       data: [
-        {name:'test_1', sig:0.99999},
-        {name:'test_2', sig:-0.1},
-        {name:'test_4', sig:0.01},
-        {name:'test_5', sig:0.01},
-        {name:'test_6', sig:0.01},
-        {name:'test_7', sig:0.01},
-        {name:'test_8', sig:0.01},
-        {name:'test_9', sig:0.01},
-        {name:'test_10', sig:0.01},
-        {name:'test_11', sig:0.01},
-        {name:'test_12', sig:0.01},
-        {name:'test_13', sig:0.01},
-        {name:'test_14', sig:0.01},
+        {name:'카카오', sig:0.571},
+        {name:'삼성전자', sig:0.624},
+        {name:'카카오게임즈', sig:0.0},
+        {name:'넷마블', sig:-0.43},
+        {name:'네이버', sig:0.00},
+        {name:'메드팩토', sig:0.9342},
+        {name:'넥슨', sig:0.353},
       ],
       favorite: []
     };
