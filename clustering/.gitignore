@@ -1,2 +1,11 @@
-*.csv
-*.xlsx
+예금적금/*.csv
+예금적금/*.xlsx
+stocks_data/*.csv
+stocks_data/*.xlsx
+
+일반은행 주요통계.csv
+일반은행 주요통계.xlsx
+저축은행 주요통계.csv
+저축은행 주요통계.xlsx
+
+dividend_final.csv
