@@ -4,7 +4,6 @@ import {
     Text, 
     Button, 
     TouchableOpacity,
-    ScrollView,
     StyleSheet
  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -96,7 +95,7 @@ class Signal extends Component {
   render() {
     return (
       <View style={styles.container}>
-
+        
         <Text style={styles.title}>즐겨찾기</Text>
         <FlatList style={styles.flatlist}
             data={this.state.favorite}
