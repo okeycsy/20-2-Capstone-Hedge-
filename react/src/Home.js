@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
+function App({ navigation }) {
   const DATA = [
     {
       id: '1',
@@ -53,7 +53,7 @@ const App = () => {
         <TouchableOpacity style={styles.button}>
           <Text>주식 신호분석</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
           <Text>금융상품 비교</Text>
         </TouchableOpacity>
       </View>
