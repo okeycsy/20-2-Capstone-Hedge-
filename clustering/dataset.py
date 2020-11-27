@@ -157,3 +157,7 @@ print(df)
 print(df.columns)
 
 df.to_csv('products_dataset.csv')
+
+df_xy = df.drop(columns = ['index', '상품명', '상품유형'])
+print(df_xy)
+df_xy.to_csv('products_dataset_xy.csv')
