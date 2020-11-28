@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from 'react-native';
 
 function App({ navigation }) {
@@ -52,6 +53,13 @@ function App({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View>
+        <Image
+          style={{ width: 200, height: 200}}
+          source={require('../image/logo.png')}
+        />
+      </View>
+
       <View style={styles.rowContainer}>
         <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
           <Text>주식 신호분석</Text>
@@ -60,8 +68,15 @@ function App({ navigation }) {
           <Text>금융상품 비교</Text>
         </TouchableOpacity>
       </View>
+      
       <View style={styles.hotProductList}>
         <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={() => navigation.push('about_Hedger')}>
+          <Text>Hedger는 어떤 어플인가요?</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -73,7 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '5%',
+    marginTop: '0%',
     marginBottom: '5%',
     paddingHorizontal: 10,
   },
