@@ -17,16 +17,16 @@ class Signal extends Component {
     super(props);
     this.state = {
       data: [
-        {name:'카카오', sig:0.571},
-        {name:'삼성전자', sig:0.624},
-        {name:'카카오게임즈', sig:0.001},
-        {name:'넷마블', sig:-0.431},
-        {name:'네이버', sig:0.001},
-        {name:'메드팩토', sig:0.934},
-        {name:'test1', sig:0.423},
-        {name:'test2', sig:0.56456456456},
-        {name:'test3', sig:0.431},
-        {name:'test4', sig:0.254},
+        {name:'카카오', sig:0.9},
+        {name:'삼성전자', sig:0.6},
+        {name:'카카오게임즈', sig:0.3},
+        {name:'넷마블', sig:-0.2},
+        {name:'네이버', sig:0.0},
+        {name:'메드팩토', sig:-0.123},
+        {name:'test1', sig:-0.34234},
+        {name:'test2', sig:-0.56456456456},
+        {name:'test3', sig:-0.7},
+        {name:'test4', sig:-0.9},
       ],
       favorite: [],
       text: ""
@@ -35,9 +35,33 @@ class Signal extends Component {
 
   componentDidMount(){
     // fetch code
+    this.init_color();
     this.init_favorite();
   }
 
+
+  init_color() {
+    let data = JSON.parse(JSON.stringify(this.state.data));
+    for(let i = 0; i < data.length; i++){
+      if(data[i].sig == 0) data[i].color = '#f2f2f2';
+      else if(data[i].sig > 0){
+        if(data[i].sig > 0.8) data[i].color = '#ffadff';
+        else if(data[i].sig > 0.5) data[i].color = '#ffccff';
+        else data[i].color = '#ffeaff';
+      }
+      else if(data[i].sig < 0) {
+        if(data[i].sig > -0.3) data[i].color = '#d9eeef';
+        else if(data[i].sig > -0.5) data[i].color = '#b8dfe2';
+        else data[i].color = '#83c7cc';
+      }
+    }
+
+
+    data.sort(function(a, b) {
+      return a.sig < b.sig ? 1: a.sig > b.sig ? -1 : 0;
+    });
+    this.setState({data : data})
+  }
   init_favorite() {
     let f;
     try {
@@ -48,7 +72,7 @@ class Signal extends Component {
         for(let i = 0; i < f.length; i++) {
           let idx = names.indexOf(f[i]);
           this.setState({
-            favorite: this.state.favorite.concat({name:names[i], sig:this.state.data[i].sig})
+            favorite: this.state.favorite.concat({name:names[i], sig:this.state.data[i].sig, color:this.state.data[i].color})
           });
         }
       });
@@ -56,6 +80,9 @@ class Signal extends Component {
       alert('init Favorite Error');
     }
   }
+
+
+
   favorite(item) {
     let f;
     try {
@@ -67,7 +94,7 @@ class Signal extends Component {
         f.push(item.name);
         AsyncStorage.setItem('@hedger_favorite', JSON.stringify(f));
         this.setState({
-          favorite: this.state.favorite.concat({name:item.name, sig:item.sig})
+          favorite: this.state.favorite.concat({name:item.name, sig:item.sig, color:item.color})
         });
       });
     } catch(error) {
@@ -148,7 +175,7 @@ class Signal extends Component {
               data={this.state.favorite}
               renderItem={({ item }) => (
                 <TouchableOpacity 
-                  style={styles.item}
+                  style={[styles.item, {backgroundColor: item.color}]}
                   onPress={() => navigation.push('Stock_Details')}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
@@ -183,7 +210,7 @@ class Signal extends Component {
               data={this.state.data}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.item}
+                  style={[styles.item, {backgroundColor: item.color}]}
                   onPress={() => navigation.push('Stock_Details')}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
@@ -208,7 +235,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '5%',
+    marginTop: '1%',
     marginBottom: '5%',
     paddingHorizontal: 10,
   },
@@ -228,7 +255,6 @@ const styles = StyleSheet.create({
   text : {
     color: 'black',
     marginLeft: '5%',
-    marginTop: '1%',
     marginBottom: '1%',
     textAlignVertical: 'center'
   },
