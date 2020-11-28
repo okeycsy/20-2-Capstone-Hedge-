@@ -122,64 +122,6 @@ class Signal extends Component {
 
     return (
       <View style={styles.container}>
-<<<<<<< Updated upstream
-        <Text style={styles.title}>즐겨찾기</Text>
-
-        <View style={styles.button_container}>
-          <Button title='high sig sort' style={styles.button} onPress={() => this.sort_favorite(1)}></Button>
-          <Button title='low sig sort' style={styles.button} onPress={() => this.sort_favorite(-1)}></Button>
-        </View>
-        
-        <FlatList style={styles.flatlist}
-            data={this.state.favorite}
-            renderItem={({ item }) => (
-              <TouchableOpacity 
-                style={styles.item}
-                onPress={() => navigation.push('Stock_Details')}
-              >
-                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
-                <Button style={styles.button}
-                  onPress={() => this.defavorite(item)}
-                  title="★"
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.name}
-        />
-
-
-
-        <Text style={styles.title}>전체 목록</Text>
-        
-        <View style={{flexDirection:'row', marginBottom:'1%'}}>
-          <TextInput style={styles.textinput} onChange={text => {this.setState({search : text})}}></TextInput>
-          <Button title="search" onPress={() => this.search()}></Button>
-        </View>
-
-        <View style={styles.button_container}>
-          <Button title='high sig sort' style={styles.button} onPress={() => this.sort_data(1)}></Button>
-          <Button title='low sig sort' style={styles.button} onPress={() => this.sort_data(-1)}></Button>
-        </View>
-
-        <FlatList style={styles.flatlist}
-            data={this.state.data}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.item}
-                onPress={() => navigation.push('Stock_Details')}
-              >
-                <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
-                <Button style={styles.button}
-                  onPress={() => this.favorite(item)}
-                  title="☆"
-                />
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.name}
-        />
-=======
         <View style={styles.roundContainer1}>
           <Text style={styles.title}>즐겨찾기</Text>
           <FlatList style={styles.flatlist}
@@ -221,7 +163,6 @@ class Signal extends Component {
               keyExtractor={item => item.name}
           />
         </View>
->>>>>>> Stashed changes
      </View>
     )
   }
@@ -263,13 +204,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-<<<<<<< HEAD
     marginBottom: "1%",
-    marginTop: "5%"
-=======
-<<<<<<< Updated upstream
+    marginTop: "5%",
     marginBottom: "1%"
->>>>>>> eb107aa4398a933f25f3b6209eb46db8dffbef36
   },
   button_container: {
     flexDirection: 'row',
@@ -279,11 +216,6 @@ const styles = StyleSheet.create({
   textinput: {
     borderColor: 'gray',
     borderWidth: 1,
-
-
-  }
-
-=======
     marginBottom: "5%",
     marginTop: "5%"
   },
@@ -306,7 +238,6 @@ const styles = StyleSheet.create({
     width: '85%',
     height: '70%',
   },
->>>>>>> Stashed changes
 });
 
 export default Signal;
