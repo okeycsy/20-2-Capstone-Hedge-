@@ -29,7 +29,7 @@ class Signal extends Component {
         {name:'test4', sig:0.254},
       ],
       favorite: [],
-      search: ""
+      text: ""
     };
   }
 
@@ -112,10 +112,26 @@ class Signal extends Component {
     this.setState({data: temp});
   }
   search() {
-    let text = JSON.stringify(this.state.search);
-    alert(text)
-  }
+    let text = this.state.text;
+    let data = JSON.parse(JSON.stringify(this.state.data));
+    let searched_data = [];
 
+    
+    for(let i = 0; i < data.length; i++){
+      if(data[i].name.indexOf(text) != -1){
+        searched_data.push(data[i]);
+      }
+    }
+    
+    for(let i = 0; i < searched_data.length; i++){
+      let idx = data.indexOf(searched_data[i]);
+      if(idx == -1) continue;
+      data.splice(idx, 1);
+    }
+
+    data = searched_data.concat(data);
+    this.setState({data : data});
+  }
 
   render() {
     const { navigation } = this.props;
@@ -124,6 +140,10 @@ class Signal extends Component {
       <View style={styles.container}>
         <View style={styles.roundContainer1}>
           <Text style={styles.title}>즐겨찾기</Text>
+          <View style={styles.button_container}>
+            <Button title='high sig sort' onPress={() => this.sort_favorite(1)}></Button>
+            <Button title='low sig sort' onPress={() => this.sort_favorite(-1)}></Button>
+          </View>
           <FlatList style={styles.flatlist}
               data={this.state.favorite}
               renderItem={({ item }) => (
@@ -145,6 +165,20 @@ class Signal extends Component {
         
         <View style={styles.roundContainer2}>
           <Text style={styles.title}>전체 목록</Text>
+
+          <View style={{flexDirection:'row', marginBottom:'1%'}}>
+            <TextInput 
+              style={styles.textinput} 
+              onChangeText={(text) => this.setState({text : text})}
+              value={this.state.text}
+            />
+            <Button title='search' onPress={() => this.search()}></Button>
+          </View>
+
+          <View style={styles.button_container}>
+            <Button title='high sig sort' onPress={() => this.sort_data(1)}></Button>
+            <Button title='low sig sort' onPress={() => this.sort_data(-1)}></Button>
+          </View>
           <FlatList style={styles.flatlist}
               data={this.state.data}
               renderItem={({ item }) => (
