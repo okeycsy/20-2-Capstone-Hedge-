@@ -24,12 +24,12 @@ export default function Stock_Details( ) {
 
 
   return (
-    <View style={styles.container}>
+    <View>
       {isLoading ? <ActivityIndicator/> : (        
-        <View style= {styles.borderContainer}>
+        <View>
           <View style={styles.chart}><ChartCompontent/></View>
         
-          <View style={styles.borderTable}>
+          <View style={styles.container}>
             <View style={styles.row}><Text>전날 종가</Text><Text>{data.yesterday_close}</Text></View>
             <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
             <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
@@ -45,39 +45,15 @@ export default function Stock_Details( ) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '5%',
-    marginBottom: '5%',
-    paddingHorizontal: 10,
-  },
-  borderContainer: {
-    borderColor: 'lightgray',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 10,
-    width: '100%',
-    marginVertical: '3%',
-    justifyContent: 'center',
-    alignContent: 'center'
-  },
-  borderTable: {
-    borderColor: 'lightgray',
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 10,
-    marginHorizontal: 20,
-    marginVertical: 10,
-    justifyContent: 'center',
-    alignContent: 'center',
-    alignItems: 'center'
   },
   chart:{
       width:'100%'
   },
   row: {
-    width: '80%',
+    width: '50%',
     flex: 1,
     marginBottom: 5,
     justifyContent: 'space-between',
