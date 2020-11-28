@@ -11,7 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from "./src/Home";
-import DetailsScreen from "./src/ProductChart";
+import DetailsScreen from "./src/new_ProductChart";
 import StockScreen from "./src/src_2/Details";
 import Stock_Details from "./src/src_2/Stock_Details";
 

@@ -5,39 +5,7 @@ import { Scatter } from 'react-chartjs-2'
 import {Button} from 'react-native';
 import * as jqcsv from 'jquery-csv';
 import Product from './Dividend'
-
-// export function App() {
-//   // 참고 : https://reactnative.dev/docs/network
-//   // setLoading과 setData는 setter 함수(이름은 마음대로 지어도 됨)
-//   const [isLoading, setLoading] = useState(true);
-//   const [data, setData] = useState(0);
-  
-//   // 서버에서 res.json 으로 보낸 json을 fetch를 통해 가져옴
-//   // fetch에 쓰인 url은 document에서 예제로 쓴 것
-//   // 끝의 []는 에러났을 때 []를 반환한다는 뜻
-//   useEffect(() => {
-//     fetch('https://swlab.uos.ac.kr/api')
-//       .then((response) => response.json())
-//       .then((json) => setData(json.bond))
-//       //.catch((error) => console.error(error))
-//       //.finally(() => setLoading(false));
-//       console.log(json)
-//   }, []);
-
-//   // setData : setter 함수
-//   // setter 함수를 통해 상태를 바꾸고, 상태가 바뀔 때마다 render
-//   // test : 클릭하면 맨 앞 요소 삭제
-//   const test = () => {
-//     // 깊은 복사 후, 수정하고 setter함수에 전달
-//     // 비효율적인 방법이지만, 다른 방법을 아직 모르겠음
-//     // data.shift(); setData(data)는 안됨...
-//     // 하지만, 예를 들어 data가 숫자고, 1을 증가시키고 싶다면,
-//     // setData(prevData => prevData + 1); 이렇게 하면 숫자가 1 증가
-//     let temp_data = JSON.parse(JSON.stringify(data)) 
-//     temp_data.shift()
-//     setData(temp_data)
-//   }
-// }
+import { text } from 'd3';
 
 const data = {
     datasets: [
@@ -88,16 +56,32 @@ function getdata() {
     
 }
 
-const ScatterChart = () => {
+let count = 0
+
+function ScatterChart() {
     const [data2, setData] = useState({});
-  
+
     useEffect(() => {
-           fetch('http://swlab.uos.ac.kr:3000/api')
-            .then((response) => response.json())
-            .then((json) => setData(json))
-      }, );
+        if (count > 1) {
+          return;
+        }
+        fetch('http://swlab.uos.ac.kr/api_bond')
+        .then((response) => response.text())
+        .then((text) => setData(text))
 
+        count = 1
+        console.log(data2)
+        console.log("count = 1")
+    });
 
+    if (typeof(data2) == typeof('string')) {
+        console.log(data2)
+        setData(data2.replace('\",\"', '\n'))
+        console.log('convert')
+        console.log(data2)
+        count = 2
+    }
+    console.log(data2)
     // var d = getdata()
     // console.log(d)
     // data.datasets[0].data = d
