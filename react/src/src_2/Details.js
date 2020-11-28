@@ -4,11 +4,12 @@ import {
     Text, 
     Button, 
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
+    TextInput
  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AlternatingFillAreaSeries from 'react-stockcharts/lib/series/AlternatingFillAreaSeries';
+import { onChange } from 'react-native-reanimated';
 
 
 class Signal extends Component {
@@ -22,9 +23,13 @@ class Signal extends Component {
         {name:'넷마블', sig:-0.431},
         {name:'네이버', sig:0.001},
         {name:'메드팩토', sig:0.934},
-        {name:'넥슨', sig:0.353},
+        {name:'test1', sig:0.423},
+        {name:'test2', sig:0.56456456456},
+        {name:'test3', sig:0.431},
+        {name:'test4', sig:0.254},
       ],
-      favorite: []
+      favorite: [],
+      search: ""
     };
   }
 
@@ -106,13 +111,20 @@ class Signal extends Component {
     });
     this.setState({data: temp});
   }
+  search() {
+    let text = JSON.stringify(this.state.search);
+    alert(text)
+  }
+
 
   render() {
     const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
+<<<<<<< Updated upstream
         <Text style={styles.title}>즐겨찾기</Text>
+
         <View style={styles.button_container}>
           <Button title='high sig sort' style={styles.button} onPress={() => this.sort_favorite(1)}></Button>
           <Button title='low sig sort' style={styles.button} onPress={() => this.sort_favorite(-1)}></Button>
@@ -136,11 +148,20 @@ class Signal extends Component {
             keyExtractor={item => item.name}
         />
 
+
+
         <Text style={styles.title}>전체 목록</Text>
+        
+        <View style={{flexDirection:'row', marginBottom:'1%'}}>
+          <TextInput style={styles.textinput} onChange={text => {this.setState({search : text})}}></TextInput>
+          <Button title="search" onPress={() => this.search()}></Button>
+        </View>
+
         <View style={styles.button_container}>
           <Button title='high sig sort' style={styles.button} onPress={() => this.sort_data(1)}></Button>
           <Button title='low sig sort' style={styles.button} onPress={() => this.sort_data(-1)}></Button>
         </View>
+
         <FlatList style={styles.flatlist}
             data={this.state.data}
             renderItem={({ item }) => (
@@ -158,6 +179,49 @@ class Signal extends Component {
             )}
             keyExtractor={item => item.name}
         />
+=======
+        <View style={styles.roundContainer1}>
+          <Text style={styles.title}>즐겨찾기</Text>
+          <FlatList style={styles.flatlist}
+              data={this.state.favorite}
+              renderItem={({ item }) => (
+                <TouchableOpacity 
+                  style={styles.item}
+                  onPress={() => navigation.push('Stock_Details')}
+                >
+                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <Button style={styles.button}
+                    onPress={() => this.defavorite(item)}
+                    title="★"
+                  />
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.name}
+          />
+        </View>  
+        
+        <View style={styles.roundContainer2}>
+          <Text style={styles.title}>전체 목록</Text>
+          <FlatList style={styles.flatlist}
+              data={this.state.data}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.item}
+                  onPress={() => navigation.push('Stock_Details')}
+                >
+                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <Button style={styles.button}
+                    onPress={() => this.favorite(item)}
+                    title="☆"
+                  />
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.name}
+          />
+        </View>
+>>>>>>> Stashed changes
      </View>
     )
   }
@@ -170,16 +234,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '5%',
-    marginBottom: '5%'
+    marginBottom: '5%',
+    paddingHorizontal: 10,
   },
   flatlist: {
-    width: '70%',
+    width: '90%',
     height: '50%'
   },
   item: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: 'lightgray',
     borderRadius: 5,
@@ -189,8 +254,8 @@ const styles = StyleSheet.create({
     color: 'black',
     marginLeft: '5%',
     marginTop: '1%',
-    marginBottom: '1%'
-
+    marginBottom: '1%',
+    textAlignVertical: 'center'
   },
   button: {
     marginRight: '10%',
@@ -198,14 +263,50 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+<<<<<<< HEAD
+    marginBottom: "1%",
+    marginTop: "5%"
+=======
+<<<<<<< Updated upstream
     marginBottom: "1%"
+>>>>>>> eb107aa4398a933f25f3b6209eb46db8dffbef36
   },
   button_container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  textinput: {
+    borderColor: 'gray',
+    borderWidth: 1,
+
+
   }
 
+=======
+    marginBottom: "5%",
+    marginTop: "5%"
+  },
+  roundContainer1: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '85%',
+    height: '30%',
+    marginVertical: '3%',
+  },
+  roundContainer2: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '85%',
+    height: '70%',
+  },
+>>>>>>> Stashed changes
 });
 
 export default Signal;
