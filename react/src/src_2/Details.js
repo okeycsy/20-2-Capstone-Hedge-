@@ -25,7 +25,7 @@ class Signal extends Component {
         {name:'메드팩토', sig:-0.123},
         {name:'test1', sig:-0.34234},
         {name:'test2', sig:-0.56456456456},
-        {name:'test3', sig:-0.7},
+        {name:'test3', sig:0.12312},
         {name:'test4', sig:-0.9},
       ],
       favorite: [],
@@ -45,9 +45,9 @@ class Signal extends Component {
     for(let i = 0; i < data.length; i++){
       if(data[i].sig == 0) data[i].color = '#f2f2f2';
       else if(data[i].sig > 0){
-        if(data[i].sig > 0.8) data[i].color = '#ffadff';
-        else if(data[i].sig > 0.5) data[i].color = '#ffccff';
-        else data[i].color = '#ffeaff';
+        if(data[i].sig > 0.8) data[i].color = '#fd6a6a';
+        else if(data[i].sig > 0.5) data[i].color = '#fea2a2';
+        else data[i].color = '#fee3e3';
       }
       else if(data[i].sig < 0) {
         if(data[i].sig > -0.3) data[i].color = '#d9eeef';
