@@ -70,7 +70,11 @@ function App({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '5%',
+    marginBottom: '5%',
     paddingHorizontal: 10,
   },
   rowContainer: {
@@ -78,8 +82,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingVertical: 10,
-    marginHorizontal: 20,
-    marginVertical: 10,
+    width: '85%',
+    marginVertical: '3%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
