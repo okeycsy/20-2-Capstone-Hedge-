@@ -56,7 +56,7 @@ function App({ navigation }) {
       <View>
         <Image
           style={{ width: 200, height: 200}}
-          source={require('../logo/logo.png')}
+          source={require('../image/logo.png')}
         />
       </View>
 
@@ -71,6 +71,12 @@ function App({ navigation }) {
       
       <View style={styles.hotProductList}>
         <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={() => navigation.push('about_Hedger')}>
+          <Text>Hedger는 어떤 어플인가요?</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
