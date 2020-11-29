@@ -68,8 +68,11 @@ function ScatterChart() {
         fetch('http://swlab.uos.ac.kr/api_bond')
         .then((response) => response.text())
         .then((text) => {
-          setData(text.replace('\",\"', '\n'));
+          text.replaceAll('\",\"', '\n')
+          setData(text.substring(2, text.length - 2));
           count = 1;
+          console.log(typeof(data2))
+          console.log(data2)
         })
     });
     // var d = getdata()
