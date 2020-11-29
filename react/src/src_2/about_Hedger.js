@@ -3,13 +3,14 @@ import { Image, ScrollView , Text, View, StyleSheet, ActivityIndicator } from 'r
 import { FlatList } from 'react-native-gesture-handler';
 
 import Test from './Test'
+import Div from './Div'
 
 export default function about_Hedger() {
   return (
     <ScrollView
         contentContainerStyle={styles.contentContainer}
     >        
-        <Test/>
+        <Div/>
     </ScrollView>
   );
 }
