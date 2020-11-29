@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { Scatter } from 'react-chartjs-2'
 import plugins from 'chartjs-plugin-zoom'
-import {Button} from 'react-native';
+import { Button, View, Text, StyleSheet } from 'react-native';
 import * as jqcsv from 'jquery-csv';
 import Product from './Dividend'
 import { text } from 'd3';
@@ -36,13 +36,6 @@ function ScatterChart() {
     const [saving, setSaving] = useState({});
 
     useEffect(() => {
-<<<<<<< HEAD
-           fetch('https://swlab.uos.ac.kr:3000/api_bond')
-            .then((response) => response.json())
-            .then((json) => setData(json))
-      }, );
-
-=======
         if (step == 0) {
           fetch('http://swlab.uos.ac.kr/api_bond')
           .then((response) => response.text())
@@ -75,7 +68,39 @@ function ScatterChart() {
           });
         }
         else if (step == 2) {
-          step = 3;
+          fetch('http://swlab.uos.ac.kr/api_dep')
+          .then((response) => response.text())
+          .then((text) => {
+            text = text.replace("수익률", "y")
+            text = text.replace("위험도", "x")
+            console.log("fetch dep")
+            console.log(step)
+            var csv = jqcsv.csv = require('jquery-csv')
+            var res = csv.toObjects(text)
+            if (step == 2) {
+              step = 3
+              setDeposit(res)
+            }
+          });
+        }
+        else if (step == 3) {
+          fetch('http://swlab.uos.ac.kr/api_sav')
+          .then((response) => response.text())
+          .then((text) => {
+            text = text.replace("수익률", "y")
+            text = text.replace("위험도", "x")
+            console.log("fetch sav")
+            console.log(step)
+            var csv = jqcsv.csv = require('jquery-csv')
+            var res = csv.toObjects(text)
+            if (step == 3) {
+              step = 4
+              setSaving(res)
+            }
+          });
+        }
+        else if (step == 4) {
+          step = 5;
           setChartdata({
             datasets: [
               {
@@ -88,18 +113,21 @@ function ScatterChart() {
                 data: dividend,
                 backgroundColor: 'rgba(99, 255, 132, 1)',
               },
+              {
+                label: '예금',
+                data: deposit,
+                backgroundColor: 'rgba(99, 99, 255, 1)',
+              },
+              {
+                label: '적금',
+                data: saving,
+                backgroundColor: 'rgba(255, 99, 255, 1)',
+              },
             ],
           })
           console.log(chartdata.datasets)
         }
-        else if (step = 3) {
-          
-        }
-        else if (step = 4) {
-          
-        }
     });
->>>>>>> 74aff1f043831415d13634efb68b1977c3dceeb5
 
     const options = {
       scales: {
@@ -165,7 +193,7 @@ function ScatterChart() {
             enabled: true,
       
             // Enable drag-to-zoom behavior
-            drag: true,
+            drag: false,
       
             // Drag-to-zoom effect can be customized
             // drag: {
@@ -218,15 +246,66 @@ function ScatterChart() {
     // data.datasets[0].data = d
 
     return (
-        <div className='header'>
+        <View className='header'>
           <Button title="siba" onPress={() => {console.log(data2)}} />
-          <h1 className='title' >financial product</h1>
-          <div className='links'>
-          </div>
+          <Text className='title' >financial product</Text>
+          <Text className='links'>
+          </Text>
           <Scatter data={chartdata} options={options}/>
-          <Product></Product>
-        </div>
+          <Product style={styles.productData}></Product>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '0%',
+    marginBottom: '5%',
+    paddingHorizontal: 10,
+  },
+  rowContainer: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    width: '85%',
+    marginVertical: '3%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  productData: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
+    justifyContent: 'center'
+  },
+  item: {
+    backgroundColor: 'white',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 16
+  },
+  button: {
+    margin: 30,
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    width: '30%',
+    height: '100%',
+  },
+});
 
 export default ScatterChart
