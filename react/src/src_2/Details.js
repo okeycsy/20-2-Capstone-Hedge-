@@ -180,10 +180,12 @@ class Signal extends Component {
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
                   <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
-                  <Button style={styles.button}
+                  <TouchableOpacity
+                    style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.defavorite(item)}
-                    title="★"
-                  />
+                  >
+                    <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>★</Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
               )}
               keyExtractor={item => item.name}
@@ -215,10 +217,21 @@ class Signal extends Component {
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
                   <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
-                  <Button style={styles.button}
+                  <TouchableOpacity
+                    style={{alignItems:'center', margin:'1%'}}
+                    onPress={() => this.favorite(item)}
+                  >
+                    <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>☆</Text>
+                  </TouchableOpacity>
+                  {/* <Button style={[styles.button, {color: 'gold'}]}
                     onPress={() => this.favorite(item)}
                     title="☆"
-                  />
+                    color={item.color}
+                    titleStyle={{
+                      color: "red",
+                      fontSize: 16,
+                    }}
+                  /> */}
                 </TouchableOpacity>
               )}
               keyExtractor={item => item.name}
