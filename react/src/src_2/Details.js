@@ -16,18 +16,7 @@ class Signal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {name:'카카오', sig:0.9},
-        {name:'삼성전자', sig:0.6},
-        {name:'카카오게임즈', sig:0.3},
-        {name:'넷마블', sig:-0.2},
-        {name:'네이버', sig:0.0},
-        {name:'메드팩토', sig:-0.123},
-        {name:'test1', sig:-0.34234},
-        {name:'test2', sig:-0.56456456456},
-        {name:'test3', sig:0.12312},
-        {name:'test4', sig:-0.9},
-      ],
+      data: [],
       favorite: [],
       text: "",
       searched_data: []
@@ -35,31 +24,41 @@ class Signal extends Component {
   }
 
   componentDidMount(){
-    // fetch code
-    this.init_color();
-    this.init_favorite();
+    const that = this;
+    fetch('http://swlab.uos.ac.kr/bs')
+    .then((response) => (response.json()))
+    .then(function(result){
+      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
+      alert(JSON.stringify(result))
+      that.setState({data:result})
+    })
+    .then(function(){
+      that.init_color();
+      that.init_favorite();
+    })
+    .catch(err => alert(err))
   }
 
 
   init_color() {
     let data = JSON.parse(JSON.stringify(this.state.data));
     for(let i = 0; i < data.length; i++){
-      if(data[i].sig == 0) data[i].color = '#f2f2f2';
-      else if(data[i].sig > 0){
-        if(data[i].sig > 0.8) data[i].color = '#fd6a6a';
-        else if(data[i].sig > 0.5) data[i].color = '#fea2a2';
+      if(data[i].bs == 0) data[i].color = '#f2f2f2';
+      else if(data[i].bs > 0){
+        if(data[i].bs > 0.8) data[i].color = '#fd6a6a';
+        else if(data[i].bs > 0.5) data[i].color = '#fea2a2';
         else data[i].color = '#fee3e3';
       }
-      else if(data[i].sig < 0) {
-        if(data[i].sig > -0.3) data[i].color = '#d9eeef';
-        else if(data[i].sig > -0.5) data[i].color = '#b8dfe2';
+      else if(data[i].bs < 0) {
+        if(data[i].bs > -0.3) data[i].color = '#d9eeef';
+        else if(data[i].bs > -0.5) data[i].color = '#b8dfe2';
         else data[i].color = '#83c7cc';
       }
     }
 
 
     data.sort(function(a, b) {
-      return a.sig < b.sig ? 1: a.sig > b.sig ? -1 : 0;
+      return a.bs < b.bs ? 1: a.bs > b.bs ? -1 : 0;
     });
     this.setState({data : data})
   }
@@ -73,7 +72,7 @@ class Signal extends Component {
         for(let i = 0; i < f.length; i++) {
           let idx = names.indexOf(f[i]);
           this.setState({
-            favorite: this.state.favorite.concat({name:names[i], sig:this.state.data[i].sig, color:this.state.data[i].color})
+            favorite: this.state.favorite.concat({name:names[i], bs:this.state.data[i].bs, color:this.state.data[i].color})
           });
         }
       });
@@ -95,7 +94,7 @@ class Signal extends Component {
         f.push(item.name);
         AsyncStorage.setItem('@hedger_favorite', JSON.stringify(f));
         this.setState({
-          favorite: this.state.favorite.concat({name:item.name, sig:item.sig, color:item.color})
+          favorite: this.state.favorite.concat({name:item.name, bs:item.bs, color:item.color})
         });
       });
     } catch(error) {
@@ -125,7 +124,7 @@ class Signal extends Component {
     if(s == 1) k = [1,-1,0];
     else k = [-1,1,0];
     temp.sort(function(a, b) {
-      return a.sig < b.sig ? k[0]: a.sig > b.sig ? k[1] : k[2];
+      return a.bs < b.bs ? k[0]: a.bs > b.bs ? k[1] : k[2];
     });
     this.setState({favorite: temp});
   }
@@ -138,7 +137,7 @@ class Signal extends Component {
     if(s == 1) k = [1,-1,0];
     else k = [-1,1,0];
     temp.sort(function(a, b) {
-      return a.sig < b.sig ? k[0]: a.sig > b.sig ? k[1] : k[2];
+      return a.bs < b.bs ? k[0]: a.bs > b.bs ? k[1] : k[2];
     });
     
     if(this.state.text == "") this.setState({data: temp});
@@ -175,7 +174,7 @@ class Signal extends Component {
                   onPress={() => navigation.push('Stock_Details')}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.defavorite(item)}
@@ -212,7 +211,7 @@ class Signal extends Component {
                   onPress={() => navigation.push('Stock_Details')}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.favorite(item)}
@@ -232,7 +231,7 @@ class Signal extends Component {
                   onPress={() => navigation.push('Stock_Details')}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.favorite(item)}
