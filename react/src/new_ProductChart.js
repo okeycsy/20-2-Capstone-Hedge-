@@ -92,7 +92,7 @@ const ScatterChart = () => {
     const [data2, setData] = useState({});
   
     useEffect(() => {
-           fetch('http://swlab.uos.ac.kr:3000/api')
+           fetch('https://swlab.uos.ac.kr:3000/api_bond')
             .then((response) => response.json())
             .then((json) => setData(json))
       }, );
