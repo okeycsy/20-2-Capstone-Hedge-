@@ -29,7 +29,8 @@ class Signal extends Component {
         {name:'test4', sig:-0.9},
       ],
       favorite: [],
-      text: ""
+      text: "",
+      searched_data: []
     };
   }
 
@@ -129,35 +130,30 @@ class Signal extends Component {
     this.setState({favorite: temp});
   }
   sort_data(s) {
-    let temp = JSON.parse(JSON.stringify(this.state.data));
+    let temp;
+    if(this.state.text == "") temp = JSON.parse(JSON.stringify(this.state.data));
+    else temp = JSON.parse(JSON.stringify(this.state.searched_data));
+
     let k = [];
     if(s == 1) k = [1,-1,0];
     else k = [-1,1,0];
     temp.sort(function(a, b) {
       return a.sig < b.sig ? k[0]: a.sig > b.sig ? k[1] : k[2];
     });
-    this.setState({data: temp});
+    
+    if(this.state.text == "") this.setState({data: temp});
+    else this.setState({searched_data:temp});
   }
-  search() {
-    let text = this.state.text;
-    let data = JSON.parse(JSON.stringify(this.state.data));
+
+  handle_text(text) {
+    this.setState({text:text});
     let searched_data = [];
-
-    
-    for(let i = 0; i < data.length; i++){
-      if(data[i].name.indexOf(text) != -1){
-        searched_data.push(data[i]);
-      }
-    }
-    
-    for(let i = 0; i < searched_data.length; i++){
-      let idx = data.indexOf(searched_data[i]);
-      if(idx == -1) continue;
-      data.splice(idx, 1);
+    let data = JSON.parse(JSON.stringify(this.state.data));
+    for(let i = 0; i < data.length; i++) {
+      if( data[i].name.indexOf(text) != -1) searched_data.push(data[i]);
     }
 
-    data = searched_data.concat(data);
-    this.setState({data : data});
+    this.setState({searched_data: searched_data});
   }
 
   render() {
@@ -198,17 +194,17 @@ class Signal extends Component {
           <View style={{flexDirection:'row', marginBottom:'1%'}}>
             <TextInput 
               style={styles.textinput} 
-              onChangeText={(text) => this.setState({text : text})}
+              onChangeText={(text) => this.handle_text(text)}
               value={this.state.text}
             />
-            <Button title='search' onPress={() => this.search()}></Button>
           </View>
 
           <View style={styles.button_container}>
             <Button title='high sig sort' onPress={() => this.sort_data(1)}></Button>
             <Button title='low sig sort' onPress={() => this.sort_data(-1)}></Button>
           </View>
-          <FlatList style={styles.flatlist}
+          {this.state.text == "" ? (
+            <FlatList style={styles.flatlist}
               data={this.state.data}
               renderItem={({ item }) => (
                 <TouchableOpacity
@@ -223,19 +219,31 @@ class Signal extends Component {
                   >
                     <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>☆</Text>
                   </TouchableOpacity>
-                  {/* <Button style={[styles.button, {color: 'gold'}]}
-                    onPress={() => this.favorite(item)}
-                    title="☆"
-                    color={item.color}
-                    titleStyle={{
-                      color: "red",
-                      fontSize: 16,
-                    }}
-                  /> */}
                 </TouchableOpacity>
               )}
               keyExtractor={item => item.name}
-          />
+            />
+          ) : (
+            <FlatList style={styles.flatlist}
+              data={this.state.searched_data}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={[styles.item, {backgroundColor: item.color}]}
+                  onPress={() => navigation.push('Stock_Details')}
+                >
+                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                  <View style={{flex:1}}><Text style={styles.text}>{item.sig}</Text></View>
+                  <TouchableOpacity
+                    style={{alignItems:'center', margin:'1%'}}
+                    onPress={() => this.favorite(item)}
+                  >
+                    <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>☆</Text>
+                  </TouchableOpacity>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.name}
+            />
+          )}
         </View>
      </View>
     )
