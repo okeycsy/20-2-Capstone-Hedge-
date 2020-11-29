@@ -19,11 +19,11 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%d");
 
-export function getData() {
-	const promiseMSFT = fetch("http://swlab.uos.ac.kr/share삼성전자")
+export function getData(company) {
+	const url = "http://swlab.uos.ac.kr/share" + company
+	const promiseMSFT = fetch(url)
 		.then(response => response.text())
 		.then(data => csvParse(data, parseData(parseDate)))
-	console.log(promiseMSFT)
 	return promiseMSFT;
 }
 

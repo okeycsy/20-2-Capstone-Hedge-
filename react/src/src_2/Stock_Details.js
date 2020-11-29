@@ -1,36 +1,46 @@
 import { style } from 'd3';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TouchableHighlightBase } from 'react-native';
+import { getTouchProps } from 'react-stockcharts/lib/utils';
 
 import ChartCompontent from '../Charts'
 
-const stock_data = {
-  yesterday_close:37300,
-  high:377500,
-  low:36600,
-  today_close:37750,
-  volume: 700638,
-}
-
-export default function Stock_Details( ) {
+export default function Stock_Details({route, navigation}) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(stock_data)
+    setData({
+      yesterday_close: 0,
+      high: 0,
+      low: 0,
+      today_close: 0,
+      volume: 0,
+    })
     setLoading(false)
   }, []);
 
+  function load(yc, h, l, t, v) {
+    setData({
+      yesterday_close:yc,
+      high:h,
+      low:l,
+      today_close:t,
+      volume: v,
+    })
+  }
 
+  const company = route.params.name
+  console.log(route)
   return (
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (        
         <View style= {styles.borderContainer}>
-          <View style={styles.chart}><ChartCompontent/></View>
+          <View style={styles.chart}><ChartCompontent company={ company } load = { load } /></View>
         
           <View style={styles.borderTable}>
-            <View style={styles.row}><Text>전날 종가</Text><Text>{data.yesterday_close}</Text></View>
+            <View style={styles.row}><Text>전일 종가</Text><Text>{data.yesterday_close}</Text></View>
             <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
             <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
             <View style={styles.row}><Text>당일 저가</Text><Text>{data.low}</Text></View>

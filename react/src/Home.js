@@ -56,7 +56,7 @@ function App({ navigation }) {
   const Item = ({ data }) => (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.push('Stock_Details')}
+      onPress={() => navigation.push('Stock_Details', {name : data.name})}
     >
       <Text style={styles.title}>{data.name}</Text>
       <Text style={styles.title}>{data.bs}</Text>

@@ -1,15 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import Stockcharts from "./Stockcharts-tutorial";
 import { getData } from "./Stockcharts-utils"
 
 import { TypeChooser } from "react-stockcharts/lib/helper";
-
+import { LongPressGestureHandler } from 'react-native-gesture-handler';
 class ChartComponent extends React.Component {
 	componentDidMount() {
-		getData().then(data => {
+		getData(this.props.company).then(data => {
 			this.setState({ data })
+			this.props.load(
+				data[data.length - 2].Close, data[data.length - 1].Close,
+				data[data.length - 1].High, data[data.length - 1].Low,
+				data[data.length - 1].Volume)
 		})
 	}
 	render() {
@@ -17,9 +21,7 @@ class ChartComponent extends React.Component {
 			return <div>Loading...</div>
 		}
 		return (
-			<TypeChooser>
-				{type => <Stockcharts type={type} data={this.state.data} />}
-			</TypeChooser>
+			<Stockcharts data={this.state.data}/>
 		)
 	}
 }
