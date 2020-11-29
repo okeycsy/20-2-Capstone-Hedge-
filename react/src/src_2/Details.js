@@ -29,7 +29,6 @@ class Signal extends Component {
     .then((response) => (response.json()))
     .then(function(result){
       for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
-      alert(JSON.stringify(result))
       that.setState({data:result})
     })
     .then(function(){
