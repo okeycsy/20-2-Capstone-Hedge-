@@ -28,6 +28,10 @@ function getdata(data2) {
 
 let step = 0
 
+function initStep() {
+  step = 0
+}
+
 function ScatterChart() {
     const [chartdata, setChartdata] = useState({});
     const [bond, setBond] = useState({});
@@ -126,6 +130,12 @@ function ScatterChart() {
             ],
           })
           console.log(chartdata.datasets)
+        }
+        else if (step == 5) {
+          if (chartdata.datasets.length == 0) {
+            step = 0;
+            setBond(0)
+          }
         }
     });
 
@@ -251,7 +261,7 @@ function ScatterChart() {
             <Text style={styles.text}>전체 금융상품</Text>
             <Text>
             </Text>
-            <Scatter data={chartdata} options={options} height={'300%'}/>
+            <Scatter data={chartdata} options={options} height={300}/>
             <View p style={styles.productData}>
               <Product/>
             </View>
