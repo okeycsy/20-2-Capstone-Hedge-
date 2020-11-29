@@ -92,7 +92,7 @@ df_dividend['상품유형'] = '배당금'
 columns = ['index', '상품명', '수익률', '위험도', '상품유형']
 
 df = pd.DataFrame(columns=columns)
-# df = df.append(df_dividend)
+df = df.append(df_dividend)
 # df = df.append(df_deposit)
 # df = df.append(df_saving)
 # df = df.append(df_bond)
