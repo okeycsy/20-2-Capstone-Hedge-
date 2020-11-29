@@ -2,6 +2,8 @@
 
 # 채권 Data :: api_bond
 
-# 예적금 Data :: api_dep
+# 예금 Data :: api_dep
+
+# 적금 Data :: api_sav
 
 # 주가 Data :: share* -> 정규식 처리함 (*에 종목 쓰면 됨)
