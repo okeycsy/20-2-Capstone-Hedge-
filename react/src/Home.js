@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
   Image,
 } from 'react-native';
 
@@ -52,33 +53,35 @@ function App({ navigation }) {
   const renderItem = ({item}) => <Item data={item} />;
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Image
-          style={{ width: 200, height: 200}}
-          source={require('../image/logo.png')}
-        />
-      </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <View>
+          <Image
+            style={{ width: 200, height: 200}}
+            source={require('../image/logo.png')}
+          />
+        </View>
 
-      <View style={styles.rowContainer}>
-        <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
-          <Text>주식 신호분석</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
-          <Text>금융상품 비교</Text>
-        </TouchableOpacity>
-      </View>
-      
-      <View style={styles.hotProductList}>
-        <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
-      </View>
+        <View style={styles.rowContainer}>
+          <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
+            <Text>주식 신호분석</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
+            <Text>금융상품 비교</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.hotProductList}>
+          <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id} />
+        </View>
 
-      <View>
-        <TouchableOpacity onPress={() => navigation.push('about_Hedger')}>
-          <Text>Hedger는 어떤 어플인가요?</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={() => navigation.push('about_Hedger')}>
+            <Text>Hedger는 어떤 어플인가요?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

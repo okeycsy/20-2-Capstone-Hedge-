@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { Scatter } from 'react-chartjs-2'
 import plugins from 'chartjs-plugin-zoom'
-import { Button, View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as jqcsv from 'jquery-csv';
 import Product from './Dividend'
 import { text } from 'd3';
@@ -246,13 +246,16 @@ function ScatterChart() {
     // data.datasets[0].data = d
 
     return (
-        <View className='header'>
-          <Button title="siba" onPress={() => {console.log(data2)}} />
-          <Text className='title' >financial product</Text>
-          <Text className='links'>
-          </Text>
-          <Scatter data={chartdata} options={options}/>
-          <Product style={styles.productData}></Product>
+        <View container style={styles.container}>
+          <ScrollView>
+            <Text style={styles.text}>전체 금융상품</Text>
+            <Text>
+            </Text>
+            <Scatter data={chartdata} options={options} height={'300%'}/>
+            <View p style={styles.productData}>
+              <Product/>
+            </View>
+          </ScrollView>
         </View>
     )
 }
@@ -295,8 +298,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  title: {
-    fontSize: 16
+  text: {
+    fontSize: 32,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   button: {
     margin: 30,
