@@ -13,6 +13,7 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "chart.js": "^2.9.4",
+    "chartjs-plugin-zoom": "^0.7.7",
     "d3": "^6.2.0",
     "d3-dsv": "^1.0.8",
     "d3-format": "^1.2.1",
