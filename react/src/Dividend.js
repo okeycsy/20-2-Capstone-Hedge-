@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import StackUtils from 'stack-utils';
 
 const App = () => {
   const TEMP1 = [

@@ -26,9 +26,4 @@ class ChartComponent extends React.Component {
 	}
 }
 
-render(
-	<ChartComponent />,
-	document.getElementById("root")
-);
-
 export default ChartComponent
