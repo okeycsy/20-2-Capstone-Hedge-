@@ -13,33 +13,8 @@ const App = () => {
   const TEMP1 = [
     {
       id: '1',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '21505054',
-      lastTerm: '43890877',
-      last2Term: '41344569',
-    },
-    {
-      id: '2',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '15353323',
-      lastTerm: '32815127',
-      last2Term: '28800837',
-    },
-  ];
-  const TEMP2 = [
-    {
-      id: '1',
-      type: '주당 현금배당금(원)보통주(1)당기',
-      thisTerm: '1416',
-      lastTerm: '1416',
-      last2Term: '850',
-    },
-    {
-      id: '2',
-      type: '주당 현금배당금(원)우선주(1)당기',
-      thisTerm: '2077',
-      lastTerm: '1417',
-      last2Term: '1417',
+      type: '5년',
+      thisTerm: '1.057',
     },
   ];
   const Item = ({ data }) => (
@@ -50,10 +25,6 @@ const App = () => {
       <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
         <Text style={styles.textRight}>{data.thisTerm}</Text>
       </View>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.lastTerm}</Text>
-      </View>
-      <Text style={styles.textRight}>{data.last2Term}</Text>
     </View>
   );
 
@@ -62,34 +33,18 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Text style={styles.title}>삼성전자</Text>
-        <Text style= {styles.text}>네이버 금융 링크</Text>
+        <Text style={styles.title}>국채 1년물</Text>
+        <Text style= {styles.text}>채권 관련 링크</Text>
       </View>
       <View style={styles.table}>
         <View style={styles.rowName}>
           <View style={styles.item_gray}>
             <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>구분</Text>
+              <Text style={styles.textCenter}>만기</Text>
             </View>
             <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>당기</Text>
+              <Text style={styles.textCenter}>수익률</Text>
             </View>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>전기</Text>
-            </View>
-            <Text style={styles.textCenter}>전전기</Text>
-          </View>
-          <View style={styles.item_white}>
-          <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>구분</Text>
-            </View>
-            <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>당기</Text>
-            </View>
-            <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>전기</Text>
-            </View>
-            <Text style={styles.textCenter}>전전기</Text>
           </View>
         </View>
         <FlatList data={TEMP1} renderItem={renderItem} keyExtractor={item => item.id} />
@@ -100,6 +55,9 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: 10,
+    marginHorizontal: 20,
+    marginVertical: 10,
     justifyContent: 'center',
   },
   head: {

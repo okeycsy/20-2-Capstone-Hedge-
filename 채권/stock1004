@@ -1,0 +1,93 @@
+import pandas as pd
+import numpy as np
+import csv
+import mysql.connector
+import math
+
+def volatility(arr):
+    arr = arr[-252:]
+    #print(arr)
+    vol = np.var(arr) * np.sqrt(252) * 100
+    return vol
+
+def profit(arr):
+    arr = arr[:-252]
+    pft = np.mean(arr)
+    return pft
+
+
+db = mysql.connector.connect(
+    user = 'root',
+    password = 'tjrdyd12',
+    host = 'localhost',
+    db = 'hedge',
+    charset = 'utf8'
+);
+
+cursor = db.cursor()
+query_1 = 'select * from bond_1_year'
+query_3 = 'select * from bond_3_year'
+query_5 = 'select * from bond_5_year'
+query_10 = 'select * from bond_10_year'
+query_30 = 'select * from bond_30_year'
+
+cursor.execute(query_1)
+result = cursor.fetchall()
+
+df_1 = pd.DataFrame(data=result, columns= ["idx","날짜", "금리", "상품코드"])
+del df_1["idx"]
+
+bond_1_rate = df_1["금리"].to_list()
+
+
+### 3 Year
+cursor.execute(query_3)
+result = cursor.fetchall()
+
+cursor.execute(query_3)
+df_3 = pd.DataFrame(data=result, columns=["idx","날짜", "금리", "상품코드"])
+del df_3["idx"]
+
+bond_3_rate = df_3["금리"].to_list()
+
+
+### 5 year
+#cursor.execute(query_5)
+result = cursor.fetchall()
+#print(result)
+df_5 = pd.DataFrame(data=result, columns=["idx","날짜", "금리", "상품코드"])
+del df_5["idx"]
+
+bond_5_rate = df_5["금리"].to_list()
+
+
+### 10 year
+cursor.execute(query_10)
+result = cursor.fetchall()
+
+df_10 = pd.DataFrame(data=result, columns=["idx","날짜", "금리", "상품코드"])
+del df_10["idx"]
+
+bond_10_rate = df_10["금리"].to_list()
+
+
+### 30 year
+cursor.execute(query_30)
+result = cursor.fetchall()
+
+df_30 = pd.DataFrame(data=result, columns=["idx","날짜", "금리", "상품코드"])
+del df_30["idx"]
+
+bond_30_rate = df_30["금리"].to_list()
+cursor.close()
+
+print(volatility(bond_1_rate))
+print(profit(bond_1_rate))
+print(volatility(bond_3_rate))
+print(profit(bond_3_rate))
+print(volatility(bond_5_rate))
+print(profit(bond_5_rate))
+print(volatility(bond_10_rate))
+print(profit(bond_10_rate))
+print(volatility(bond_30_rate))
+print(profit(bond_30_rate))

@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import sklearn as sk
 import math
 
 # 배당금 위험-수익률 데이터 생성
@@ -42,7 +41,7 @@ def dividend():
             df = df.append(s, ignore_index = True)
             
         except Exception as e:
-            print (e)
+            #print (e)
             continue
 
     df = df.dropna()
@@ -107,6 +106,7 @@ def deposit():
     #print(df_saving)
 
     return df_deposit, df_saving
+'''
 # 채권 데이터 생성
 def bond():
     columns = ['상품명', '수익률', '만기일', '위험도']
@@ -123,16 +123,16 @@ def bond():
     
     #print (df)
     return df
-
+'''
 # main
 df_dividend = dividend()
 df_deposit, df_saving = deposit()
-df_bond = bond()
+#df_bond = bond()
 
 df_dividend = df_dividend.reset_index()
 df_deposit = df_deposit.reset_index()
 df_saving = df_saving.reset_index()
-df_bond = df_bond.reset_index()
+#df_bond = df_bond.reset_index()
 
 df_dividend.rename(columns = {'회사명': '상품명', '변동성': '위험도'}, inplace = True)
 df_deposit.rename(columns = {'금리': '수익률'}, inplace = True)
@@ -141,7 +141,7 @@ df_saving.rename(columns = {'금리': '수익률'}, inplace = True)
 df_dividend['상품유형'] = '배당금'
 df_deposit['상품유형'] = '예금'
 df_saving['상품유형'] = '적금'
-df_bond['상품유형'] = '국채'
+#df_bond['상품유형'] = '국채'
 
 columns = ['index', '상품명', '수익률', '위험도', '상품유형']
 
@@ -149,15 +149,17 @@ df = pd.DataFrame(columns = columns)
 df = df.append(df_dividend)
 df = df.append(df_deposit)
 df = df.append(df_saving)
-df = df.append(df_bond)
+#df = df.append(df_bond)
 
 df.drop(columns = df.columns[5:len(df.columns)], inplace = True)
 
-print(df)
-print(df.columns)
+print('idx,상품명,y,x')
+for idx, row in df.iterrows():
+    print(str(idx)+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"]))
+    #print(row)
+    #print(type(row))
 
-df.to_csv('products_dataset.csv')
+#print(df)
+#print(df.columns)
 
-df_xy = df.drop(columns = ['index', '상품명', '상품유형'])
-print(df_xy)
-df_xy.to_csv('products_dataset_xy.csv')
+df.to_csv('tmp1.csv')
