@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import numpy as np
 import pandas as pd
 import math
@@ -78,7 +80,7 @@ df_saving.rename(columns = {'금리': '수익률'}, inplace = True)
 df_saving['상품유형'] = '적금'
 #df_bond['상품유형'] = '국채'
 
-columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형']
+columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형', '최대금리']
 
 df = pd.DataFrame(columns = columns)
 #df = df.append(df_dividend)
@@ -86,11 +88,11 @@ df = pd.DataFrame(columns = columns)
 df = df.append(df_saving)
 #df = df.append(df_bond)
 
-df.drop(columns = df.columns[6:len(df.columns)], inplace = True)
+df.drop(columns = df.columns[7:len(df.columns)], inplace = True)
 
 print('idx,fin_prdt_cd,상품명,y,x')
 for idx, row in df.iterrows():
-    print(str(idx)+','+str(row["fin_prdt_cd"])+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"]))
+    print(str(idx)+','+str(row["fin_prdt_cd"])+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"])+","+str(row["상품유형"])+","+str(row["최대금리"]))
     #print(row)
     #print(type(row))
 
@@ -98,3 +100,4 @@ for idx, row in df.iterrows():
 #print(df.columns)
 
 df.to_csv('/home/selab/Desktop/chatbot/node/Capstone/Server/public/data_saving.csv')
+>>>>>>> 24b9bd54c89aacd98ad5f9b8cf6f40252bcaf8e9
