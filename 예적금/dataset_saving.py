@@ -9,7 +9,7 @@ def deposit_saving():
     source_bank_saving = pd.read_csv('예금적금/적금_은행.csv')
     source_sbank_saving = pd.read_csv('예금적금/적금_저축은행.csv')
 
-    columns = ['은행명', '상품명', '만기', '금리종류', '금리', '최대금리']
+    columns = ['fin_prdt_cd', '은행명', '상품명', '만기', '금리종류', '금리', '최대금리']
 
     def parse(source, columns):
         df = pd.DataFrame(columns = columns)
@@ -22,9 +22,9 @@ def deposit_saving():
                option = option.replace(',', '')
                option = option.split(' ')
 
-               new_row = [row['kor_co_nm'], row['fin_prdt_nm']]
+               new_row = [row['fin_prdt_cd'], row['kor_co_nm'], row['fin_prdt_nm']]
                new_row = new_row + option
-               new_row = new_row[:6]
+               new_row = new_row[:7]
            
                s = pd.Series(new_row, index = columns)
                df = df.append(s, ignore_index= True)
@@ -78,7 +78,7 @@ df_saving.rename(columns = {'금리': '수익률'}, inplace = True)
 df_saving['상품유형'] = '적금'
 #df_bond['상품유형'] = '국채'
 
-columns = ['index', '상품명', '수익률', '위험도', '상품유형']
+columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형']
 
 df = pd.DataFrame(columns = columns)
 #df = df.append(df_dividend)
@@ -86,11 +86,11 @@ df = pd.DataFrame(columns = columns)
 df = df.append(df_saving)
 #df = df.append(df_bond)
 
-df.drop(columns = df.columns[5:len(df.columns)], inplace = True)
+df.drop(columns = df.columns[6:len(df.columns)], inplace = True)
 
-print('idx,상품명,y,x')
+print('idx,fin_prdt_cd,상품명,y,x')
 for idx, row in df.iterrows():
-    print(str(idx)+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"]))
+    print(str(idx)+','+str(row["fin_prdt_cd"])+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"]))
     #print(row)
     #print(type(row))
 
