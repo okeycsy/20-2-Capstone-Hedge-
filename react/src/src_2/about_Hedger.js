@@ -6,9 +6,7 @@ import Test from './Test'
 
 export default function about_Hedger() {
   return (
-    <ScrollView
-        contentContainerStyle={styles.contentContainer}
-    >        
+    <ScrollView>        
         <Test/>
     </ScrollView>
   );
