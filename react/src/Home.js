@@ -50,15 +50,23 @@ function App({ navigation }) {
         </View>
 
         <View style={styles.rowContainer}>
-          <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
-            <Text>주식 신호분석</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
-            <Text>금융상품 비교</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-            <Text>배당금 비교</Text>
-          </TouchableOpacity>
+          <View style={styles.subRow}>
+            <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
+              <Text>주식 신호분석</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
+              <Text>금융상품 비교</Text>
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.subRow}>
+            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
+              <Text>배당금 비교</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
+              <Text>배당금 비교</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         
         <View style={styles.hotProductList}>
@@ -94,11 +102,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingVertical: 10,
-    width: '85%',
+    width: '100%',
     marginVertical: '3%',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  subRow: {
+    marginTop: '1%',
+    marginBottom: '1%',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   hotProductList: {
     borderColor: 'lightgray',
@@ -125,7 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    width: '30%',
+    width: '40%',
     height: '100%',
   },
 });
