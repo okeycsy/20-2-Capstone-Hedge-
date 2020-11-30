@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Animated, Text, View, StyleSheet, Button, Image } from "react-native";
+import { Animated, Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const Test = () => {
-  const [contents, setContents] = useState(0);
-
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const test = useRef(new Animated.Value(0)).current;
 
@@ -23,28 +21,33 @@ const Test = () => {
     }))
   };
 
-  const show_contents_1 = () => {
+  const appear_contents_1 = () => {
     Animated.sequence([
       fadeIn(fadeAnim),
       fadeIn(test),
-      // Animated.parallel([
-      //   fadeOut(fadeAnim),
-      //   fadeOut(test)
-      // ])
     ]).start();
+  }
+  const disappear_contents_1 = () => {
+    Animated.parallel([
+      fadeOut(fadeAnim),
+      fadeOut(test)
+    ]).start()
   }
 
   useEffect(() => {
-    show_contents_1();
+    appear_contents_1();
   });
+  
   
   return (
     <View style={styles.container}>
+      <View>
+        <TouchableOpacity onPress={() => appear_contents_1()}><Text>Contents_1</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => disappear_contents_1()}><Text>Contents_2</Text></TouchableOpacity>
+      </View>
+
       <Animated.View
-        style={[
-          styles.fadingContainer,
-          {opacity: fadeAnim}
-        ]}
+        style={[{opacity: fadeAnim}]}
       >
         <Image
           style={{ width: 200, height: 200}}
@@ -54,10 +57,7 @@ const Test = () => {
 
 
       <Animated.View
-        style={[
-          styles.fadingContainer,
-          {opacity: test}
-        ]}
+        style={[{opacity: test}]}
       >
         <Image
           style={{ width: 200, height: 200}}
