@@ -55,17 +55,17 @@ df_deposit.rename(columns = {'금리': '수익률'}, inplace = True)
 
 df_deposit['상품유형'] = '예금'
 
-columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형']
+columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형', '최대금리']
 
 df = pd.DataFrame(columns = columns)
 #df = df.append(df_dividend)
 df = df.append(df_deposit)
 
-df.drop(columns = df.columns[6:len(df.columns)], inplace = True)
+df.drop(columns = df.columns[7:len(df.columns)], inplace = True)
 
-print('idx,fin_prdt_cd,상품명,y,x')
+print('idx,fin_prdt_cd,상품명,y,x,상품유형,최대금리')
 for idx, row in df.iterrows():
-    print(str(idx)+','+str(row["fin_prdt_cd"])+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"]))
+    print(str(idx)+','+str(row["fin_prdt_cd"])+','+row["상품명"]+","+str(row["수익률"])+","+str(row["위험도"])+","+str(row["상품유형"])+","+str(row["최대금리"]))
 
 
 df.to_csv('/home/selab/Desktop/chatbot/node/Capstone/Server/public/data_deposit.csv')
