@@ -5,7 +5,7 @@ import { Scatter } from 'react-chartjs-2'
 import plugins from 'chartjs-plugin-zoom'
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as jqcsv from 'jquery-csv';
-import Product from './Dividend'
+import Product from './Deposit'
 import { text } from 'd3';
 
 function getdata(data2) {
