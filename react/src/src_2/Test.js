@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Animated, Text, View, StyleSheet, Button, Image } from "react-native";
 
 const Test = () => {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const [contents, setContents] = useState(0);
+
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const test = useRef(new Animated.Value(0)).current;
 
@@ -22,19 +23,19 @@ const Test = () => {
     }))
   };
 
-  const start_sequence = () => {
+  const show_contents_1 = () => {
     Animated.sequence([
       fadeIn(fadeAnim),
       fadeIn(test),
-      Animated.parallel([
-        fadeOut(fadeAnim),
-        fadeOut(test)
-      ])
+      // Animated.parallel([
+      //   fadeOut(fadeAnim),
+      //   fadeOut(test)
+      // ])
     ]).start();
   }
 
   useEffect(() => {
-    start_sequence();
+    show_contents_1();
   });
   
   return (
@@ -42,9 +43,7 @@ const Test = () => {
       <Animated.View
         style={[
           styles.fadingContainer,
-          {
-            opacity: fadeAnim // Bind opacity to animated value
-          }
+          {opacity: fadeAnim}
         ]}
       >
         <Image
@@ -52,12 +51,12 @@ const Test = () => {
           source={require('../../image/logo.png')}
         />
       </Animated.View>
+
+
       <Animated.View
         style={[
           styles.fadingContainer,
-          {
-            opacity: test // Bind opacity to animated value
-          }
+          {opacity: test}
         ]}
       >
         <Image
@@ -71,24 +70,8 @@ const Test = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    flex: 1
   },
-  fadingContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: "powderblue"
-  },
-  fadingText: {
-    fontSize: 28,
-    textAlign: "center",
-    margin: 10
-  },
-  buttonRow: {
-    flexDirection: "row",
-    marginVertical: 16
-  }
 });
 
 export default Test;

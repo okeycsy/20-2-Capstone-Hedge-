@@ -22,7 +22,7 @@ function App({ navigation }) {
       result.sort(function(a,b){
         return a.bs < b.bs ? 1 : a.bs > b.bs ? -1 : 0;
       })
-      for(let i = 1; i < 5; i++) temp.push(result[i]);
+      for(let i = 1; i < 5; i++) temp.push(  {name:result[i].name, bs:parseFloat(result[i].bs).toFixed(3)}  );
       setData(temp);
     })
   })
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    width: '40%',
+    width: '30%',
     height: '100%',
   },
 });
