@@ -119,9 +119,9 @@ export default function Div() {
           {text === "" ?
             (
               <View style={styles.roundContainer2}>
-                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginTop: '2%'}}>
-                  <TouchableOpacity onPress={() => sorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
-                  <TouchableOpacity onPress={() => sorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
+                  <TouchableOpacity onPress={() => sorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={() => sorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
                 </View>
                 <FlatList
                   style={styles.flatlistlist}
@@ -132,9 +132,9 @@ export default function Div() {
               </View>
             ) :
             (<View style={styles.roundContainer2}>
-              <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginTop: '2%'}}>
-                <TouchableOpacity onPress={() => searchSorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => searchSorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
+              <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
+                <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
               </View>
 
               <FlatList
@@ -210,4 +210,12 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontSize: 16,
   },
+  button: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    width: '35%',
+    height:'100%',
+    alignItems: 'center'
+  }
 });
