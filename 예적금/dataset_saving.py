@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 import numpy as np
 import pandas as pd
 import math
@@ -98,3 +100,4 @@ for idx, row in df.iterrows():
 #print(df.columns)
 
 df.to_csv('/home/selab/Desktop/chatbot/node/Capstone/Server/public/data_saving.csv')
+>>>>>>> 24b9bd54c89aacd98ad5f9b8cf6f40252bcaf8e9

@@ -22,8 +22,8 @@ export default function Div() {
           let temp_obj = {
             idx: result[i][1],
             name: result[i][2],
-            yield: result[i][3],
-            risk: result[i][4]
+            yield: parseFloat(result[i][3]).toFixed(3),
+            risk: parseFloat(result[i][4]).toFixed(3)
           }
           if(temp_obj.name === undefined) continue;
           temp_data.push(temp_obj);
@@ -40,10 +40,10 @@ export default function Div() {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.opacity}>
-        <Text>{item.name}   </Text>
-        <Text>{item.risk}   </Text>
-        <Text>{item.yield}   </Text>
+      <TouchableOpacity style={styles.item}>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.name}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.risk}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.yield}</Text></View>
       </TouchableOpacity>
     )
   }
@@ -103,49 +103,38 @@ export default function Div() {
 
     setSearch(searched_data);
   }
-  
-  // const searching = () => {
-  //   let searched_data = [];
-
-  //   for(let i = 0; i < data.length; i++) {
-  //     try{
-  //       if( data[i].name.indexOf(text) != -1 ) searched_data.push(data[i]);
-  //     } catch {
-  //     }      
-  //   }
-
-  //   setSearch(searched_data);
-  // }
 
   return (
-    <View>
+    <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (
-        <View>
+        <View style={styles.roundContainer1}>
           <View>
             <TextInput
+              style={styles.textinput}
               onChangeText={(text) => handle_text(text)}
               value={text}
             />
           </View>
 
           {text === "" ?
-            (<View>
-              <View>
-                <TouchableOpacity onPress={() => sorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => sorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
+            (
+              <View style={styles.roundContainer2}>
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
+                  <TouchableOpacity onPress={() => sorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={() => sorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
+                </View>
+                <FlatList
+                  style={styles.flatlistlist}
+                  data={data}
+                  renderItem={renderItem}
+                  keyExtractor={item => item.idx}
+                />
               </View>
-
-              <FlatList
-                style={styles.flatlistlist}
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={item => item.idx}
-              />
-            </View>) :
-            (<View>
-              <View>
-                <TouchableOpacity onPress={() => searchSorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => searchSorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
+            ) :
+            (<View style={styles.roundContainer2}>
+              <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
+                <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
               </View>
 
               <FlatList
@@ -163,11 +152,70 @@ export default function Div() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '1%',
+    marginBottom: '5%',
+    paddingHorizontal: 10,
+  },
   flatlist: {
-    flexDirection:'column'
+    flexDirection:'column',
+    width: '100%',
+    height: '50%'
   },
   opacity: {
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  roundContainer1: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '85%',
+    height: '90%',
+  },
+  roundContainer2: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    width: '60%',
+    height: '90%',
+  },
+  textinput: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: "5%",
+    marginTop: "5%"
+  },
+  item: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'lightgray',
+    borderRadius: 5,
+    marginBottom: 5,
+  },
+  text : {
+    color: 'black',
+    marginLeft: '5%',
+    marginVertical: '2%',
+    textAlignVertical: 'center',
+    fontSize: 16,
+  },
+  button: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    width: '35%',
+    height:'100%',
+    alignItems: 'center'
+  }
 });
