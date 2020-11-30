@@ -159,6 +159,7 @@ function ScatterChart() {
           var label = chartdata.datasets[clickedDatasetIndex].label;
           var name = chartdata.datasets[clickedDatasetIndex].data[clickedElementindex].상품명;     
           console.log("Clicked: " + label + " - " + name);
+          console.log(chartdata.datasets[clickedDatasetIndex].data[clickedElementindex])
         }
       },
       plugins: {

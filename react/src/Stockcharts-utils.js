@@ -20,7 +20,7 @@ function parseData(parse) {
 const parseDate = timeParse("%Y-%m-%d");
 
 export function getData(company) {
-	const url = "http://swlab.uos.ac.kr/share" + company
+	const url = "http://swlab.uos.ac.kr/share_" + company
 	const promiseMSFT = fetch(url)
 		.then(response => response.text())
 		.then(data => csvParse(data, parseData(parseDate)))
