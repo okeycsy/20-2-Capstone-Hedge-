@@ -31,8 +31,8 @@ export default function Stock_Details({route, navigation}) {
     })
   }
 
-  const company = route.params.name
   console.log(route)
+  const company = route.params.name
   return (
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (        

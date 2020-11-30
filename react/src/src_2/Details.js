@@ -170,7 +170,7 @@ class Signal extends Component {
               renderItem={({ item }) => (
                 <TouchableOpacity 
                   style={[styles.item, {backgroundColor: item.color}]}
-                  onPress={() => navigation.push('Stock_Details', {company : item.name})}
+                  onPress={() => navigation.push('Stock_Details', {name : item.name})}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
                   <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
@@ -227,7 +227,7 @@ class Signal extends Component {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={[styles.item, {backgroundColor: item.color}]}
-                  onPress={() => navigation.push('Stock_Details')}
+                  onPress={() => navigation.push('Stock_Details', {name : item.name})}
                 >
                   <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
                   <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
