@@ -41,9 +41,9 @@ export default function Div() {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.item}>
-        <View style={{flex:1}}><Text>{item.name}</Text></View>
-        <View style={{flex:1}}><Text>{item.risk}</Text></View>
-        <View style={{flex:1}}><Text>{item.yield}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.name}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.risk}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.yield}</Text></View>
       </TouchableOpacity>
     )
   }
@@ -103,19 +103,6 @@ export default function Div() {
 
     setSearch(searched_data);
   }
-  
-  // const searching = () => {
-  //   let searched_data = [];
-
-  //   for(let i = 0; i < data.length; i++) {
-  //     try{
-  //       if( data[i].name.indexOf(text) != -1 ) searched_data.push(data[i]);
-  //     } catch {
-  //     }      
-  //   }
-
-  //   setSearch(searched_data);
-  // }
 
   return (
     <View style={styles.container}>
@@ -132,11 +119,10 @@ export default function Div() {
           {text === "" ?
             (
               <View style={styles.roundContainer2}>
-                <View>
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginTop: '2%'}}>
                   <TouchableOpacity onPress={() => sorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
                   <TouchableOpacity onPress={() => sorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
                 </View>
-
                 <FlatList
                   style={styles.flatlistlist}
                   data={data}
@@ -146,7 +132,7 @@ export default function Div() {
               </View>
             ) :
             (<View style={styles.roundContainer2}>
-              <View>
+              <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginTop: '2%'}}>
                 <TouchableOpacity onPress={() => searchSorting(2)}><Text>리스크 정렬</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => searchSorting(1)}><Text>수익률 정렬</Text></TouchableOpacity>
               </View>
@@ -190,7 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: '85%',
     height: '90%',
   },
   roundContainer2: {
@@ -216,5 +202,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderRadius: 5,
     marginBottom: 5,
+  },
+  text : {
+    color: 'black',
+    marginLeft: '5%',
+    marginVertical: '2%',
+    textAlignVertical: 'center',
+    fontSize: 16,
   },
 });
