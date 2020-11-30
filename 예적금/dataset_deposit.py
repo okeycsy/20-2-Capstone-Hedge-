@@ -7,7 +7,7 @@ def deposit_deposit():
     source_bank_deposit = pd.read_csv('예금적금/예금_은행.csv')
     source_sbank_deposit = pd.read_csv('예금적금/예금_저축은행.csv')
 
-    columns = ['fin_prdt_cd', '은행명', '상품명', '만기', '금리종류', '금리', '최대금리']
+    columns = ['fin_prdt_cd', 'join_member', 'max_limit', 'spcl_cnd', '은행명', '상품명', '만기', '금리종류', '금리', '최대금리']
 
     def parse(source, columns):
         df = pd.DataFrame(columns = columns)
@@ -20,9 +20,9 @@ def deposit_deposit():
                option = option.replace(',', '')
                option = option.split(' ')
 
-               new_row = [row['fin_prdt_cd'], row['kor_co_nm'], row['fin_prdt_nm']]
+               new_row = [row['fin_prdt_cd'], row['join_member'], row['max_limit'], row['spcl_cnd'], row['kor_co_nm'], row['fin_prdt_nm']]
                new_row = new_row + option
-               new_row = new_row[:7]
+               new_row = new_row[:10]
            
                s = pd.Series(new_row, index = columns)
                df = df.append(s, ignore_index= True)
@@ -55,13 +55,13 @@ df_deposit.rename(columns = {'금리': '수익률'}, inplace = True)
 
 df_deposit['상품유형'] = '예금'
 
-columns = ['index', 'fin_prdt_cd', '상품명', '수익률', '위험도', '상품유형', '최대금리']
+columns = ['index', 'fin_prdt_cd', 'join_member', 'max_limit', 'spcl_cnd', '은행명', '상품명', '만기', '금리종류', '수익률', '위험도', '상품유형', '최대금리']
 
 df = pd.DataFrame(columns = columns)
 #df = df.append(df_dividend)
 df = df.append(df_deposit)
 
-df.drop(columns = df.columns[7:len(df.columns)], inplace = True)
+df.drop(columns = df.columns[13:len(df.columns)], inplace = True)
 
 print('idx,fin_prdt_cd,상품명,y,x,상품유형,최대금리')
 for idx, row in df.iterrows():
