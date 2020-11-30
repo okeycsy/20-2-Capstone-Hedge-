@@ -1,0 +1,33 @@
+body { 
+	text-align: center; 
+	/*background: #fef45b;*/
+	background: rgb(255, 250, 176);
+}
+
+.container { 
+	padding: 10px;
+	/*background: rgb(255, 250, 176);*/
+	display: inline-block;
+	clear:both;
+	margin-top: 10px; 
+    text-align: center;
+}
+
+.table_container {
+	padding: 10px;
+	/*background: rgb(255, 250, 176);*/
+	display: inline-block;
+	clear:both;
+	margin-bottom: 30px; 
+    text-align: center;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid;
+}
+
+td {
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-top: 20px;
+	padding-bottom: 0px;
+}

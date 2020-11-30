@@ -15,6 +15,7 @@ import DetailsScreen from "./src/new_ProductChart";
 import StockScreen from "./src/src_2/Details";
 import Stock_Details from "./src/src_2/Stock_Details";
 import about_Hedger from "./src/src_2/about_Hedger";
+import Div from "./src/src_2/Div";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ function App() {
 				<Stack.Screen name="Stocks" component={StockScreen} />
         <Stack.Screen name="Stock_Details" component={Stock_Details} />
         <Stack.Screen name="about_Hedger" component={about_Hedger} />
+        <Stack.Screen name="Div" component={Div} />
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>

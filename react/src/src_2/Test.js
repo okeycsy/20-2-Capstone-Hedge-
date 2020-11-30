@@ -10,6 +10,8 @@ export default class Test extends Component {
           new Animated.ValueXY({x:0, y:0}),
           new Animated.ValueXY({x:0, y:0}),
           new Animated.ValueXY({x:0, y:0}),
+          new Animated.ValueXY({x:0, y:0}),
+          new Animated.ValueXY({x:0, y:0}),
         ]
       };
     }
@@ -24,7 +26,7 @@ export default class Test extends Component {
       return Animated.timing (
         position, {
           toValue : {x:200, y:0},
-          duration : 1000,
+          duration : 300,
           delay : 0
       });
     }
@@ -45,7 +47,10 @@ export default class Test extends Component {
           {
             this.state.positions.map((position, index) => {
               return (
-                <Animated.View style={this._getStyle(position)} key={index}/>
+                <View>
+                  <Animated.View style={this._getStyle(position)} key={index}/>
+                  <Animated.View style={this._getStyle(position)} key={index}/>
+                </View>
               )
             })
           }

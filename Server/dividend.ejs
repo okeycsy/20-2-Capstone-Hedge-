@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href='./css/dividend.css'>
+</head>
+<body>
+    <!--로고-->
+    <div>
+        <div class="container">
+            <a href="/">logo</a>
+        </div>
+    </div>
+    <hr>
+    
+
+    <div>
+        <div class="container">
+            배당 세부 정보
+        </div>
+    </div>
+    
+    <!--Dividend table-->>
+    <div>
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>구분</th><th>당기</th><th>전기</th><th>전전기</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="4"><%= data.Name %></td>
+                    </tr>
+                    <tr>
+                        <td>당기순이익 (백만원)</a></td><td><%= data.Income.Thstrm %></td><td><%= data.Income.Frmtrm %></td><td><%= data.Income.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td>(연결) 당기순이익 (백만원)</a></td><td><%= data.NetIncome.Thstrm %></td><td><%= data.NetIncome.Frmtrm %></td><td><%= data.NetIncome.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td>(별도) 당기순이익 (백만원)</a></td><td><%= data.SeparateIncome.Thstrm %></td><td><%= data.SeparateIncome.Frmtrm %></td><td><%= data.SeparateIncome.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">배당 정보</td>
+                    </tr>
+                    <tr>
+                        <td><%= data.stock1.name %></a></td><td><%= data.stock1.Thstrm %></td><td><%= data.stock1.Frmtrm %></td><td><%= data.stock1.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td><%= data.stock2.name %></a></td><td><%= data.stock2.Thstrm %></td><td><%= data.stock2.Frmtrm %></td><td><%= data.stock2.Lwfr %></td>
+                    </tr>
+                    <tr>
+                        <td><%= data.stock3.name %></a></td><td><%= data.stock3.Thstrm %></td><td><%= data.stock3.Frmtrm %></td><td><%= data.stock3.Lwfr %></td>                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <hr>
+        <div class="container">
+
+            <footer>
+                footer
+            </footer>
+        </div>
+    </div>
+    
+</body>
+</html>
+

@@ -100,9 +100,6 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
-    marginHorizontal: 20,
-    marginVertical: 10,
     justifyContent: 'center',
   },
   head: {

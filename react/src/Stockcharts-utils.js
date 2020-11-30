@@ -3,11 +3,10 @@
 import { tsvParse, csvParse } from  "d3-dsv";
 import { timeParse } from "d3-time-format";
 import * as d3 from "d3";
-import data from '../카카오.csv';
 
 function parseData(parse) {
 	return function(d) {
-		d.date = parse(d.index);
+		d.date = parse(d.날짜);
 		d.open = +d.Open;
 		d.high = +d.High;
 		d.low = +d.Low;
@@ -20,16 +19,11 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%d");
 
-/* original code
-export function getData() {
-	const promiseMSFT = fetch("https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/MSFT.tsv")
+export function getData(company) {
+	const url = "http://swlab.uos.ac.kr/share" + company
+	const promiseMSFT = fetch(url)
 		.then(response => response.text())
-		.then(data => tsvParse(data, parseData(parseDate)))
-	return promiseMSFT;
-*/
-
-export function getData() {
-	const promiseMSFT = d3.csv(data, parseData(parseDate))
+		.then(data => csvParse(data, parseData(parseDate)))
 	return promiseMSFT;
 }
 

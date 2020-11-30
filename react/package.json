@@ -34,6 +34,7 @@
     "react-native-screens": "~2.10.1",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.3",
+    "react-papaparse": "^3.11.0",
     "react-stockcharts": "^0.7.8",
     "shortid": "^2.2.8"
   },
