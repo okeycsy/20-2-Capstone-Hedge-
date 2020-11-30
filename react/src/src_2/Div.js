@@ -134,7 +134,6 @@ export default function Div() {
                 <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
               </View>
-
               <FlatList
                 style={styles.flatlistlist}
                 data={search}
