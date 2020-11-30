@@ -108,7 +108,7 @@ export default function Div() {
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (
         <View style={styles.roundContainer1}>
-          <View>
+          <View style={{marginBottom: '2%', flex:1, width: '55%'}}>
             <TextInput
               style={styles.textinput}
               onChangeText={(text) => handle_text(text)}
@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: "5%",
-    marginTop: "5%"
+    marginTop: "5%",
+    flex: 1,
   },
   item: {
     flex: 1,
