@@ -12,8 +12,6 @@
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
-    "chart.js": "^2.9.4",
-    "chartjs-plugin-zoom": "^0.7.7",
     "d3": "^6.2.0",
     "d3-dsv": "^1.0.8",
     "d3-format": "^1.2.1",
@@ -25,17 +23,18 @@
     "prop-types": "^15.6.0",
     "react": "16.13.1",
     "react-bootstrap": "^0.31.5",
-    "react-chartjs-2": "^2.11.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
+    "react-native-svg": "^12.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.3",
     "react-stockcharts": "^0.7.8",
-    "shortid": "^2.2.8"
+    "shortid": "^2.2.8",
+    "victory-native": "^35.3.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
