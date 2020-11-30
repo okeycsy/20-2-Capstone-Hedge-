@@ -126,7 +126,6 @@ export default function Div() {
               onChangeText={(text) => handle_text(text)}
               value={text}
             />
-            {/* <TouchableOpacity onPress={() => searching()}><Text>검색</Text></TouchableOpacity> */}
           </View>
 
           {text === "" ?

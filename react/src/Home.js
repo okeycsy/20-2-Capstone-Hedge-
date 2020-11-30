@@ -26,32 +26,6 @@ function App({ navigation }) {
       setData(temp);
     })
   })
-  // const DATA = [
-  //   {
-  //     id: '1',
-  //     type: '유형351',
-  //     title: '이름~~~!@#',
-  //     signal: '매수신234호',
-  //   },
-  //   {
-  //     id: '2',
-  //     type: '유형1',
-  //     title: '이름',
-  //     signal: '매수신호',
-  //   },
-  //   {
-  //     id: '3',
-  //     type: '유형1',
-  //     title: '이름',
-  //     signal: '매수신호',
-  //   },
-  //   {
-  //     id: '4',
-  //     type: '유형1',
-  //     title: '이름',
-  //     signal: '매수신호',
-  //   },
-  // ];
 
   const Item = ({ data }) => (
     <TouchableOpacity
@@ -81,6 +55,9 @@ function App({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
             <Text>금융상품 비교</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
+            <Text>배당금 비교</Text>
           </TouchableOpacity>
         </View>
         

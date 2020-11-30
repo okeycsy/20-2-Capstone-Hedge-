@@ -28,7 +28,8 @@ class Signal extends Component {
     fetch('http://swlab.uos.ac.kr/bs')
     .then((response) => (response.json()))
     .then(function(result){
-      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
+      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs).toFixed(3);
+      result.splice(0, 1);
       that.setState({data:result})
     })
     .then(function(){
