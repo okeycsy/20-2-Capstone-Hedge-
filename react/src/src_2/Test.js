@@ -1,26 +1,42 @@
-import React, { useRef } from "react";
-import { Animated, Text, View, StyleSheet, Button } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { Animated, Text, View, StyleSheet, Button, Image } from "react-native";
 
 const Test = () => {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const test = useRef(new Animated.Value(0)).current;
 
   const fadeIn = (target) => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(target, {
-      toValue: 1,
-      duration: 500
-    }).start();
+    return (
+      Animated.timing(target, {
+        toValue: 1,
+        duration: 500
+      }))
   };
 
   const fadeOut = (target) => {
-    // Will change fadeAnim value to 0 in 5 seconds
+    return (
     Animated.timing(target, {
       toValue: 0,
       duration: 500
-    }).start();
+    }))
   };
 
+  const start_sequence = () => {
+    Animated.sequence([
+      fadeIn(fadeAnim),
+      fadeIn(test),
+      Animated.parallel([
+        fadeOut(fadeAnim),
+        fadeOut(test)
+      ])
+    ]).start();
+  }
+
+  useEffect(() => {
+    start_sequence();
+  });
+  
   return (
     <View style={styles.container}>
       <Animated.View
@@ -31,12 +47,24 @@ const Test = () => {
           }
         ]}
       >
-        <Text style={styles.fadingText}>Fading View!</Text>
+        <Image
+          style={{ width: 200, height: 200}}
+          source={require('../../image/logo.png')}
+        />
       </Animated.View>
-      <View style={styles.buttonRow}>
-        <Button title="Fade In" onPress={() => fadeIn(fadeAnim)} />
-        <Button title="Fade Out" onPress={() => fadeOut(fadeAnim)} />
-      </View>
+      <Animated.View
+        style={[
+          styles.fadingContainer,
+          {
+            opacity: test // Bind opacity to animated value
+          }
+        ]}
+      >
+        <Image
+          style={{ width: 200, height: 200}}
+          source={require('../../image/logo.png')}
+        />
+      </Animated.View>
     </View>
   );
 }
