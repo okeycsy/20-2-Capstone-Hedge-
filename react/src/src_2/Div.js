@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import {readString} from "react-papaparse";
 
 export default function Div() {
   const [isLoading, setLoading] = useState(true);
@@ -14,16 +13,15 @@ export default function Div() {
   useEffect(() => {
     fetch('http://swlab.uos.ac.kr/api_div')
       .then((response) => response.text())
-      .then((text) => readString(text))
-      .then((result) => result.data)
+      .then((text) => text.split(','))
       .then(function(result) {
         let temp_data = [];
-        for(let i = 1; i < result.length; i++) {
+        for(let i = 6; i < result.length; i+=5) {
           let temp_obj = {
-            idx: result[i][1],
-            name: result[i][2],
-            yield: parseFloat(result[i][3]).toFixed(3),
-            risk: parseFloat(result[i][4]).toFixed(3)
+            idx: result[i],
+            name: result[i+1],
+            yield: parseFloat(result[i+2]).toFixed(3),
+            risk: parseFloat(result[i+3]).toFixed(3)
           }
           if(temp_obj.name === undefined) continue;
           temp_data.push(temp_obj);
