@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '90%',
   },
   roundContainer2: {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'stretch',
-    width: '60%',
+    width: '100%',
     height: '90%',
   },
   textinput: {
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginVertical: '2%',
     textAlignVertical: 'center',
-    fontSize: 16,
+    fontSize: 12,
   },
   button: {
     borderColor: 'lightgray',
