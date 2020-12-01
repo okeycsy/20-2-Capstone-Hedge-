@@ -190,7 +190,7 @@ class Signal extends Component {
         <View style={styles.roundContainer2}>
           <Text style={styles.title}>전체 목록</Text>
 
-          <View style={{flexDirection:'row', marginBottom:'1%'}}>
+          <View style={{width: '80%'}}>
             <TextInput 
               style={styles.textinput} 
               onChangeText={(text) => this.handle_text(text)}
@@ -296,7 +296,6 @@ const styles = StyleSheet.create({
   textinput: {
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: "5%",
     marginTop: "5%"
   },
   roundContainer1: {
@@ -305,7 +304,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '30%',
     marginVertical: '3%',
   },
@@ -315,7 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '70%',
   },
 });
