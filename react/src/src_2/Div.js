@@ -20,8 +20,8 @@ export default function Div() {
           let temp_obj = {
             idx: result[i],
             name: result[i+1],
-            yield: parseFloat(result[i+2]).toFixed(3),
-            risk: parseFloat(result[i+3]).toFixed(3)
+            yield: parseFloat(parseFloat(result[i+2]).toFixed(3)),
+            risk: parseFloat(parseFloat(result[i+3]).toFixed(3))
           }
           if(temp_obj.name === undefined) continue;
           temp_data.push(temp_obj);
