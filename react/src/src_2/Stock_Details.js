@@ -1,4 +1,3 @@
-import { style } from 'd3';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TouchableHighlightBase } from 'react-native';
@@ -8,7 +7,13 @@ import ChartCompontent from '../Charts'
 
 export default function Stock_Details({route, navigation}) {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    yesterday_close: 0,
+    high: 0,
+    low: 0,
+    today_close: 0,
+    volume: 0,
+  });
 
   useEffect(() => {
     setData({
@@ -22,6 +27,7 @@ export default function Stock_Details({route, navigation}) {
   }, []);
 
   function load(yc, h, l, t, v) {
+    console.log("acutal load")
     setData({
       yesterday_close:yc,
       high:h,
@@ -31,20 +37,20 @@ export default function Stock_Details({route, navigation}) {
     })
   }
 
-  console.log(route)
   const company = route.params.name
+  console.log(data)
+  console.log(isLoading)
   return (
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (        
         <View style= {styles.borderContainer}>
           <View style={styles.chart}><ChartCompontent company={ company } load = { load } /></View>
-        
           <View style={styles.borderTable}>
-            <View style={styles.row}><Text>전일 종가</Text><Text>{data.yesterday_close}</Text></View>
-            <View style={styles.row}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
-            <View style={styles.row}><Text>당일 고가</Text><Text>{data.high}</Text></View>
-            <View style={styles.row}><Text>당일 저가</Text><Text>{data.low}</Text></View>
-            <View style={styles.row}><Text>거래량</Text><Text>{data.volume}</Text></View>
+            <View style={styles.rowView}><Text>전일 종가</Text><Text>{data.yesterday_close}</Text></View>
+            <View style={styles.rowView}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
+            <View style={styles.rowView}><Text>당일 고가</Text><Text>{data.high}</Text></View>
+            <View style={styles.rowView}><Text>당일 저가</Text><Text>{data.low}</Text></View>
+            <View style={styles.rowView}><Text>거래량</Text><Text>{data.volume}</Text></View>
           </View>
         </View>
       )}
@@ -84,11 +90,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   chart:{
-      width:'100%'
+      width:'100%',
   },
-  row: {
+  rowView: {
     width: '80%',
-    flex: 1,
     marginBottom: 5,
     justifyContent: 'space-between',
     flexDirection: 'row'
