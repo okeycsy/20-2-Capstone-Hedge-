@@ -86,7 +86,7 @@ export default function Div() {
     let searched_data = [];
 
     for(let i = 0; i < data.length; i++) {
-      if( data[i].name.indexOf(text) != -1 ) searched_data.push(data[i]);
+      if( data[i].상품명.indexOf(text) != -1 ) searched_data.push(data[i]);
     }
 
     setSearch(searched_data);
