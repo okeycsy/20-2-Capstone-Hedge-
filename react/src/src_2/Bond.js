@@ -71,6 +71,7 @@ export default function Bond() {
                   <FlatList
                     data={data[idx]}
                     renderItem={renderItem}
+                    keyExtractor={item => item.날짜}
                   />
               </View>
           </View>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
       borderColor: 'lightgray',
       borderRadius: 5,
       borderWidth: 1,
-      height: '90%'
+      height: '85%',
   },
   item: {
     flex: 1,
@@ -98,14 +99,15 @@ const styles = StyleSheet.create({
   buttonContainer:{
     flexDirection: 'column',
     flex:1,
-    marginVertical: '1%'
+    marginVertical: '3%',
+    marginBottom: '15%'
   },
   buttonSubContainer:{
     flexDirection: 'row',
     flex:1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    marginVertical: '3%'
+    marginVertical: '3%',
   },
   button:{
     flex: 1,
