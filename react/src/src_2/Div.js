@@ -1,3 +1,4 @@
+import { func } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -13,6 +14,13 @@ export default function Div() {
   useEffect(() => {
     fetch('http://swlab.uos.ac.kr/api_div')
       .then((response) => response.json())
+      .then(function(result){
+        for(let i = 0; i < result.length; i++) {
+          result[i].위험도 = parseFloat(parseFloat(result[i].위험도).toFixed(3))
+          result[i].수익률 = parseFloat(parseFloat(result[i].수익률).toFixed(3))
+        }
+        return result
+      })
       .then((result) => setData(result))
       .catch((error) => alert(error))
       .finally(() => setLoading(false));
