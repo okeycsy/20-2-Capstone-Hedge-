@@ -1,3 +1,4 @@
+import { func } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -12,26 +13,15 @@ export default function Div() {
 
   useEffect(() => {
     fetch('http://swlab.uos.ac.kr/api_div')
-      .then((response) => response.text())
-      .then((text) => text.split(','))
-      .then(function(result) {
-        let temp_data = [];
-        for(let i = 6; i < result.length; i+=5) {
-          let temp_obj = {
-            idx: result[i],
-            name: result[i+1],
-            yield: parseFloat(parseFloat(result[i+2]).toFixed(3)),
-            risk: parseFloat(parseFloat(result[i+3]).toFixed(3))
-          }
-          if(temp_obj.name === undefined) continue;
-          temp_data.push(temp_obj);
+      .then((response) => response.json())
+      .then(function(result){
+        for(let i = 0; i < result.length; i++) {
+          result[i].위험도 = parseFloat(parseFloat(result[i].위험도).toFixed(3))
+          result[i].수익률 = parseFloat(parseFloat(result[i].수익률).toFixed(3))
         }
-
-        temp_data.sort(function(a,b) {
-          return a.yield < b.yield ? 1 : a.yield > b.yield ? -1 : 0;
-        })
-        setData(temp_data);
+        return result
       })
+      .then((result) => setData(result))
       .catch((error) => alert(error))
       .finally(() => setLoading(false));
   }, []);
@@ -39,9 +29,9 @@ export default function Div() {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity style={styles.item}>
-        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.name}</Text></View>
-        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.risk}</Text></View>
-        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.yield}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.위험도}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.수익률}</Text></View>
       </TouchableOpacity>
     )
   }
@@ -58,11 +48,11 @@ export default function Div() {
 
     if( Math.abs(nextSort) === 1 ) {
       temp_data.sort(function(a, b) {
-        return a.yield < b.yield ? k[0] : a.yield > b.yield ? k[1] : k[2];
+        return a.수익률 < b.수익률 ? k[0] : a.수익률 > b.수익률 ? k[1] : k[2];
       })
     } else {
       temp_data.sort(function(a, b) {
-        return a.risk < b.risk ? k[0] : a.risk > b.risk ? k[1] : k[2];
+        return a.위험도 < b.위험도 ? k[0] : a.위험도 > b.위험도 ? k[1] : k[2];
       })
     }
 
@@ -80,11 +70,11 @@ export default function Div() {
 
     if( Math.abs(nextSort) === 1 ) {
       temp_data.sort(function(a, b) {
-        return a.yield < b.yield ? k[0] : a.yield > b.yield ? k[1] : k[2];
+        return a.수익률 < b.수익률 ? k[0] : a.수익률 > b.수익률 ? k[1] : k[2];
       })
     } else {
       temp_data.sort(function(a, b) {
-        return a.risk < b.risk ? k[0] : a.risk > b.risk ? k[1] : k[2];
+        return a.위험도 < b.위험도 ? k[0] : a.위험도 > b.위험도 ? k[1] : k[2];
       })
     }
 
