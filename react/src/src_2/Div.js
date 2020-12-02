@@ -26,12 +26,20 @@ export default function Div({ navigation }) {
       .finally(() => setLoading(false));
   }, []);
 
+  function fixCode(code) {
+    var result = code
+    while(result.length < 8) {
+      result = '0' + result;
+    }
+    return result.substr(0, 6);
+  }
+
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.push('Dividend_details',{
-          code: parseInt(item.code),
+          code: fixCode(item.code),
           name: item.회사명,
           this_year: item.올해배당금,
           last_year: item.작년배당금,
@@ -98,7 +106,7 @@ export default function Div({ navigation }) {
     let searched_data = [];
 
     for(let i = 0; i < data.length; i++) {
-      if( data[i].상품명.indexOf(text) != -1 ) searched_data.push(data[i]);
+      if( data[i].회사명.indexOf(text) != -1 ) searched_data.push(data[i]);
     }
 
     setSearch(searched_data);
@@ -134,7 +142,7 @@ export default function Div({ navigation }) {
                   style={styles.flatlistlist}
                   data={data}
                   renderItem={renderItem}
-                  keyExtractor={item => item.idx}
+                  keyExtractor={item => item.회사명}
                 />
               </View>
             ) :
@@ -147,7 +155,7 @@ export default function Div({ navigation }) {
                 style={styles.flatlistlist}
                 data={search}
                 renderItem={renderItem}
-                keyExtractor={item => item.idx}
+                keyExtractor={item => item.회사명}
               />
             </View>)
           }

@@ -14,7 +14,7 @@ import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 async function openLink(code) {
   try {
     const url = 'https://finance.naver.com/item/main.nhn?code='
-    console.log(InAppBrowser.isAvailable())
+    //console.log(InAppBrowser.isAvailable())
     // {
     //   const result =  InAppBrowser.open(url, {
 
