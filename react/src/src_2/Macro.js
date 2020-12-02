@@ -33,11 +33,15 @@ export default function Macro() {
 
   const renderNames = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => setIdx(item.id)}>
+      <TouchableOpacity
+        style={styles.names}  
+        onPress={() => setIdx(item.id)}
+      >
           <Text>{item.name}</Text>
       </TouchableOpacity>
     )
   }
+
   const setIdx = (idx) => {
     let k = [0,1,2,3,4,5,6,7,8];
     k.splice(k.indexOf(idx), 1);
@@ -50,7 +54,7 @@ export default function Macro() {
 
   const renderItem = ({item}) => {
       return (
-        <TouchableOpacity onPress={() => setIdx(item.id)}>
+        <TouchableOpacity style={styles.item}>
             <Text>{item.name}</Text>
             <Text>{item.val}</Text>
         </TouchableOpacity>
@@ -62,14 +66,17 @@ export default function Macro() {
           <View style={{flexDirection:'column'}}>
               <View style={{borderWidth:1}}>
                 <FlatList
+                  style={styles.namesFlat}
                   data={names}
                   renderItem={renderNames}
+                  numColumns={3}
                   keyExtractor={item => item.id}
                 />
               </View>
 
               <View style={{borderWidth:1}}>
                 <FlatList
+                  style={styles.itemFlat}
                   data={tempData}
                   renderItem={renderItem}
                   keyExtractor={item => item.id}
@@ -80,3 +87,18 @@ export default function Macro() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    namesFlat: {
+        
+    },
+    names: {
+
+    },
+    itemFlat: {
+        flexDirection: 'column'
+    },
+    item: {
+        flexDirection: 'row'
+    }
+})
