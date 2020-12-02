@@ -41,7 +41,7 @@ const Test = () => {
 
   useEffect(() => {
     display_contents(Contents_2, Contents_1)
-  });
+  },[]);
   
   const renderItem_1 = ({ item }) => {
     return (
