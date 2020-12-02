@@ -17,7 +17,7 @@ function DepositDetails( {route} ) {
   ])
 
   useEffect(() => {
-    fetch('http://swlab.uos.ac.kr/dep_' + route.params.fin_prdt_cd + '&' + route.params.bank)
+    fetch('http://swlab.uos.ac.kr/sav_' + route.params.fin_prdt_cd + '&' + route.params.bank)
       .then((response) => response.json())
       .then((result) => setData(result))
       .catch((error) => alert(error))
@@ -26,7 +26,6 @@ function DepositDetails( {route} ) {
   return (
     <View style={styles.container}>
       <View style={styles.table}>
-        
         <FlatList style={styles.flatlist}
           ListHeaderComponent = {
             <View>
@@ -38,63 +37,60 @@ function DepositDetails( {route} ) {
                 <Text style= {styles.text}>네이버 금융 링크</Text>
               </View>
               <View style={styles.item_set}>
-                <View style={styles.item_gray}>
-                  <Text style={styles.textRight}>BIS 자기자본비율</Text>
-                </View>
-              <View style={styles.item_white}>
-                <View style={styles.rowSeparator_gray}>
-                  <Text style={styles.textRight}>{data[0]["BIS 비율"]} %</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.item_set}>
-              <View style={styles.item_gray}>
-                <Text style={styles.textRight}>고정이하여신비율</Text>
-              </View>
-              <View style={styles.item_white}>
-                <View style={styles.rowSeparator_gray}>
-                  <Text style={styles.textRight}>{data[0].고정이하여신비율} %</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.item_set}>
-              <View style={styles.item_gray}>
-                <Text style={styles.textRight}>가입 대상</Text>
-              </View>
-              <View style={styles.item_white}>
-                <View style={styles.rowSeparator_gray}>
-                  <Text style={styles.textRight}>{(data[0].join_member == NaN) ? "없음" : data[0].join_member} </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.item_set}>
-              <View style={styles.item_gray}>
-                <Text style={styles.textRight}>우대 조건</Text>
-              </View>
-              <View style={styles.item_white}>
-                <View style={styles.rowSeparator_gray}>
-                  <Text style={styles.textRight}>{(data[0].spcl_cnd == "") ? "없음" : data[0].spcl_cnd} </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.item_set}>
-              <View style={styles.item_gray}>
-                <Text style={styles.textRight}>납입 한도</Text>
-              </View>
+                  <View style={styles.item_gray}>
+                    <Text style={styles.textRight}>BIS 자기자본비율</Text>
+                  </View>
                 <View style={styles.item_white}>
                   <View style={styles.rowSeparator_gray}>
-                   <Text style={styles.textRight}>{(data[0].max_limit == "") ? "없음" : data[0].max_limit }</Text>
-                 </View>
+                    <Text style={styles.textRight}>{data[0]["BIS 비율"]} %</Text>
+                  </View>
                 </View>
-             </View>
-             <View style={styles.rowSeparator_white}/>
-             <View style={styles.rowSeparator_white}/>
-             <View style={styles.rowSeparator_white}/>
-             <View style={styles.rowSeparator_white}/>
-             <View style={styles.rowSeparator_white}/>
-
-
-
+              </View>
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>고정이하여신비율</Text>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{data[0].고정이하여신비율} %</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>가입 대상</Text>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{(data[0].join_member == NaN) ? "없음" : data[0].join_member} </Text>
+                  </View>
+                </View>
+              </View>
+                <View style={styles.item_set}>
+                  <View style={styles.item_gray}>
+                    <Text style={styles.textRight}>우대 조건</Text>
+                  </View>
+                  <View style={styles.item_white}>
+                    <View style={styles.rowSeparator_gray}>
+                      <Text style={styles.textRight}>{(data[0].spcl_cnd == "") ? "없음" : data[0].spcl_cnd} </Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.item_set}>
+                  <View style={styles.item_gray}>
+                    <Text style={styles.textRight}>납입 한도</Text>
+                  </View>
+                  <View style={styles.item_white}>
+                    <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{(data[0].max_limit == "") ? "없음" : data[0].max_limit }</Text>
+                    </View>
+                  </View>
+                </View>
+              <View style={styles.rowSeparator_white}/>
+              <View style={styles.rowSeparator_white}/>
+              <View style={styles.rowSeparator_white}/>
+              <View style={styles.rowSeparator_white}/>
+              <View style={styles.rowSeparator_white}/>
             </View>
           }
           ItemSeparatorComponent={

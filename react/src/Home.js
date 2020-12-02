@@ -54,10 +54,10 @@ function App({ navigation }) {
             <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
               <Text>배당금 비교</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.push('Dep')} style={styles.button}>
               <Text>예금 상품 비교</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.push('Sav')} style={styles.button}>
               <Text>적금 상품 비교</Text>
             </TouchableOpacity>
           </View>

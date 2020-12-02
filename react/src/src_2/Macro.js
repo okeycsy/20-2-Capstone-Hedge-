@@ -99,21 +99,21 @@ export default function Macro() {
 const styles = StyleSheet.create({
     namesContainer: {
         borderWidth:1
-    },
+    }, // name 버튼을 생성하는 flatlist를 포함하는 view
     namesFlat: {
         
-    },
+    }, // name 버튼을 생성하는 flatlist
     names: {
 
-    },
+    }, // name들의 버튼
 
     itemContainer: {
         borderWidth:1
-    },
+    }, // item 버튼을 생성하는 flatlist를 포함하는 view
     itemFlat: {
         flexDirection: 'column'
-    },
+    }, // item 버튼을 생성하는 flatlist
     item: {
         flexDirection: 'row'
-    }
+    } // item들의 버튼(touchableopacity)
 })

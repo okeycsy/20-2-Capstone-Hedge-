@@ -8,7 +8,7 @@
 
 
 
-# 채권 세부 데이터 :: bond_* (예시 :: 1_year, 3_year, 5_year, 10_year, 30_year, aa_credit, bbb_credit)
+# 채권 세부 데이터 :: bond_* (예시 :: 1, 3, 5, 10, 30, aa, bbb)
 
 # 주가 세부 Data :: share* -> 정규식 처리함 (*에 종목 쓰면 됨)
 
