@@ -34,6 +34,7 @@ export default function Div({ navigation }) {
           fin_prdt_cd: item.fin_prdt_cd,
           bank: item.은행명,
           })}>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.은행명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.위험도}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.만기}</Text></View>
@@ -92,7 +93,7 @@ export default function Div({ navigation }) {
     let searched_data = [];
 
     for(let i = 0; i < data.length; i++) {
-      if( data[i].상품명.indexOf(text) != -1 ) searched_data.push(data[i]);
+      if( data[i].은행명.indexOf(text) != -1 ) searched_data.push(data[i]);
     }
 
     setSearch(searched_data);
@@ -117,6 +118,14 @@ export default function Div({ navigation }) {
                   <TouchableOpacity onPress={() => sorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
                   <TouchableOpacity onPress={() => sorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
                 </View>
+                <View
+                  style={styles.columns}>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>은행명</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>상품명</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>위험도</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>만기</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>수익률</Text></View>
+                </View>
                 <FlatList
                   style={styles.flatlistlist}
                   data={data}
@@ -129,6 +138,14 @@ export default function Div({ navigation }) {
               <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
                 <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
+              </View>
+              <View
+                style={styles.columns}>
+                <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>은행명</Text></View>
+                <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>상품명</Text></View>
+                <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>위험도</Text></View>
+                <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>만기</Text></View>
+                <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>수익률</Text></View>
               </View>
               <FlatList
                 style={styles.flatlistlist}
@@ -196,6 +213,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderRadius: 5,
     marginBottom: 5,
+  },
+  columns: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    marginVertical: '3%',
+    height: '5%'
   },
   text : {
     color: 'black',
