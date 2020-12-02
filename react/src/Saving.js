@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   smallText: {
-    fontSize: 10,
+    fontSize: 13,
     color: 'gray',
   },
   textCenter: {
