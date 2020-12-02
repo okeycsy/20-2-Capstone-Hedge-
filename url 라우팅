@@ -6,11 +6,17 @@
 
 # 적금 Data :: api_sav
 
-# 주가 Data :: share* -> 정규식 처리함 (*에 종목 쓰면 됨)
 
-# 적금 데이터 :: dep_productcode_은행명
 
-# 적금 데이터 :: sav_WR0001E&우리은행
+# 채권 세부 데이터 :: bond_* (예시 :: 1_year, 3_year, 5_year, 10_year, 30_year, aa_credit, bbb_credit)
+
+# 주가 세부 Data :: share* -> 정규식 처리함 (*에 종목 쓰면 됨)
+
+# 적금 세부 데이터 :: dep_productcode_은행명
+
+# 적금 세부 데이터 :: sav_WR0001E&우리은행
+
+
 
 # 매크로 지표 :: api_macro (원/달러, 금 , 나스닥, ..... 단순 꺾은선 그래프로 나타내기만 하면 됨)
 
