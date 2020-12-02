@@ -163,9 +163,10 @@ class Signal extends Component {
         <View style={styles.roundContainer1}>
           <Text style={styles.title}>즐겨찾기</Text>
           <View style={styles.button_container}>
-            <Button title='high sig sort' onPress={() => this.sort_favorite(1)}></Button>
-            <Button title='low sig sort' onPress={() => this.sort_favorite(-1)}></Button>
+            <TouchableOpacity style={styles.sortButton} onPress={() => this.sort_favorite(1)}><Text style={{fontSize:16}}>High Sig Sort</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.sortButton} onPress={() => this.sort_favorite(-1)}><Text style={{fontSize:16}}>Low Sig Sort</Text></TouchableOpacity>
           </View>
+
           <FlatList style={styles.flatlist}
               data={this.state.favorite}
               renderItem={({ item }) => (
@@ -203,8 +204,8 @@ class Signal extends Component {
           </View>
 
           <View style={styles.button_container}>
-            <Button title='high sig sort' onPress={() => this.sort_data(1)}></Button>
-            <Button title='low sig sort' onPress={() => this.sort_data(-1)}></Button>
+            <TouchableOpacity style={styles.sortButton} onPress={() => this.sort_data(1)}><Text style={{fontSize:16}}>High Sig Sort</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.sortButton} onPress={() => this.sort_data(-1)}><Text style={{fontSize:16}}>Low Sig Sort</Text></TouchableOpacity>
           </View>
           {this.state.text == "" ? (
             <FlatList style={styles.flatlist}
@@ -300,8 +301,9 @@ const styles = StyleSheet.create({
   },
   button_container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginVertical: '5%'
   },
   textinput: {
     borderColor: 'gray',
@@ -327,6 +329,14 @@ const styles = StyleSheet.create({
     width: '95%',
     height: '70%',
   },
+  sortButton: {
+    borderColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 10,
+    width: '35%',
+    height:'100%',
+    alignItems: 'center',
+  }
 });
 
 export default Signal;
