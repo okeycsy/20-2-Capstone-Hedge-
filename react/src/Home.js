@@ -69,7 +69,7 @@ function App({ navigation }) {
             <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
               <Text>채권(국고채/회사채)</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.push('ELSDLS')} style={styles.button}>
               <Text>ELS/DLS</Text>
             </TouchableOpacity>
           </View>

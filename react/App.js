@@ -22,6 +22,8 @@ import Dep from "./src/src_2/Dep"
 import DepositDetails from "./src/Deposit"
 import Sav from "./src/src_2/Sav"
 import SavingDetails from "./src/Saving"
+import ELSDLS from "./src/src_2/ELSDLS"
+
 
 
 const Stack = createStackNavigator();
@@ -42,6 +44,7 @@ function App() {
         <Stack.Screen name="Deposit_details" component={DepositDetails} />
         <Stack.Screen name="Sav" component={Sav} />
         <Stack.Screen name="Saving_details" component={SavingDetails} />
+        <Stack.Screen name="ELSDLS" component={ELSDLS} />
         <Stack.Screen name="Macro" component={Macro} />
 			</Stack.Navigator>
 		</View>
