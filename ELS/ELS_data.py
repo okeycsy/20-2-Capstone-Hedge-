@@ -87,8 +87,15 @@ def fnc_table(rcp):
     
     temp=pd.DataFrame(([[rcp_no, pdct_nm, pdct_asset, st_date, exp_date]]), columns=["문서번호", "상품명", "기초자산", "발행일", "만기일"])
     data=pd.concat([data, temp])
-    
-    body = str(page).split('최대이익액 및')[1]
+
+    try:
+        body = str(page).split('최대이익액 및')[1]
+    except:
+        try:
+            body = str(page).split('최소이익액 및')[1]
+        except:
+            body = str(page).split('최대손실액 및')[1]
+        
     body = BeautifulSoup(body, 'html.parser')
     table2 = body.find_all("table")
     p = parser.make2d(table2[0])
@@ -110,7 +117,7 @@ def fnc_table(rcp):
     
     earn_temp=pd.DataFrame(([[min_rate, max_rate]]), columns=["최소수익", "최대수익"])
     data=pd.concat([data, earn_temp], axis=1)
-
+    #print(min_rate)
     return data
 
 final_data =pd.DataFrame()

@@ -51,37 +51,37 @@ function App({ navigation }) {
 
         <View style={styles.rowContainer}>
           <View style={styles.subRow}>
-            <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
-              <Text>주식 신호분석</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
-              <Text>금융상품 비교</Text>
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
               <Text>배당금 비교</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
+              <Text>예금 상품 비교</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
+              <Text>적금 상품 비교</Text>
             </TouchableOpacity>
           </View>
           
           <View style={styles.subRow}>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>매크로 지표</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>채권(국고채/회사채)</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>ELS/DLS</Text>
             </TouchableOpacity>
           </View>
+
+
         </View>
-        
-        {/* <View style={styles.hotProductList}>
-          <FlatList
-            data={DATA} 
-            renderItem={renderItem} 
-            keyExtractor={item => item.name} 
-          />
-        </View> */}
+
+        <View style={{borderWidth:1, width:'80%'}}>
+          <TouchableOpacity onPress={() => navigation.push('Stocks')}>
+                <Text>주식 신호분석</Text>
+          </TouchableOpacity>
+        </View>
 
         <View>
           <TouchableOpacity 
