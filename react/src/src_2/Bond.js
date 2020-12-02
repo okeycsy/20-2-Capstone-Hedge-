@@ -35,6 +35,7 @@ export default function Bond() {
 
                 val[i][j].날짜 = temp_string;
             }
+            val[i].reverse();
             data.push(val[i]);
         } 
         setData(data);
