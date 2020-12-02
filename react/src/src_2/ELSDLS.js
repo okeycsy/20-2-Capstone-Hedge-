@@ -94,11 +94,12 @@ export default function ELSDLS({ navigation }) {
               <View style={styles.roundContainer2}>
                 <View
                   style={styles.columns}>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>증권사</Text></View>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>기초자산</Text></View>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>위험도</Text></View>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>만기</Text></View>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>수익률</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>발행사   </Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>기초자산   </Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>발행일   </Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>만기일   </Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>최소수익  </Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>최대수익  </Text></View>
                 </View>
                 <FlatList
                   style={styles.flatlistlist}
