@@ -10,10 +10,10 @@ const Test = () => {
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
   ];
   const Contents_2 = [
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seok1.jpg'), name:"최석용", text:"test\ntest" },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seung1.jpg'), name:"이승윤", text:"test" },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jun1.jpg'), name:"이정준", text:"test" },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jung1.jpg'), name:"정현학", text:"test" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seok1.jpg'), name:"최석용", text:"- Team Leader\n -Developed Part : BackEnd(Server, DB, Data Collecting)" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seung1.jpg'), name:"이승윤", text:" -Developed Part : BackEnd(Server, Data Collecting" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jun1.jpg'), name:"이정준", text:" -Developed Part : FrontEnd(React Native), Data Collecting" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jung1.jpg'), name:"정현학", text:" -Developed Part : FrontEnd(React Native), Data Collecting" },
   ];
 
   const fadeIn = (target) => {
