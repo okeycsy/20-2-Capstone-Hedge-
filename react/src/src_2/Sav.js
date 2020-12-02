@@ -12,6 +12,7 @@ export default function Div({ navigation }) {
   const [searchSort, setSearchSort] = useState(1);
 
   useEffect(() => {
+    navigation.setOptions({ title: '적금상품 한눈에' })
     fetch('http://swlab.uos.ac.kr/api_sav')
       .then((response) => response.json())
       .then(function(result){
@@ -33,6 +34,7 @@ export default function Div({ navigation }) {
         onPress={() => navigation.push('Saving_details',{
           fin_prdt_cd: item.fin_prdt_cd,
           bank: item.은행명,
+          name: item.상품명,
           })}>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.은행명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function Div({ navigation }) {
+export default function Dep({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [sort, setSort] = useState(1);
@@ -33,6 +33,7 @@ export default function Div({ navigation }) {
         onPress={() => navigation.push('Deposit_details',{
           fin_prdt_cd: item.fin_prdt_cd,
           bank: item.은행명,
+          name: item.상품명,
           })}>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.은행명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>

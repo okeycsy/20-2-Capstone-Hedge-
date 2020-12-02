@@ -8,8 +8,8 @@ export default function Macro() {
   const [names, setNames] = useState([]);
   const [tempData, setTemp] = useState([]);
 
-  const unselected_color = 'red';
-  const selected_color = 'green';
+  const unselected_color = '#cccccc';
+  const selected_color = '#9be0ae';
   // field1: 자기 자신
   // NASDAQ. DOW JONES, KOSPI, Gold, CRUDE OIL, USD/KRW, 미 10년 국고채, 미 30년 국고채, 비트코인
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Macro() {
           style={[styles.names, {backgroundColor:item.color}]}
           onPress={() => setIdx(item.id)}
         >
-            <Text>{item.name}</Text>
+            <Text style={{fontSize: 16}}>{item.name}</Text>
         </TouchableOpacity>
     )
   }
@@ -61,14 +61,16 @@ export default function Macro() {
 
   const renderItem = ({item}) => {
       return (
-        <TouchableOpacity style={styles.item}>
-            <View style={{alignItems: 'center', flex:1}}><Text>{item.name}</Text></View>
-            <View style={{alignItems: 'center', flex:1}}><Text>{item.val}</Text></View>
-        </TouchableOpacity>
+        <View style={{height: '20%', flex:1}}>
+          <TouchableOpacity style={styles.item}>
+              <View style={{justifyContent: 'center', alignItems: 'center', height: '20%', width: '50%'}}><Text style={{fontSize: 16}}>{item.name}</Text></View>
+              <View style={{justifyContent: 'center', alignItems: 'center', height: '20%', width: '50%'}}><Text style={{fontSize: 16}}>{item.val}</Text></View>
+          </TouchableOpacity>
+        </View>
       )
   }
   return (
-    <View>
+    <View style={{justifyContent: 'center'}}>
       {isLoading ? <ActivityIndicator/> : (
           <View style={{flexDirection:'column'}}>
               <View style={styles.namesContainer}>
@@ -123,7 +125,6 @@ const styles = StyleSheet.create({
       borderColor: 'lightgray',
       borderRadius: 5,
       borderWidth: 1,
-      height: '50%',
     }, // item 버튼을 생성하는 flatlist를 포함하는 view
     itemFlat: {
         flexDirection: 'column',
@@ -132,10 +133,11 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
       backgroundColor: 'lightgray',
       borderRadius: 5,
-      marginBottom: 5,
+      height: '20%',
+      marginVertical: '1%',
 
     }, // item들의 버튼(touchableopacity)
     header: {flex:1, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'white'}

@@ -40,7 +40,6 @@ function App({ navigation }) {
 
 
   return (
-    <ScrollView>
       <View style={styles.container}>
         <View style={{flex:1, height:'10%', marginTop: '3%'}}>
           <Image
@@ -52,34 +51,55 @@ function App({ navigation }) {
         <View style={styles.rowContainer}>
           <View style={styles.subRow}>
             <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/Dividend.png')}
+              />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Dep')} style={styles.button}>
-              <Text>예금 상품 비교</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/Deposit.png')}
+              />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Sav')} style={styles.button}>
-              <Text>적금 상품 비교</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/Saving.png')}
+              />
             </TouchableOpacity>
           </View>
           
           <View style={styles.subRow}>
             <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
-              <Text>매크로 지표</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/Macro.png')}
+              />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Bond')} style={styles.button}>
-              <Text>채권(국고채/회사채)</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/Bond.png')}
+              />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('ELSDLS')} style={styles.button}>
-              <Text>ELS/DLS</Text>
+              <Image
+                style={styles.icon}
+                source={require('../assets/ELS.png')}
+              />
             </TouchableOpacity>
           </View>
 
 
         </View>
 
-        <View style={{borderWidth:1, width:'80%'}}>
+        <View style={{width:'80%', height:'8%', marginVertical: '5%'}}>
           <TouchableOpacity onPress={() => navigation.push('Stocks')}>
-                <Text>주식 신호분석</Text>
+            <Image
+              style={[styles.icon, {width: '100%', height: '100%'}]}
+              source={require('../assets/Stock.png')}
+            />
           </TouchableOpacity>
         </View>
 
@@ -92,7 +112,6 @@ function App({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
   );
 };
 
@@ -105,6 +124,7 @@ const styles = StyleSheet.create({
     marginTop: '0%',
     marginBottom: '5%',
     paddingHorizontal: 10,
+    height: '100%'
   },
   rowContainer: {
     borderColor: 'lightgray',
@@ -112,15 +132,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '100%',
     height: '60%',
-    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
   },
   subRow: {
     width: '100%',
     height: '50%',
     paddingVertical: '7%',
-    marginVertical: '2%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -129,13 +146,21 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   button: {
-    margin: 30,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    justifyContent: 'center',
     padding: 10,
     width: '30%',
     height: '120%',
   },
+  icon: {
+    borderRadius: 10,
+    borderColor: 'lightgray',
+    borderWidth: 2,
+    width: '120%',
+    height: '90%',
+    resizeMode: 'contain',
+    alignSelf: 'center'
+  }
 });
 
 export default App;

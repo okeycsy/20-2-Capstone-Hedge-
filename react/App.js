@@ -11,7 +11,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from "./src/Home";
-import DetailsScreen from "./src/new_ProductChart";
 import StockScreen from "./src/src_2/Details";
 import Stock_Details from "./src/src_2/Stock_Details";
 import about_Hedger from "./src/src_2/about_Hedger";
@@ -32,20 +31,19 @@ function App() {
 	<NavigationContainer>
 		<View style={styles.container}>
 			<Stack.Navigator initialRouteName="Home">
-				<Stack.Screen name="Home" component={HomeScreen} />
-				<Stack.Screen name="Details" component={DetailsScreen} />
-				<Stack.Screen name="Stocks" component={StockScreen} />
-        <Stack.Screen name="Stock_Details" component={Stock_Details} />
-        <Stack.Screen name="about_Hedger" component={about_Hedger} />
-        <Stack.Screen name="Div" component={Div} />
-        <Stack.Screen name="Dividend_details" component={DividendDetails} />
-        <Stack.Screen name="Dep" component={Dep} />
-        <Stack.Screen name="Deposit_details" component={DepositDetails} />
-        <Stack.Screen name="Sav" component={Sav} />
-        <Stack.Screen name="Saving_details" component={SavingDetails} />
-        <Stack.Screen name="ELSDLS" component={ELSDLS} />
-        <Stack.Screen name="Macro" component={Macro} />
-        <Stack.Screen name="Bond" component={Bond} />
+				<Stack.Screen name="Home" component={HomeScreen} options={({  }) => ({ title: 'Home' })}/>
+				<Stack.Screen name="Stocks" component={StockScreen} options={({  }) => ({ title: '주식신호분석' })}/>
+        <Stack.Screen name="Stock_Details" component={Stock_Details} options={({ route }) => ({ title: route.params.name })}/>
+        <Stack.Screen name="about_Hedger" component={about_Hedger} options={({  }) => ({ title: 'About Hedger' })}/>
+        <Stack.Screen name="Div" component={Div} options={({  }) => ({ title: '배당금 한눈에' })}/>
+        <Stack.Screen name="Dividend_details" component={DividendDetails} options={({ route }) => ({ title: route.params.name })}/>
+        <Stack.Screen name="Dep" component={Dep} options={({  }) => ({ title: '예금상품 한눈에' })}/>
+        <Stack.Screen name="Deposit_details" component={DepositDetails} options={({ route }) => ({ title: route.params.name })}/>
+        <Stack.Screen name="Sav" component={Sav} options={({  }) => ({ title: '적금상품 한눈에' })}/>
+        <Stack.Screen name="Saving_details" component={SavingDetails} options={({ route }) => ({ title: route.params.name })}/>
+        <Stack.Screen name="ELSDLS" component={ELSDLS} options={({  }) => ({ title: 'ELS/DLS 한눈에' })}/>
+        <Stack.Screen name="Macro" component={Macro} options={({  }) => ({ title: '매크로분석 한눈에' })}/>
+        <Stack.Screen name="Bond" component={Bond} options={({  }) => ({ title: '채권 한눈에' })}/>
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>

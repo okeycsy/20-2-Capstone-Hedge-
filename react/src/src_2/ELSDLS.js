@@ -12,6 +12,7 @@ export default function ELSDLS({ navigation }) {
   const [searchSort, setSearchSort] = useState(1);
 
   useEffect(() => {
+    navigation.setOptions({ title: 'ELS/DLS 한눈에' })
     fetch('http://swlab.uos.ac.kr/api_els')
       .then((response) => response.json())
       .then(function(result){
@@ -93,8 +94,8 @@ export default function ELSDLS({ navigation }) {
               <View style={styles.roundContainer2}>
                 <View
                   style={styles.columns}>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>은행명</Text></View>
-                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>상품명</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>증권사</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>기초자산</Text></View>
                   <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>위험도</Text></View>
                   <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>만기</Text></View>
                   <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>수익률</Text></View>

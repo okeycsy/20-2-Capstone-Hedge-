@@ -52,11 +52,7 @@ class ChartComponent extends React.Component {
 		return (
 			<VictoryChart
 				theme={VictoryTheme.material}
-				scale={{ x: "time" }}
-				containerComponent= {
-				<VictoryZoomContainer
-					zoomDimension="x"
-				/>}>
+				scale={{ x: "time" }}>
 				<VictoryAxis tickFormat={(t) => `${t.getMonth()}월 ${t.getDate()}일`}/>
 				<VictoryAxis dependentAxis/>
 				<VictoryCandlestick

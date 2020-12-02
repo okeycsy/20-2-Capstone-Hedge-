@@ -46,11 +46,11 @@ export default function Stock_Details({route, navigation}) {
         <View style= {styles.borderContainer}>
           <View style={styles.chart}><ChartCompontent company={ company } load = { load } /></View>
           <View style={styles.borderTable}>
-            <View style={styles.rowView}><Text>전일 종가</Text><Text>{data.yesterday_close}</Text></View>
-            <View style={styles.rowView}><Text>당일 종가</Text><Text>{data.today_close}</Text></View>
-            <View style={styles.rowView}><Text>당일 고가</Text><Text>{data.high}</Text></View>
-            <View style={styles.rowView}><Text>당일 저가</Text><Text>{data.low}</Text></View>
-            <View style={styles.rowView}><Text>거래량</Text><Text>{data.volume}</Text></View>
+            <View style={styles.rowView}><Text>전일 종가</Text><Text>{parseInt(data.yesterday_close)} 원</Text></View>
+            <View style={styles.rowView}><Text>당일 종가</Text><Text>{parseInt(data.today_close)} 원</Text></View>
+            <View style={styles.rowView}><Text>당일 고가</Text><Text>{parseInt(data.high)} 원</Text></View>
+            <View style={styles.rowView}><Text>당일 저가</Text><Text>{parseInt(data.low)} 원</Text></View>
+            <View style={styles.rowView}><Text>거래량</Text><Text>{parseInt(data.volume)} 주</Text></View>
           </View>
         </View>
       )}
