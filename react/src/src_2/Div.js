@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import {readString} from "react-papaparse";
 
 export default function Div() {
   const [isLoading, setLoading] = useState(true);
@@ -14,16 +13,15 @@ export default function Div() {
   useEffect(() => {
     fetch('http://swlab.uos.ac.kr/api_div')
       .then((response) => response.text())
-      .then((text) => readString(text))
-      .then((result) => result.data)
+      .then((text) => text.split(','))
       .then(function(result) {
         let temp_data = [];
-        for(let i = 1; i < result.length; i++) {
+        for(let i = 6; i < result.length; i+=5) {
           let temp_obj = {
-            idx: result[i][1],
-            name: result[i][2],
-            yield: parseFloat(result[i][3]).toFixed(3),
-            risk: parseFloat(result[i][4]).toFixed(3)
+            idx: result[i],
+            name: result[i+1],
+            yield: parseFloat(parseFloat(result[i+2]).toFixed(3)),
+            risk: parseFloat(parseFloat(result[i+3]).toFixed(3))
           }
           if(temp_obj.name === undefined) continue;
           temp_data.push(temp_obj);
@@ -108,7 +106,7 @@ export default function Div() {
     <View style={styles.container}>
       {isLoading ? <ActivityIndicator/> : (
         <View style={styles.roundContainer1}>
-          <View>
+          <View style={{marginBottom: '2%', flex:1, width: '55%'}}>
             <TextInput
               style={styles.textinput}
               onChangeText={(text) => handle_text(text)}
@@ -136,7 +134,6 @@ export default function Div() {
                 <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
                 <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
               </View>
-
               <FlatList
                 style={styles.flatlistlist}
                 data={search}
@@ -176,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '90%',
   },
   roundContainer2: {
@@ -185,14 +182,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'stretch',
-    width: '60%',
+    width: '100%',
     height: '90%',
   },
   textinput: {
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: "5%",
-    marginTop: "5%"
+    marginTop: "5%",
+    flex: 1,
   },
   item: {
     flex: 1,
@@ -208,7 +206,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     marginVertical: '2%',
     textAlignVertical: 'center',
-    fontSize: 16,
+    fontSize: 12,
   },
   button: {
     borderColor: 'lightgray',

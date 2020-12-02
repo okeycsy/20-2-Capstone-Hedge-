@@ -1,65 +1,91 @@
-import React, { useRef } from "react";
-import { Animated, Text, View, StyleSheet, Button } from "react-native";
+import React, { useRef, useEffect, useState } from "react";
+import { Animated, Text, View, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
 
 const Test = () => {
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [page, setPage] = useState(1);
+  const Contents_1 = [
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+  ];
+  const Contents_2 = [
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+  ];
 
   const fadeIn = (target) => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(target, {
-      toValue: 1,
-      duration: 500
-    }).start();
+    return Animated.timing( target, {toValue: 1, duration: 300} )
   };
-
   const fadeOut = (target) => {
-    // Will change fadeAnim value to 0 in 5 seconds
-    Animated.timing(target, {
-      toValue: 0,
-      duration: 500
-    }).start();
+    return Animated.timing( target, {toValue: 0, duration: 300} )
   };
 
+  const appear_contents = (Contents) => {
+    return Animated.sequence( Contents.map(x => fadeIn(x.ani)) )
+  };
+  const disappear_contents = (Contents) => {
+    return Animated.parallel( Contents.map(x => fadeOut(x.ani)) )
+  };
+  const display_contents = (target, detarget) => {
+    Animated.sequence([
+      disappear_contents(detarget),
+      appear_contents(target)
+    ]).start();
+  }
+
+  useEffect(() => {
+  });
+  
+  const renderItem = ({ item }) => {
+    return (
+      <Animated.View style={[{opacity: item.ani}]}>
+        <Image
+          style={styles.Contents_img}
+          source={item.img}
+        />
+      </Animated.View>
+    )
+  }
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.fadingContainer,
-          {
-            opacity: fadeAnim // Bind opacity to animated value
-          }
-        ]}
-      >
-        <Text style={styles.fadingText}>Fading View!</Text>
-      </Animated.View>
-      <View style={styles.buttonRow}>
-        <Button title="Fade In" onPress={() => fadeIn(fadeAnim)} />
-        <Button title="Fade Out" onPress={() => fadeOut(fadeAnim)} />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_1, Contents_2)}><Text>Contents_1</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_2, Contents_1)}><Text>Contents_2</Text></TouchableOpacity>
       </View>
+
+      <View>
+        <FlatList
+            data={Contents_1}
+            renderItem={renderItem}
+        />
+
+        <FlatList
+            data={Contents_2}
+            renderItem={renderItem}
+        />
+      </View>
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    flex: 1
   },
-  fadingContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: "powderblue"
+  buttonContainer: {
+    flexDirection: 'row',
+    flex: 1
   },
-  fadingText: {
-    fontSize: 28,
-    textAlign: "center",
-    margin: 10
+  button: {
+    borderWidth: 1
   },
-  buttonRow: {
-    flexDirection: "row",
-    marginVertical: 16
+  Contents_img: {
+    width: 200,
+    height: 200,
   }
 });
 

@@ -11,10 +11,10 @@ import {
 const App = () => {
   const TEMP1 = [
     {
-      id: '1',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '21505054',
-      lastTerm: '43890877',
+      id: '0',
+      join_member: '실명의 개인',
+      max_limit: '없음',
+      spcl_cnd: '* 최대우대금리 : 0.4%\n1. 거래고객우대금리 : 최대0.1% (신규시) \n -최초예적금고객/재예치/장기거래 각 0.05% \n2. 거래실적우대금리 : 최대0.3% (만기시)\n -급여,연금이체등/수협카드결제/공과금이체등 각0.1%\n※단위:연%p',
       last2Term: '41344569',
     },
     {
@@ -61,7 +61,10 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Text style={styles.title}>삼성전자</Text>
+        <View style={styles.titleSub}>
+          <Text style={styles.title}>수협은행</Text>
+          <Text style={styles.textLeft}>Sh평생주거래우대예금</Text>
+        </View>
         <Text style= {styles.text}>네이버 금융 링크</Text>
       </View>
       <View style={styles.table}>
@@ -111,6 +114,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
   },
+  titleSub: {
+    width: '60%',
+  },
   table: {
     borderColor: 'lightgray',
     borderWidth: 2,
@@ -155,7 +161,11 @@ const styles = StyleSheet.create({
   textRight: {
     fontSize: 16,
     textAlign: 'right',
-  }
+  },
+  textLeft: {
+    fontSize: 16,
+    textAlign: 'left',
+  },
 });
 
 export default App;

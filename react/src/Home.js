@@ -22,7 +22,7 @@ function App({ navigation }) {
       result.sort(function(a,b){
         return a.bs < b.bs ? 1 : a.bs > b.bs ? -1 : 0;
       })
-      for(let i = 1; i < 5; i++) temp.push(result[i]);
+      for(let i = 1; i < 5; i++) temp.push(  {name:result[i].name, bs:parseFloat(result[i].bs).toFixed(3)}  );
       setData(temp);
     })
   })
@@ -42,9 +42,9 @@ function App({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View>
+        <View style={{flex:1, height:'10%'}}>
           <Image
-            style={{ width: 200, height: 200}}
+            style={{ width: 100, height: 100}}
             source={require('../image/logo.png')}
           />
         </View>
@@ -101,33 +101,32 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
     borderWidth: 1,
     borderRadius: 10,
-    paddingVertical: 10,
     width: '100%',
-    marginVertical: '3%',
+    height: '40%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
   },
   subRow: {
-    marginTop: '1%',
-    marginBottom: '1%',
+    borderWidth:1,
     width: '100%',
+    height: '30%',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   hotProductList: {
     borderColor: 'lightgray',
     borderWidth: 1,
     borderRadius: 10,
-    paddingVertical: 10,
-    marginHorizontal: 20,
     marginVertical: 10,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: '40%',
+    width: '100%'
   },
   item: {
     backgroundColor: 'white',
-    padding: 20,
+    padding: 15,
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: 'row',
@@ -141,8 +140,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    width: '40%',
-    height: '100%',
+    width: '50%',
+    height: '50%',
   },
 });
 

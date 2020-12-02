@@ -28,7 +28,7 @@ class Signal extends Component {
     fetch('http://swlab.uos.ac.kr/bs')
     .then((response) => (response.json()))
     .then(function(result){
-      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs).toFixed(3);
+      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(parseFloat(result[i].bs).toFixed(3));
       result.splice(0, 1);
       that.setState({data:result})
     })
@@ -72,7 +72,7 @@ class Signal extends Component {
         for(let i = 0; i < f.length; i++) {
           let idx = names.indexOf(f[i]);
           this.setState({
-            favorite: this.state.favorite.concat({name:names[i], bs:this.state.data[i].bs, color:this.state.data[i].color})
+            favorite: this.state.favorite.concat({name:names[idx], bs:this.state.data[idx].bs, color:this.state.data[idx].color})
           });
         }
       });
@@ -139,7 +139,7 @@ class Signal extends Component {
     temp.sort(function(a, b) {
       return a.bs < b.bs ? k[0]: a.bs > b.bs ? k[1] : k[2];
     });
-    
+
     if(this.state.text == "") this.setState({data: temp});
     else this.setState({searched_data:temp});
   }
@@ -190,7 +190,7 @@ class Signal extends Component {
         <View style={styles.roundContainer2}>
           <Text style={styles.title}>전체 목록</Text>
 
-          <View style={{flexDirection:'row', marginBottom:'1%'}}>
+          <View style={{width: '80%'}}>
             <TextInput 
               style={styles.textinput} 
               onChangeText={(text) => this.handle_text(text)}
@@ -296,7 +296,6 @@ const styles = StyleSheet.create({
   textinput: {
     borderColor: 'gray',
     borderWidth: 1,
-    marginBottom: "5%",
     marginTop: "5%"
   },
   roundContainer1: {
@@ -305,7 +304,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '30%',
     marginVertical: '3%',
   },
@@ -315,7 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '85%',
+    width: '95%',
     height: '70%',
   },
 });
