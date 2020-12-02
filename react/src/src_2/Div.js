@@ -31,7 +31,8 @@ export default function Div({ navigation }) {
       <TouchableOpacity
         style={styles.item}
         onPress={() => navigation.push('Dividend_details',{
-          name: item.상품명,
+          code: parseInt(item.code),
+          name: item.회사명,
           this_year: item.올해배당금,
           last_year: item.작년배당금,
           lastlast_year: item.재작년배당금,
@@ -39,9 +40,10 @@ export default function Div({ navigation }) {
           yield: item.수익률,
           risk: item.위험도
           })}>
-        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.회사명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.위험도}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.수익률}</Text></View>
+        <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{parseInt(item.주가)}</Text></View>
       </TouchableOpacity>
     )
   }
@@ -120,6 +122,13 @@ export default function Div({ navigation }) {
                 <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
                   <TouchableOpacity onPress={() => sorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
                   <TouchableOpacity onPress={() => sorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
+                </View>
+                <View
+                  style={styles.columns}>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>회사명</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>변동성</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>배당 수익률</Text></View>
+                  <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>전일 종가</Text></View>
                 </View>
                 <FlatList
                   style={styles.flatlistlist}
@@ -200,6 +209,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderRadius: 5,
     marginBottom: 5,
+  },
+  columns: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    marginVertical: '3%',
+    height: '5%'
   },
   text : {
     color: 'black',
