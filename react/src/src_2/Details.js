@@ -336,6 +336,8 @@ const styles = StyleSheet.create({
     width: '35%',
     height:'100%',
     alignItems: 'center',
+    backgroundColor:'#bababa',
+    marginRight: '3%'
   }
 });
 

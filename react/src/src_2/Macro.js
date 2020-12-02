@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     namesContainer: {
       marginTop: '10%',
       borderColor: 'lightgray',
-      height: '30%',
+      height: '40%',
       justifyContent: 'center',
     }, // name 버튼을 생성하는 flatlist를 포함하는 view
     namesFlat: {
@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
       borderColor: 'lightgray',
       borderRadius: 5,
       borderWidth: 1,
+      marginTop: '10%'
     }, // item 버튼을 생성하는 flatlist를 포함하는 view
     itemFlat: {
         flexDirection: 'column',
