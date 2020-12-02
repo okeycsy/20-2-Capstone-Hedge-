@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { Animated, Text, View, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
 
 const Test = () => {
-  const [page, setPage] = useState(1);
   const Contents_1 = [
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png'), text:"1. 배당금\n\n 배당금을 한눈에 예측할 수 있는 화면입니다.\n주가 변동성과 수익률을 바탕으로 내림차순/오름차순으로 정렬해 직관적인 데이터를 확인할 수 있습니다.\n" },
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png'), text:"2&3.예/적금상품\n\n 최신 예금상품을 비교할 수 있는 화면입니다.\n각 은행의 'BIS 자기자본비율'과 '고정이하여신비율'을 바탕으로 위험도를 모델링하여 산출하였습니다.\n리스크 정렬과 수익률 정렬으로 보다 직관적인 데이터 확인이 가능합니다\n예금상품의 상세정보를 원할 경우, 클릭하여 가입정보, 우대정보, 납입한도, 만기, 금리종류 등이 들어있는 상세정보를 확인할 수 있습니다.\n" },
@@ -19,10 +18,10 @@ const Test = () => {
   ];
 
   const fadeIn = (target) => {
-    return Animated.timing( target, {toValue: 1, duration: 300} )
+    return Animated.timing( target, {toValue: 1, duration: 300, useNativeDriver: true} )
   };
   const fadeOut = (target) => {
-    return Animated.timing( target, {toValue: 0, duration: 300} )
+    return Animated.timing( target, {toValue: 0, duration: 300, useNativeDriver: true} )
   };
 
   const appear_contents = (Contents) => {
@@ -73,8 +72,8 @@ const Test = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_2, Contents_1)}><Text>Contents_2</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_1, Contents_2)}><Text>Contents_1</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_2, Contents_1)}><Text style={{fontSize:20}}>개발자</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_1, Contents_2)}><Text style={{fontSize:20}}>설명서</Text></TouchableOpacity>
         
       </View>
 
@@ -104,10 +103,17 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: '5%'
   },
   button: {
-    borderWidth: 1
+    borderRadius: 10,
+    width: '35%',
+    height:'100%',
+    alignItems: 'center',
+    backgroundColor: 'powderblue'
   },
   Contents_img: {
     width: 200,
