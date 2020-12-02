@@ -11,34 +11,6 @@ import {
 } from 'react-native';
 
 function App({ navigation }) {
-  // const [DATA, setData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch('http://swlab.uos.ac.kr/bs')
-  //   .then((response) => (response.json()))
-  //   .then(function(result){
-  //     let temp = [];
-  //     for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
-  //     result.sort(function(a,b){
-  //       return a.bs < b.bs ? 1 : a.bs > b.bs ? -1 : 0;
-  //     })
-  //     for(let i = 1; i < 5; i++) temp.push(  {name:result[i].name, bs:parseFloat(result[i].bs).toFixed(3)}  );
-  //     setData(temp);
-  //   })
-  // })
-
-  // const Item = ({ data }) => (
-  //   <TouchableOpacity
-  //     style={styles.item}
-  //     onPress={() => navigation.push('Stock_Details', {name : data.name})}
-  //   >
-  //     <Text style={styles.title}>{data.name}</Text>
-  //     <Text style={styles.title}>{data.bs}</Text>
-  //   </TouchableOpacity>
-  // );
-  // const renderItem = ({item}) => <Item data={item} />;
-
-
   return (
       <View style={styles.container}>
         <View style={{flex:1, height:'10%', marginTop: '3%'}}>
@@ -105,10 +77,10 @@ function App({ navigation }) {
 
         <View>
           <TouchableOpacity 
-            style={{marginTop:'5%'}}
+            style={{marginTop:'3%'}}
             onPress={() => navigation.push('about_Hedger')}
             >
-            <Text>Hedger는 어떤 어플인가요?</Text>
+            <Text style={{fontSize:16, backgroundColor: '#eef571'}}>Hedger는 어떤 어플인가요?</Text>
           </TouchableOpacity>
         </View>
       </View>
