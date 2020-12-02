@@ -63,14 +63,14 @@ function App({ navigation }) {
           </View>
           
           <View style={styles.subRow}>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>매크로 확인</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>매크로 확인</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>매크로 확인</Text>
             </TouchableOpacity>
           </View>
         </View>
