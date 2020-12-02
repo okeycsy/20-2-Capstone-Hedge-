@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { Background } from 'victory-native';
 
 export default function Macro() {
   const [isLoading, setLoading] = useState(true);
@@ -8,6 +9,8 @@ export default function Macro() {
   const [names, setNames] = useState([]);
   const [tempData, setTemp] = useState([]);
 
+  const unselected_color = 'red';
+  const selected_color = 'green';
   // field1: 자기 자신
   // NASDAQ. DOW JONES, KOSPI, Gold, CRUDE OIL, USD/KRW, 미 10년 국고채, 미 30년 국고채, 비트코인
   useEffect(() => {
@@ -16,7 +19,7 @@ export default function Macro() {
       .then(function(result) {
           let keys = Object.keys(result[0]);
           let names = [];
-          for(let i = 1; i < keys.length; i++) names.push({name: keys[i], id: i-1});
+          for(let i = 1; i < keys.length; i++) names.push({name: keys[i], id: i-1, color: unselected_color});
           setNames(names);
           
           for(let i = 0; i < result.length; i++) {
@@ -34,7 +37,7 @@ export default function Macro() {
   const renderNames = ({ item }) => {
     return (
       <TouchableOpacity
-        style={styles.names}  
+        style={[styles.names, {backgroundColor:item.color}]}
         onPress={() => setIdx(item.id)}
       >
           <Text>{item.name}</Text>
@@ -43,6 +46,11 @@ export default function Macro() {
   }
 
   const setIdx = (idx) => {
+    let temp_name = JSON.parse(JSON.stringify(names));
+    for(let i = 0; i < temp_name.length; i++) temp_name[i].color = unselected_color;
+    temp_name[idx].color = selected_color;
+    setNames(temp_name);
+
     let k = [0,1,2,3,4,5,6,7,8];
     k.splice(k.indexOf(idx), 1);
     let temp_data = [];
