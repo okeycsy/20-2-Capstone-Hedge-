@@ -22,7 +22,7 @@ import Dep from "./src/src_2/Dep"
 import DepositDetails from "./src/Deposit"
 import Sav from "./src/src_2/Sav"
 import SavingDetails from "./src/Saving"
-
+import Bond from "./src/src_2/Bond"
 
 const Stack = createStackNavigator();
 
@@ -43,6 +43,7 @@ function App() {
         <Stack.Screen name="Sav" component={Sav} />
         <Stack.Screen name="Saving_details" component={SavingDetails} />
         <Stack.Screen name="Macro" component={Macro} />
+        <Stack.Screen name="Bond" component={Bond} />
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>
