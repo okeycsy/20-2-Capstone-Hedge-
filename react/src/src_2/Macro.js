@@ -64,7 +64,7 @@ export default function Macro() {
     <View>
       {isLoading ? <ActivityIndicator/> : (
           <View style={{flexDirection:'column'}}>
-              <View style={{borderWidth:1}}>
+              <View style={styles.namesContainer}>
                 <FlatList
                   style={styles.namesFlat}
                   data={names}
@@ -74,7 +74,7 @@ export default function Macro() {
                 />
               </View>
 
-              <View style={{borderWidth:1}}>
+              <View style={styles.itemContainer}>
                 <FlatList
                   style={styles.itemFlat}
                   data={tempData}
@@ -89,11 +89,18 @@ export default function Macro() {
 }
 
 const styles = StyleSheet.create({
+    namesContainer: {
+        borderWidth:1
+    },
     namesFlat: {
         
     },
     names: {
 
+    },
+
+    itemContainer: {
+        borderWidth:1
     },
     itemFlat: {
         flexDirection: 'column'
