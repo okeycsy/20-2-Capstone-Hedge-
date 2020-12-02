@@ -10,10 +10,10 @@ const Test = () => {
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
   ];
   const Contents_2 = [
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seok1.jpg') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seung1.jpg') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jun1.jpg') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jung1.jpg') },
   ];
 
   const fadeIn = (target) => {
