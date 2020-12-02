@@ -72,7 +72,7 @@ export default function Macro() {
   return (
     <View style={{justifyContent: 'center'}}>
       {isLoading ? <ActivityIndicator/> : (
-          <View style={{flexDirection:'column'}}>
+          <View style={{flexDirection:'column', height:'80%'}}>
               <View style={styles.namesContainer}>
                 <FlatList
                   style={styles.namesFlat}
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
       borderColor: 'lightgray',
       borderRadius: 5,
       borderWidth: 1,
-      marginTop: '10%'
     }, // item 버튼을 생성하는 flatlist를 포함하는 view
     itemFlat: {
         flexDirection: 'column',

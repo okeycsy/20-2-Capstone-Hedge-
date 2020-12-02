@@ -35,6 +35,7 @@ export default function Bond() {
 
                 val[i][j].날짜 = temp_string;
             }
+            val[i].reverse();
             data.push(val[i]);
         } 
         setData(data);
@@ -63,18 +64,18 @@ export default function Bond() {
               <View style={styles.buttonContainer}>
                   
                   <View style={styles.buttonSubContainer}>
-                    <Text>국채</Text>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[0]}]} onPress={() => {setIdx(0), setClick(0)}}><Text>1년물</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[1]}]} onPress={() => {setIdx(1), setClick(1)}}><Text>3년물</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[2]}]} onPress={() => {setIdx(2), setClick(2)}}><Text>5년물</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[3]}]} onPress={() => {setIdx(3), setClick(3)}}><Text>10년물</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[4]}]} onPress={() => {setIdx(4), setClick(4)}}><Text>30년물</Text></TouchableOpacity>
+                    <Text style={{fontSize:16, marginRight:'5%'}}>국채</Text>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[0]}]} onPress={() => {setIdx(0), setClick(0)}}><Text style={{fontSize:16}}>1년물</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[1]}]} onPress={() => {setIdx(1), setClick(1)}}><Text style={{fontSize:16}}>3년물</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[2]}]} onPress={() => {setIdx(2), setClick(2)}}><Text style={{fontSize:16}}>5년물</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[3]}]} onPress={() => {setIdx(3), setClick(3)}}><Text style={{fontSize:16}}>10년물</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[4]}]} onPress={() => {setIdx(4), setClick(4)}}><Text style={{fontSize:16}}>30년물</Text></TouchableOpacity>
                   </View>
 
                   <View style={styles.buttonSubContainer}>
-                    <Text>회사채</Text>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[5]}]} onPress={() => {setIdx(5), setClick(5)}}><Text>aa</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[6]}]} onPress={() => {setIdx(6), setClick(6)}}><Text>bbb</Text></TouchableOpacity>
+                    <Text style={{fontSize:16, marginRight:'1%'}}>회사채</Text>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[5]}]} onPress={() => {setIdx(5), setClick(5)}}><Text style={{fontSize:16}}>aa</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.button, {backgroundColor: buttonColor[6]}]} onPress={() => {setIdx(6), setClick(6)}}><Text style={{fontSize:16}}>bbb</Text></TouchableOpacity>
                   </View>
               </View>
 
