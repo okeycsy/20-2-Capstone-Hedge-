@@ -11,10 +11,9 @@ import {
 import { Linking } from 'react-native'
 import { InAppBrowser } from 'react-native-inappbrowser-reborn'
 
-async function openLink() {
+async function openLink(code) {
   try {
-    const url = 'https://finance.naver.com/search/searchList.nhn?query='
-    const query = '삼성전자'
+    const url = 'https://finance.naver.com/item/main.nhn?code='
     console.log(InAppBrowser.isAvailable())
     // {
     //   const result =  InAppBrowser.open(url, {
@@ -31,7 +30,7 @@ async function openLink() {
     //     }
     //   })
     // }
-    Linking.openURL(url + query)
+    Linking.openURL(url + code)
   } catch (error) {
     alert(error.message)
   }
@@ -46,7 +45,7 @@ function DividendDetails( {route} ) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            openLink()
+            openLink(data.code)
         }}>
           <Text style= {styles.text}>네이버 금융 링크</Text>
         </TouchableOpacity>
@@ -64,7 +63,10 @@ function DividendDetails( {route} ) {
         </View>
         <View style={styles.item_set}>
           <View style={styles.item_gray}>
-            <Text style={styles.textRight}>(2019년 배당금 기준) 수익률</Text>
+            <View style={styles.rowItem}>
+              <Text style= {styles.smallText}>(2019년 배당금 총합 기준)</Text>
+              <Text style={styles.textRight}>연간 수익률</Text>
+            </View>
           </View>
           <View style={styles.item_white}>
             <View style={styles.rowSeparator_gray}>
@@ -147,6 +149,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignContent: 'space-between',
   },
+  rowItem: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
   rowSeparator_white: {
     borderColor: 'white',
     borderBottomWidth: 1,
@@ -172,6 +179,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 13,
+  },
+  smallText: {
+    fontSize: 12,
+    color: 'gray',
   },
   textCenter: {
     fontSize: 16,
