@@ -10,10 +10,10 @@ const Test = () => {
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
   ];
   const Contents_2 = [
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo2.png') },
   ];
 
   const fadeIn = (target) => {
@@ -57,15 +57,19 @@ const Test = () => {
       </View>
 
       <View>
-        <FlatList
-            data={Contents_1}
-            renderItem={renderItem}
-        />
+        <View style={styles.fixed}>
+          <FlatList
+              data={Contents_1}
+              renderItem={renderItem}
+          />
+        </View>
 
-        <FlatList
-            data={Contents_2}
-            renderItem={renderItem}
-        />
+        <View>
+          <FlatList
+              data={Contents_2}
+              renderItem={renderItem}
+          />
+        </View>
       </View>
       
     </View>
@@ -86,6 +90,10 @@ const styles = StyleSheet.create({
   Contents_img: {
     width: 200,
     height: 200,
+  },
+  fixed: {
+    position:'absolute',
+    left:0, top:0, bottom:0, right:0
   }
 });
 
