@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { first } from 'react-stockcharts/lib/utils';
 import { Background } from 'victory-native';
 
 export default function Bond() {
@@ -25,7 +26,17 @@ export default function Bond() {
     ])
     .then(function(val){
         let data = [];
-        for(let i = 0; i < val.length; i++) data.push(val[i]);
+        for(let i = 0; i < val.length; i++){
+            for(let j = 0; j < val[i].length; j++){
+                let temp_string = ""
+                temp_string += val[i][j].날짜.substring(0,4) + '-';
+                temp_string += val[i][j].날짜.substring(4,6) + '-';
+                temp_string += val[i][j].날짜.substring(6,8);
+
+                val[i][j].날짜 = temp_string;
+            }
+            data.push(val[i]);
+        } 
         setData(data);
     })
     .catch((error) => alert(error))
