@@ -37,6 +37,7 @@ const Test = () => {
   }
 
   useEffect(() => {
+    display_contents(Contents_1, Contents_2)
   });
   
   const renderItem_1 = ({ item }) => {
