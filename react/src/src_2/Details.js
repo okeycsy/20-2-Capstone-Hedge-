@@ -5,7 +5,8 @@ import {
     Button, 
     TouchableOpacity,
     StyleSheet,
-    TextInput
+    TextInput,
+    InputAccessoryView
  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -169,19 +170,23 @@ class Signal extends Component {
           <FlatList style={styles.flatlist}
               data={this.state.favorite}
               renderItem={({ item }) => (
-                <TouchableOpacity 
-                  style={[styles.item, {backgroundColor: item.color}]}
-                  onPress={() => navigation.push('Stock_Details', {name : item.name})}
-                >
-                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                <View style={{flexDirection:'row'}}>
+                  <TouchableOpacity 
+                    style={[styles.item, {backgroundColor: item.color}]}
+                    onPress={() => navigation.push('Stock_Details', {name : item.name})}
+                  >
+                    <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                    <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                  </TouchableOpacity>
+
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.defavorite(item)}
                   >
                     <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>★</Text>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </View>
+                
               )}
               keyExtractor={item => item.name}
           />
@@ -206,19 +211,22 @@ class Signal extends Component {
             <FlatList style={styles.flatlist}
               data={this.state.data}
               renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={[styles.item, {backgroundColor: item.color}]}
-                  onPress={() => navigation.push('Stock_Details', {name : item.name})}
-                >
-                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                <View style={{flexDirection:'row'}}>
+                  <TouchableOpacity
+                    style={[styles.item, {backgroundColor: item.color}]}
+                    onPress={() => navigation.push('Stock_Details', {name : item.name})}
+                  >
+                    <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                    <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                  </TouchableOpacity>
+                    
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.favorite(item)}
                   >
                     <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>☆</Text>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </View>
               )}
               keyExtractor={item => item.name}
             />
@@ -226,19 +234,22 @@ class Signal extends Component {
             <FlatList style={styles.flatlist}
               data={this.state.searched_data}
               renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={[styles.item, {backgroundColor: item.color}]}
-                  onPress={() => navigation.push('Stock_Details', {name : item.name})}
-                >
-                  <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
-                  <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                <View style={{flexDirection:'row'}}>
+                  <TouchableOpacity
+                    style={[styles.item, {backgroundColor: item.color}]}
+                    onPress={() => navigation.push('Stock_Details', {name : item.name})}
+                  >
+                    <View style={{flex:1}}><Text style={styles.text}>{item.name}</Text></View>
+                    <View style={{flex:1}}><Text style={styles.text}>{item.bs}</Text></View>
+                  </TouchableOpacity>
+                    
                   <TouchableOpacity
                     style={{alignItems:'center', margin:'1%'}}
                     onPress={() => this.favorite(item)}
                   >
-                    <Text style={{color: 'gold', fontSize: 16, fontWeight:'bold'}}>☆</Text>
+                    <Text style={{color: 'gold', fontSize: 18, fontWeight:'bold'}}>☆</Text>
                   </TouchableOpacity>
-                </TouchableOpacity>
+                </View>
               )}
               keyExtractor={item => item.name}
             />
