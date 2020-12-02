@@ -5,8 +5,8 @@ import { first } from 'react-stockcharts/lib/utils';
 import { Background } from 'victory-native';
 
 export default function Bond() {
-  const us = 'red';
-  const s = 'green';
+  const us = '#cccccc';
+  const s = '#9be0ae';
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -47,7 +47,7 @@ export default function Bond() {
       return (
         <TouchableOpacity style={styles.item}>
             <Text>{item.날짜}</Text>
-            <Text>{item.금리}</Text>
+            <View style={{width:'10%'}}><Text>{item.금리}</Text></View>
         </TouchableOpacity>
     )}
 
@@ -82,8 +82,8 @@ export default function Bond() {
                   <FlatList
                     ListHeaderComponent={
                         <View style={styles.header}>
-                        <Text>상품명</Text>
-                        <Text>금리</Text>
+                        <Text>날짜</Text>
+                        <Text>금리 (%)</Text>
                         </View>
                     }
                     data={data[idx]}
