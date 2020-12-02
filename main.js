@@ -5,11 +5,14 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const pythonShell = require('python-shell')
 const mysql = require('mysql');
-const cors = require('cors')
-const url = require('url')
+const cors = require('cors');
+const url = require('url');
+const base64 = require('node-base64-image');
 
+const CSVtoJSON = require('csvtojson');
 
 const proxy = require('http-proxy-middleware');
+const nodejsBase64 = require('nodejs-base64');
 
 
 app.use(cors());
@@ -39,7 +42,6 @@ app.get('/api_bond',function(request, response){
                 console.log(data);
             }
         })
-        console.log('api_bond 성공');
         response.send(fr);
     }
     catch(exception){
@@ -51,15 +53,24 @@ app.get('/api_bond',function(request, response){
 app.get('/api_div',function(request, response){
     //console.log(request);
     try{
+        CSVtoJSON().fromFile('./public/data_dividend.csv')
+            .then(users => {
+                //var tmp = {d : users};
+                console.log("api_dev 접근");
+                response.send(users);
+            }).catch(error => {
+                console.log(error);
+            })
+
         var fr = fs.readFileSync('./public/data_dividend.csv','utf8',function(error,data){
             if(error){
                 console.log(error);
-            } else{
-                console.log(data);
-            }
+            } 
+            //json 형식으로 response    
         })
+        //console.log(CSVtoJSON().fr);
         //console.log(JSON.stringify(fr));
-        response.send(fr);
+        //response.send(fr);
         //console.log(typeof(fr));
     }
     catch(exception){
@@ -70,18 +81,17 @@ app.get('/api_div',function(request, response){
 //예금 정보
 app.get('/api_dep',function(request, response){
     try{
-        var fr = fs.readFileSync('./public/data_deposit.csv','utf8',function(error,data){
-            if(error){
+        CSVtoJSON().fromFile('./public/data_deposit.csv')
+            .then(users => {
+                response.send(users);
+            }).catch(error =>{
                 console.log(error);
-            } else{
-                console.log(data);
-            }
-        })
+            });
 
-        var jbSplit = fr.split('\n');
-        console.log(jbSplit);
-        console.log("api dep 연결 성공");
-        response.send(fr);
+        //var jbSplit = fr.split('\n');
+        //console.log(jbSplit);
+        //console.log("api dep 연결 성공");
+        //response.send(fr);
     } catch (exception){
         throw exception;
     }
@@ -90,62 +100,61 @@ app.get('/api_dep',function(request, response){
 //적금 정보
 app.get('/api_sav', function(request,response){
     try{
-        var fr = fs.readFileSync('./public/data_saving.csv','utf8',function(error,data){
-            if(error){
-                console.log(error);
-            }else{
-                console.log("api_sav 연결 성공");
-                response.send(fr);
-            }
-        })
-        response.send(fr);
+        CSVtoJSON().fromFile('./public/data_saving.csv')
+        .then(users => {
+            response.send(users);
+        }).catch(error =>{
+            console.log(error);
+        });
     } catch (exception){
         throw exception;
     }
 })
 
+//채권 데이터
+app.get('/bond_*',function(request,response){
+    var param = request.params[0]
+    let routing = './public/bond_data/bond_'+param+'.csv'
+    console.log(routing)
+    try{
 
+        CSVtoJSON().fromFile(routing)
+            .then(users => {
+                    response.send(users)
+            })
+    } catch (exception){
+         throw exception;
+    }
+
+})
 
 //예금 MySQL Raw Data
 app.get('/dep_*',function(request,response){
     var param = request.params[0];
+    param_arr = param.split('&');
+
+    //param_arr[0] , param_arr[1]
     try{
-        var send_js = {};
-        var fr = fs.readFile('./public/data_deposit.csv','utf8',function(error,data){
-             if(error){
-                 console.log(error);
-             }
-             var dataSp = data.split(/\r?\n/);
-             var len_row = dataSp.length;
-             for (var i = 0; i<dataSp.length; ++i){
-                 dataSp[i] = dataSp[i].split(',');
-             }
-             //mapping
-             //datal = dataSp.map(x => x.split(','));
- 
-             for (var i = 0; i<len_row; ++i){
-                 if(dataSp[i][2]==param){
-                      for(var j = 1; j<=12; j+=2){
-                          //response.send(dataSp[i]);
-                          var tmp_key = dataSp[i][j];
-                          send_js[tmp_key] = (dataSp[i][j+1]);
 
-                     }
-                    //  response.send(dataSp[i]);
-                     break;
-                 }
-             }
-             //console.log();
-             //console.log(datal)
-             // for(var i=0; i<dataArray.length; ++i){
-             //     console.log(dataArray[i]);
-             // }
-
-             response.send(send_js);
+        CSVtoJSON().fromFile('./public/data_deposit.csv')
+            .then(users => {
+                var tmp=[];
+                //console.log(users.length);
+                for (var i = 0; i<users.length; ++i){
+                    if(users[i].fin_prdt_cd == param_arr[0]){
+                        if(users[i].은행명 == param_arr[1]){
+                            tmp.push(users[i]);
+                            //console.log(tmp);
+                        }
+                            
+                    }
+                }
+                return tmp;
+            }) 
+            .then(user1 => {
+                console.log('request on');
+                response.send(user1);
             })
-         
-         //response.send(fr);
-         //console.log(fr);
     } catch (exception){
          throw exception;
     }
@@ -153,47 +162,35 @@ app.get('/dep_*',function(request,response){
 
 //예금 MySQL Raw Data
 app.get('/sav_*',function(request,response){
+
     var param = request.params[0];
+    param_arr = param.split('&');
+
+    //param_arr[0] , param_arr[1]
     try{
-        var send_js = {};
-        var fr = fs.readFile('./public/data_saving.csv','utf8',function(error,data){
-             if(error){
-                 console.log(error);
-             }
-             //console.log(data);
-             var dataSp = data.split(']]"');
-             console.log(dataSp);
-             response.send(dataSp);
-             var datal = dataSp.map(x => x.split(','));
 
-
-             console.log(datal);
-             /*
-             for (var i = 0; i<len_row; ++i){
-                 if(dataSp[i][2]==param){
-                     //console.log(dataSp[i]);
-                     for(var j = 1; j<=12; j+=2){
-                        var tmp_key = dataSp[i][j];
-                        send_js[tmp_key]= (dataSp[i][j+1]);
-                        //console.log(tmp_key, dataSp[i][j+1]);
+        CSVtoJSON().fromFile('./public/data_saving.csv')
+            .then(users => {
+                var tmp=[];
+                //console.log(users.length);
+                for (var i = 0; i<users.length; ++i){
+                    if(users[i].fin_prdt_cd == param_arr[0]){
+                        if(users[i].은행명 == param_arr[1]){
+                            tmp.push(users[i]);
+                            //console.log(tmp);
+                        }
+                            
                     }
-                    //  response.send(dataSp[i]);
-                     //break;
-                 }
-                 
-             }
-             */
-             //response.send(send_js);
-        })
-         
-         //console.log(123);
-         //console.log(fr.length);
-         
-         //response.send(fr);
-         //console.log(fr);
+                }
+                return tmp;
+            }) 
+            .then(user1 => {
+                response.send(user1);
+            })
     } catch (exception){
          throw exception;
     }
+
  });
 
 
@@ -280,6 +277,45 @@ app.get('/bs',function(request,response){
             }
         })
     } catch (exception){
+        throw exception;
+    }
+})
+    
+
+//매크로 지표
+app.get('/api_macro',function(Request,response){
+    try{
+        CSVtoJSON().fromFile('./public/macro.csv')
+            .then(users =>{
+                response.send(users);
+            }).catch(error =>{
+                console.log(error);
+            })
+    } catch(exception){
+        console.log(exception);
+    }
+});
+
+app.get('/api_macro_coef',function(request,response){
+    try{
+        CSVtoJSON().fromFile('./public/macro_coef.csv')
+            .then(users =>{
+                response.send(users);
+            }).catch(error =>{
+                console.log(error);
+            })
+    } catch(exception){
+        console.log(exception);
+    }
+});
+
+app.get('/what',function(request,response){
+    const url = './public/img/seok1.jpg';
+    try{
+        var tmp1 = fs.readFileSync(url,'base64');
+        //let encoded_seok = base64encode(fr);
+        response.send(tmp1);
+    }catch(exception){
         throw exception;
     }
 })
