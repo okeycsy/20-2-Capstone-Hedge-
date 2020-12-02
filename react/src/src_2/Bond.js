@@ -80,6 +80,12 @@ export default function Bond() {
 
               <View style={styles.itemContainer}>
                   <FlatList
+                    ListHeaderComponent={
+                        <View style={styles.header}>
+                        <Text>상품명</Text>
+                        <Text>금리</Text>
+                        </View>
+                    }
                     data={data[idx]}
                     renderItem={renderItem}
                     keyExtractor={item => item.날짜}
@@ -126,5 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'lightgray'
-  }
+  },
+  header: {flex:1, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'white'}
 });
