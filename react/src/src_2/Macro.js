@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput, Image } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { Background } from 'victory-native';
 
 export default function Macro() {
   const [isLoading, setLoading] = useState(true);
@@ -36,12 +35,12 @@ export default function Macro() {
 
   const renderNames = ({ item }) => {
     return (
-      <TouchableOpacity
-        style={[styles.names, {backgroundColor:item.color}]}
-        onPress={() => setIdx(item.id)}
-      >
-          <Text>{item.name}</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.names, {backgroundColor:item.color}]}
+          onPress={() => setIdx(item.id)}
+        >
+            <Text>{item.name}</Text>
+        </TouchableOpacity>
     )
   }
 
@@ -63,8 +62,8 @@ export default function Macro() {
   const renderItem = ({item}) => {
       return (
         <TouchableOpacity style={styles.item}>
-            <Text>{item.name}</Text>
-            <Text>{item.val}</Text>
+            <View style={{alignItems: 'center', flex:1}}><Text>{item.name}</Text></View>
+            <View style={{alignItems: 'center', flex:1}}><Text>{item.val}</Text></View>
         </TouchableOpacity>
       )
   }
@@ -98,22 +97,39 @@ export default function Macro() {
 
 const styles = StyleSheet.create({
     namesContainer: {
-        borderWidth:1
+      marginTop: '10%',
+      borderColor: 'lightgray',
+      height: '30%',
+      justifyContent: 'center',
     }, // name 버튼을 생성하는 flatlist를 포함하는 view
     namesFlat: {
-        
+        flex:1,
     }, // name 버튼을 생성하는 flatlist
     names: {
-
+      flex: 1,
+      alignItems: 'center',
+      borderRadius: 5,
+      borderWidth: 1,
+      borderColor: 'lightgray',
     }, // name들의 버튼
 
     itemContainer: {
-        borderWidth:1
+      borderColor: 'lightgray',
+      borderRadius: 5,
+      borderWidth: 1,
+      height: '50%',
     }, // item 버튼을 생성하는 flatlist를 포함하는 view
     itemFlat: {
-        flexDirection: 'column'
+        flexDirection: 'column',
     }, // item 버튼을 생성하는 flatlist
     item: {
-        flexDirection: 'row'
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-evenly',
+      backgroundColor: 'lightgray',
+      borderRadius: 5,
+      marginBottom: 5,
+
     } // item들의 버튼(touchableopacity)
 })
