@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { NavigationRouteContext } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
   StatusBar,
@@ -8,93 +9,160 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
-  const TEMP1 = [
+function DepositDetails( {route} ) {
+  const [data, setData] = useState([
     {
-      id: '0',
-      join_member: '실명의 개인',
-      max_limit: '없음',
-      spcl_cnd: '* 최대우대금리 : 0.4%\n1. 거래고객우대금리 : 최대0.1% (신규시) \n -최초예적금고객/재예치/장기거래 각 0.05% \n2. 거래실적우대금리 : 최대0.3% (만기시)\n -급여,연금이체등/수협카드결제/공과금이체등 각0.1%\n※단위:연%p',
-      last2Term: '41344569',
-    },
-    {
-      id: '2',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '15353323',
-      lastTerm: '32815127',
-      last2Term: '28800837',
-    },
-  ];
-  const TEMP2 = [
-    {
-      id: '1',
-      type: '주당 현금배당금(원)보통주(1)당기',
-      thisTerm: '1416',
-      lastTerm: '1416',
-      last2Term: '850',
-    },
-    {
-      id: '2',
-      type: '주당 현금배당금(원)우선주(1)당기',
-      thisTerm: '2077',
-      lastTerm: '1417',
-      last2Term: '1417',
-    },
-  ];
-  const Item = ({ data }) => (
-    <View style={((data.id % 2 == 0) ? (styles.item_white) : (styles.item_gray))}>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.type}</Text>
-      </View>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.thisTerm}</Text>
-      </View>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.lastTerm}</Text>
-      </View>
-      <Text style={styles.textRight}>{data.last2Term}</Text>
-    </View>
-  );
+      
+    }
+  ])
 
-  const renderItem = ({item}) => <Item data={item} />;
+  useEffect(() => {
+    fetch('http://swlab.uos.ac.kr/dep_' + route.params.fin_prdt_cd + '&' + route.params.bank)
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => alert(error))
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <View style={styles.titleSub}>
-          <Text style={styles.title}>수협은행</Text>
-          <Text style={styles.textLeft}>Sh평생주거래우대예금</Text>
+        <View>
+          <Text style={styles.title}>{data[0].은행명}</Text>
+          <Text style={styles.textLeft}>{data[0].상품명}</Text>
         </View>
         <Text style= {styles.text}>네이버 금융 링크</Text>
       </View>
       <View style={styles.table}>
-        <View style={styles.rowName}>
-          <View style={styles.item_gray}>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>구분</Text>
+        
+        <FlatList style={styles.flatlist}
+          ListHeaderComponent = {
+            <View>
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>BIS 자기자본비율</Text>
+                </View>
+              <View style={styles.item_white}>
+                <View style={styles.rowSeparator_gray}>
+                  <Text style={styles.textRight}>{data[0]["BIS 비율"]} %</Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>당기</Text>
+            <View style={styles.item_set}>
+              <View style={styles.item_gray}>
+                <Text style={styles.textRight}>고정이하여신비율</Text>
+              </View>
+              <View style={styles.item_white}>
+                <View style={styles.rowSeparator_gray}>
+                  <Text style={styles.textRight}>{data[0].고정이하여신비율} %</Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>전기</Text>
+            <View style={styles.item_set}>
+              <View style={styles.item_gray}>
+                <Text style={styles.textRight}>가입 대상</Text>
+              </View>
+              <View style={styles.item_white}>
+                <View style={styles.rowSeparator_gray}>
+                  <Text style={styles.textRight}>{(data[0].join_member == NaN) ? "없음" : data[0].join_member} </Text>
+                </View>
+              </View>
             </View>
-            <Text style={styles.textCenter}>전전기</Text>
-          </View>
-          <View style={styles.item_white}>
-          <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>구분</Text>
+            <View style={styles.item_set}>
+              <View style={styles.item_gray}>
+                <Text style={styles.textRight}>우대 조건</Text>
+              </View>
+              <View style={styles.item_white}>
+                <View style={styles.rowSeparator_gray}>
+                  <Text style={styles.textRight}>{(data[0].spcl_cnd == "") ? "없음" : data[0].spcl_cnd} </Text>
+                </View>
+              </View>
             </View>
-            <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>당기</Text>
+            <View style={styles.item_set}>
+              <View style={styles.item_gray}>
+                <Text style={styles.textRight}>납입 한도</Text>
+              </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                   <Text style={styles.textRight}>{(data[0].max_limit == "") ? "없음" : data[0].max_limit }</Text>
+                 </View>
+                </View>
+             </View>
+             <View style={styles.rowSeparator_white}/>
+             <View style={styles.rowSeparator_white}/>
+             <View style={styles.rowSeparator_white}/>
+             <View style={styles.rowSeparator_white}/>
+             <View style={styles.rowSeparator_white}/>
+
+
+
             </View>
-            <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>전기</Text>
+          }
+          ItemSeparatorComponent={
+            ({highlighted}) => (
+              <View>
+                <View style={styles.rowSeparator_white}/>
+                <View style={styles.rowSeparator_white}/>
+                <View style={styles.rowSeparator_white}/>
+                <View style={styles.rowSeparator_white}/>
+                <View style={styles.rowSeparator_white}/>
+              </View>
+            )
+          }
+          data={data}
+          renderItem={({ item }) => (
+            <View style={styles.list_set}>
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>만기</Text>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{item.만기} 개월</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>금리 종류</Text>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{item.금리종류}</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <Text style={styles.textRight}>기본 금리</Text>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{item.수익률} %</Text>
+                  </View>
+                </View>
+              </View>
+              
+              <View style={styles.item_set}>
+                <View style={styles.item_gray}>
+                  <View style={styles.rowItem}>
+                    <Text style= {styles.smallText}>(우대 조건 모두 만족 시)</Text>
+                    <Text style={styles.textRight}>최대 금리</Text>
+                  </View>
+                </View>
+                <View style={styles.item_white}>
+                  <View style={styles.rowSeparator_gray}>
+                    <Text style={styles.textRight}>{item.최대금리} %</Text>
+                  </View>
+                </View>
+              </View>
             </View>
-            <Text style={styles.textCenter}>전전기</Text>
-          </View>
-        </View>
-        <FlatList data={TEMP1} renderItem={renderItem} keyExtractor={item => item.id} />
+          )}
+          keyExtractor={item => item.field1}
+          />
+        
+        
       </View>
     </View>
   );
@@ -102,7 +170,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignSelf: 'center',
     justifyContent: 'center',
+    width: '80%',
   },
   head: {
     justifyContent: 'space-between',
@@ -114,9 +185,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
   },
-  titleSub: {
-    width: '60%',
-  },
   table: {
     borderColor: 'lightgray',
     borderWidth: 2,
@@ -124,12 +192,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: 'center',
     alignContent: 'space-between',
-    flexDirection: 'row',
   },
   rowName: {
     borderColor: 'white',
     justifyContent: 'space-around',
     alignContent: 'space-between',
+  },
+  rowItem: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'flex-end'
   },
   rowSeparator_white: {
     borderColor: 'white',
@@ -151,8 +223,18 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-between',
   },
+  item_set: {
+  },
+  list_set: {
+    borderColor: 'black',
+    borderWidth: 2,
+  },
   text: {
     fontSize: 13,
+  },
+  smallText: {
+    fontSize: 10,
+    color: 'gray',
   },
   textCenter: {
     fontSize: 16,
@@ -165,7 +247,7 @@ const styles = StyleSheet.create({
   textLeft: {
     fontSize: 16,
     textAlign: 'left',
-  },
+  }
 });
 
-export default App;
+export default DepositDetails;
