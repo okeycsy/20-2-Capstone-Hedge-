@@ -39,7 +39,7 @@ const Test = () => {
   useEffect(() => {
   });
   
-  const renderItem = ({ item }) => {
+  const renderItem_1 = ({ item }) => {
     return (
       <Animated.View style={[{opacity: item.ani}]}>
         <Image
@@ -49,6 +49,23 @@ const Test = () => {
       </Animated.View>
     )
   }
+
+  const renderItem_2 = ({ item }) => {
+    return (
+      <Animated.View style={[{opacity: item.ani}]}>
+        <View style={{flexDirection:'row'}}>
+          <Image
+            style={styles.Contents_img}
+            source={item.img}
+          />
+
+          <Text>test</Text>
+        </View>
+      </Animated.View>
+    )
+  }
+
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -60,14 +77,14 @@ const Test = () => {
         <View style={styles.fixed}>
           <FlatList
               data={Contents_1}
-              renderItem={renderItem}
+              renderItem={renderItem_1}
           />
         </View>
 
         <View>
           <FlatList
               data={Contents_2}
-              renderItem={renderItem}
+              renderItem={renderItem_2}
           />
         </View>
       </View>
