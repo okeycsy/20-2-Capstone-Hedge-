@@ -75,7 +75,7 @@ const Test = () => {
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={[styles.button, {backgroundColor:c[0]}]} onPress={() => {display_contents(Contents_2, Contents_1), setC(['powderblue', '#b9bdc4'])}}><Text style={{fontSize:20}}>개발자</Text></TouchableOpacity>
-        <TouchableOpacity style={[styles.button, {backgroundColor:c[1]}]} onPress={() => {display_contents(Contents_1, Contents_2), setC(['#b9bdc4', 'powderblue'])}}><Text style={{fontSize:20}}>설명서</Text></TouchableOpacity>
+        <TouchableOpacity style={[styles.button, {backgroundColor:c[1]}]} onPress={() => {display_contents(Contents_1, Contents_2), setC(['#b9bdc4','powderblue'])}}><Text style={{fontSize:20}}>설명서</Text></TouchableOpacity>
         
       </View>
 
