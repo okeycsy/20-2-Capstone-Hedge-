@@ -17,6 +17,7 @@ import Stock_Details from "./src/src_2/Stock_Details";
 import about_Hedger from "./src/src_2/about_Hedger";
 import Div from "./src/src_2/Div";
 import Macro from "./src/src_2/Macro";
+import DividendDetails from "./src/Dividend"
 
 
 const Stack = createStackNavigator();
@@ -33,6 +34,8 @@ function App() {
         <Stack.Screen name="about_Hedger" component={about_Hedger} />
         <Stack.Screen name="Div" component={Div} />
         <Stack.Screen name="Macro" component={Macro} />
+        <Stack.Screen name="Dividend_details" component={DividendDetails} />
+
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>

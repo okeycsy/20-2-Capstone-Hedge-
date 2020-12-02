@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function Div() {
+export default function Div({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [sort, setSort] = useState(1);
@@ -28,7 +28,17 @@ export default function Div() {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => navigation.push('Dividend_details',{
+          name: item.상품명,
+          this_year: item.올해배당금,
+          last_year: item.작년배당금,
+          lastlast_year: item.재작년배당금,
+          cost: item.주가,
+          yield: item.수익률,
+          risk: item.위험도
+          })}>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.상품명}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.위험도}</Text></View>
         <View style={{flex:1, alignItems:'center'}}><Text style={styles.text}>{item.수익률}</Text></View>
