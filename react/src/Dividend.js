@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FlatList,
   StatusBar,
@@ -8,90 +8,75 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
-  const TEMP1 = [
-    {
-      id: '1',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '21505054',
-      lastTerm: '43890877',
-      last2Term: '41344569',
-    },
-    {
-      id: '2',
-      type: '(연결) 당기순이익 (백만원)',
-      thisTerm: '15353323',
-      lastTerm: '32815127',
-      last2Term: '28800837',
-    },
-  ];
-  const TEMP2 = [
-    {
-      id: '1',
-      type: '주당 현금배당금(원)보통주(1)당기',
-      thisTerm: '1416',
-      lastTerm: '1416',
-      last2Term: '850',
-    },
-    {
-      id: '2',
-      type: '주당 현금배당금(원)우선주(1)당기',
-      thisTerm: '2077',
-      lastTerm: '1417',
-      last2Term: '1417',
-    },
-  ];
-  const Item = ({ data }) => (
-    <View style={((data.id % 2 == 0) ? (styles.item_white) : (styles.item_gray))}>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.type}</Text>
-      </View>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.thisTerm}</Text>
-      </View>
-      <View style={((data.id % 2 == 0) ? (styles.rowSeparator_gray) : (styles.rowSeparator_white))}>
-        <Text style={styles.textRight}>{data.lastTerm}</Text>
-      </View>
-      <Text style={styles.textRight}>{data.last2Term}</Text>
-    </View>
-  );
-
-  const renderItem = ({item}) => <Item data={item} />;
-
+function DividendDetails( {route} ) {
+  const data = route.params
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Text style={styles.title}>삼성전자</Text>
+        <Text style={styles.title}>{data.name}</Text>
         <Text style= {styles.text}>네이버 금융 링크</Text>
       </View>
       <View style={styles.table}>
-        <View style={styles.rowName}>
+        <View style={styles.item_set}>
           <View style={styles.item_gray}>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>구분</Text>
-            </View>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>당기</Text>
-            </View>
-            <View style={styles.rowSeparator_white}>
-              <Text style={styles.textCenter}>전기</Text>
-            </View>
-            <Text style={styles.textCenter}>전전기</Text>
+            <Text style={styles.textRight}>어제 종가</Text>
           </View>
           <View style={styles.item_white}>
-          <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>구분</Text>
-            </View>
             <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>당기</Text>
+              <Text style={styles.textRight}>{parseInt(data.cost)} 원</Text>
             </View>
-            <View style={styles.rowSeparator_gray}>
-              <Text style={styles.textCenter}>전기</Text>
-            </View>
-            <Text style={styles.textCenter}>전전기</Text>
           </View>
         </View>
-        <FlatList data={TEMP1} renderItem={renderItem} keyExtractor={item => item.id} />
+        <View style={styles.item_set}>
+          <View style={styles.item_gray}>
+            <Text style={styles.textRight}>(2019년 배당금 기준) 수익률</Text>
+          </View>
+          <View style={styles.item_white}>
+            <View style={styles.rowSeparator_gray}>
+              <Text style={styles.textRight}>{data.yield} %</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.item_set}>
+          <View style={styles.item_gray}>
+            <Text style={styles.textRight}>종목 변동성</Text>
+          </View>
+          <View style={styles.item_white}>
+            <View style={styles.rowSeparator_gray}>
+              <Text style={styles.textRight}>{data.risk} %</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.item_set}>
+          <View style={styles.item_gray}>
+            <Text style={styles.textRight}>2019년 배당금</Text>
+          </View>
+          <View style={styles.item_white}>
+            <View style={styles.rowSeparator_gray}>
+              <Text style={styles.textRight}>{data.this_year} 원</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.item_set}>
+          <View style={styles.item_gray}>
+            <Text style={styles.textRight}>2018년 배당금</Text>
+          </View>
+          <View style={styles.item_white}>
+            <View style={styles.rowSeparator_gray}>
+              <Text style={styles.textRight}>{data.last_year} 원</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.item_set}>
+          <View style={styles.item_gray}>
+            <Text style={styles.textRight}>2017년 배당금</Text>
+          </View>
+          <View style={styles.item_white}>
+            <View style={styles.rowSeparator_gray}>
+              <Text style={styles.textRight}>{data.lastlast_year} 원</Text>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -99,7 +84,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignSelf: 'center',
     justifyContent: 'center',
+    width: '80%',
   },
   head: {
     justifyContent: 'space-between',
@@ -118,7 +106,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: 'center',
     alignContent: 'space-between',
-    flexDirection: 'row',
   },
   rowName: {
     borderColor: 'white',
@@ -145,6 +132,9 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-between',
   },
+  item_set: {
+    width: '100%',
+  },
   text: {
     fontSize: 13,
   },
@@ -158,4 +148,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default DividendDetails;

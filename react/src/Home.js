@@ -11,74 +11,83 @@ import {
 } from 'react-native';
 
 function App({ navigation }) {
-  const [DATA, setData] = useState([]);
+  // const [DATA, setData] = useState([]);
 
-  useEffect(() => {
-    fetch('http://swlab.uos.ac.kr/bs')
-    .then((response) => (response.json()))
-    .then(function(result){
-      let temp = [];
-      for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
-      result.sort(function(a,b){
-        return a.bs < b.bs ? 1 : a.bs > b.bs ? -1 : 0;
-      })
-      for(let i = 1; i < 5; i++) temp.push(  {name:result[i].name, bs:parseFloat(result[i].bs).toFixed(3)}  );
-      setData(temp);
-    })
-  })
+  // useEffect(() => {
+  //   fetch('http://swlab.uos.ac.kr/bs')
+  //   .then((response) => (response.json()))
+  //   .then(function(result){
+  //     let temp = [];
+  //     for(let i = 0; i < result.length; i++) result[i].bs = parseFloat(result[i].bs);
+  //     result.sort(function(a,b){
+  //       return a.bs < b.bs ? 1 : a.bs > b.bs ? -1 : 0;
+  //     })
+  //     for(let i = 1; i < 5; i++) temp.push(  {name:result[i].name, bs:parseFloat(result[i].bs).toFixed(3)}  );
+  //     setData(temp);
+  //   })
+  // })
 
-  const Item = ({ data }) => (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => navigation.push('Stock_Details', {name : data.name})}
-    >
-      <Text style={styles.title}>{data.name}</Text>
-      <Text style={styles.title}>{data.bs}</Text>
-    </TouchableOpacity>
-  );
-  const renderItem = ({item}) => <Item data={item} />;
+  // const Item = ({ data }) => (
+  //   <TouchableOpacity
+  //     style={styles.item}
+  //     onPress={() => navigation.push('Stock_Details', {name : data.name})}
+  //   >
+  //     <Text style={styles.title}>{data.name}</Text>
+  //     <Text style={styles.title}>{data.bs}</Text>
+  //   </TouchableOpacity>
+  // );
+  // const renderItem = ({item}) => <Item data={item} />;
 
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <View style={{flex:1, height:'10%'}}>
+        <View style={{flex:1, height:'10%', marginTop: '3%'}}>
           <Image
-            style={{ width: 100, height: 100}}
+            style={{ width: 150, height: 150}}
             source={require('../image/logo.png')}
           />
         </View>
 
         <View style={styles.rowContainer}>
           <View style={styles.subRow}>
+            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
+              <Text>배당금 비교</Text>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Stocks')} style={styles.button}>
-              <Text>주식 신호분석</Text>
+              <Text>예금 상품 비교</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.push('Details')} style={styles.button}>
-              <Text>금융상품 비교</Text>
+              <Text>적금 상품 비교</Text>
             </TouchableOpacity>
           </View>
           
           <View style={styles.subRow}>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>매크로 지표</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.push('Div')} style={styles.button}>
-              <Text>배당금 비교</Text>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>채권(국고채/회사채)</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('Macro')} style={styles.button}>
+              <Text>ELS/DLS</Text>
             </TouchableOpacity>
           </View>
+
+
         </View>
-        
-        <View style={styles.hotProductList}>
-          <FlatList
-            data={DATA} 
-            renderItem={renderItem} 
-            keyExtractor={item => item.name} 
-          />
+
+        <View style={{borderWidth:1, width:'80%'}}>
+          <TouchableOpacity onPress={() => navigation.push('Stocks')}>
+                <Text>주식 신호분석</Text>
+          </TouchableOpacity>
         </View>
 
         <View>
-          <TouchableOpacity onPress={() => navigation.push('about_Hedger')}>
+          <TouchableOpacity 
+            style={{marginTop:'5%'}}
+            onPress={() => navigation.push('about_Hedger')}
+            >
             <Text>Hedger는 어떤 어플인가요?</Text>
           </TouchableOpacity>
         </View>
@@ -102,35 +111,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     width: '100%',
-    height: '40%',
+    height: '60%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
   },
   subRow: {
-    borderWidth:1,
     width: '100%',
-    height: '30%',
+    height: '50%',
+    paddingVertical: '7%',
+    marginVertical: '2%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-  },
-  hotProductList: {
-    borderColor: 'lightgray',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginVertical: 10,
-    justifyContent: 'center',
-    height: '40%',
-    width: '100%'
-  },
-  item: {
-    backgroundColor: 'white',
-    padding: 15,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   title: {
     fontSize: 16
@@ -140,8 +133,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
     padding: 10,
-    width: '50%',
-    height: '50%',
+    width: '30%',
+    height: '120%',
   },
 });
 
