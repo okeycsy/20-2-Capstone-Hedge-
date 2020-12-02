@@ -10,10 +10,10 @@ const Test = () => {
     { ani: useRef(new Animated.Value(0)).current, img: require('../../image/logo.png') },
   ];
   const Contents_2 = [
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seok1.jpg') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seung1.jpg') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jun1.jpg') },
-    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jung1.jpg') },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seok1.jpg'), name:"최석용", text:"test\ntest" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/seung1.jpg'), name:"이승윤", text:"test" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jun1.jpg'), name:"이정준", text:"test" },
+    { ani: useRef(new Animated.Value(0)).current, img: require('../../image/jung1.jpg'), name:"정현학", text:"test" },
   ];
 
   const fadeIn = (target) => {
@@ -37,7 +37,7 @@ const Test = () => {
   }
 
   useEffect(() => {
-    display_contents(Contents_1, Contents_2)
+    display_contents(Contents_2, Contents_1)
   });
   
   const renderItem_1 = ({ item }) => {
@@ -54,13 +54,17 @@ const Test = () => {
   const renderItem_2 = ({ item }) => {
     return (
       <Animated.View style={[{opacity: item.ani}]}>
-        <View style={{flexDirection:'row'}}>
-          <Image
-            style={styles.Contents_img}
-            source={item.img}
-          />
-
-          <Text>test</Text>
+        <View style={{flexDirection:'row', marginVertical: '5%'}}>
+          <View style={{marginRight:'5%'}}>
+            <Image
+              style={styles.Contents_img}
+              source={item.img}
+            />
+          </View>
+          <View style={{flex:1, flexDirection:'column', alignItems:'stretch'}}>
+            <View><Text style={{fontSize:20}}>{item.name}</Text></View>
+            <View><Text>{item.text}</Text></View>
+          </View>
         </View>
       </Animated.View>
     )
@@ -70,8 +74,9 @@ const Test = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_1, Contents_2)}><Text>Contents_1</Text></TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_2, Contents_1)}><Text>Contents_2</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => display_contents(Contents_1, Contents_2)}><Text>Contents_1</Text></TouchableOpacity>
+        
       </View>
 
       <View>
@@ -108,6 +113,8 @@ const styles = StyleSheet.create({
   Contents_img: {
     width: 200,
     height: 200,
+    borderRadius: 100,
+    overflow: 'hidden'
   },
   fixed: {
     position:'absolute',
