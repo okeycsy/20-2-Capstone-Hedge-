@@ -20,6 +20,8 @@ import Macro from "./src/src_2/Macro";
 import DividendDetails from "./src/Dividend"
 import Dep from "./src/src_2/Dep"
 import DepositDetails from "./src/Deposit"
+import Sav from "./src/src_2/Sav"
+import SavingDetails from "./src/Saving"
 
 
 const Stack = createStackNavigator();
@@ -35,10 +37,12 @@ function App() {
         <Stack.Screen name="Stock_Details" component={Stock_Details} />
         <Stack.Screen name="about_Hedger" component={about_Hedger} />
         <Stack.Screen name="Div" component={Div} />
-        <Stack.Screen name="Macro" component={Macro} />
         <Stack.Screen name="Dividend_details" component={DividendDetails} />
         <Stack.Screen name="Dep" component={Dep} />
         <Stack.Screen name="Deposit_details" component={DepositDetails} />
+        <Stack.Screen name="Sav" component={Sav} />
+        <Stack.Screen name="Saving_details" component={SavingDetails} />
+        <Stack.Screen name="Macro" component={Macro} />
 			</Stack.Navigator>
 		</View>
 	</NavigationContainer>
