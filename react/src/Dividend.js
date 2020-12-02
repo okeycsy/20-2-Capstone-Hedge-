@@ -8,13 +8,48 @@ import {
   View,
 } from 'react-native';
 
+import { Linking } from 'react-native'
+import { InAppBrowser } from 'react-native-inappbrowser-reborn'
+
+async function openLink() {
+  try {
+    const url = 'https://finance.naver.com/search/searchList.nhn?query='
+    const query = '삼성전자'
+    console.log(InAppBrowser.isAvailable())
+    // {
+    //   const result =  InAppBrowser.open(url, {
+
+    //     // Android Properties
+    //     showTitle: true,
+    //     toolbarColor: '#6200EE',
+    //     secondaryToolbarColor: 'black',
+    //     enableUrlBarHiding: true,
+    //     enableDefaultShare: true,
+    //     forceCloseOnRedirection: false,
+    //     headers: {
+    //       'my-custom-header': 'my custom header value'
+    //     }
+    //   })
+    // }
+    Linking.openURL(url + query)
+  } catch (error) {
+    alert(error.message)
+  }
+}
+
 function DividendDetails( {route} ) {
   const data = route.params
   return (
     <View style={styles.container}>
       <View style={styles.head}>
         <Text style={styles.title}>{data.name}</Text>
-        <Text style= {styles.text}>네이버 금융 링크</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            openLink()
+        }}>
+          <Text style= {styles.text}>네이버 금융 링크</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.table}>
         <View style={styles.item_set}>

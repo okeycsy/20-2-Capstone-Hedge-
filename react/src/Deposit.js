@@ -35,7 +35,7 @@ function DepositDetails( {route} ) {
                   <Text style={styles.title}>{data[0].은행명}</Text>
                   <Text style={styles.textLeft}>{data[0].상품명}</Text>
                 </View>
-                <Text style= {styles.text}>네이버 금융 링크</Text>
+                <Text style= {styles.text}></Text>
               </View>
               <View style={styles.item_set}>
                 <View style={styles.item_gray}>
