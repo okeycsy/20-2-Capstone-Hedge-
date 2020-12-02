@@ -83,6 +83,12 @@ export default function Macro() {
 
               <View style={styles.itemContainer}>
                 <FlatList
+                  ListHeaderComponent={
+                    <View style={styles.header}>
+                      <Text>상품명</Text>
+                      <Text>유사도</Text>
+                    </View>
+                  }
                   style={styles.itemFlat}
                   data={tempData}
                   renderItem={renderItem}
@@ -131,5 +137,6 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       marginBottom: 5,
 
-    } // item들의 버튼(touchableopacity)
+    }, // item들의 버튼(touchableopacity)
+    header: {flex:1, flexDirection: 'row', justifyContent: 'space-around', backgroundColor: 'white'}
 })

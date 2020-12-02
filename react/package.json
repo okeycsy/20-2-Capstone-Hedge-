@@ -17,7 +17,7 @@
     "d3-format": "^1.2.1",
     "d3-scale": "^1.0.7",
     "d3-time-format": "^2.1.1",
-    "expo": "~39.0.2",
+    "expo": "^39.0.5",
     "expo-cli": "^4.0.7",
     "expo-status-bar": "~1.0.2",
     "jquery-csv": "^1.0.11",
