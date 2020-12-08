@@ -10,6 +10,13 @@ export default function Div({ navigation }) {
   const [text, setText] = useState("");
   const [search, setSearch] = useState([]);
   const [searchSort, setSearchSort] = useState(1);
+  
+  // 버튼 색 정의
+  const s_h = 'red';
+  const s_l = 'blue';
+  const us = 'lightgray';
+  // 버튼 색 변화를 위한 상태 정의 
+  const [sortButtonColor, setSortButtonColor] = useState([us, s_h]);
 
   useEffect(() => {
     fetch('http://swlab.uos.ac.kr/api_div')
@@ -76,6 +83,17 @@ export default function Div({ navigation }) {
       })
     }
 
+    // 버튼 색 변화
+    if(nextSort === 1) {
+      setSortButtonColor([us, s_h]);
+    } else if(nextSort === -1) {
+      setSortButtonColor([us, s_l]);
+    } else if(nextSort === 2) {
+      setSortButtonColor([s_h, us]);
+    } else if(nextSort === -2) {
+      setSortButtonColor([s_l, us]);
+    }
+
     setData(temp_data);
   }
   
@@ -128,8 +146,8 @@ export default function Div({ navigation }) {
             (
               <View style={styles.roundContainer2}>
                 <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
-                  <TouchableOpacity onPress={() => sorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
-                  <TouchableOpacity onPress={() => sorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={() => sorting(2)} style={[styles.button, {backgroundColor:sortButtonColor[0]}]}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                  <TouchableOpacity onPress={() => sorting(1)} style={[styles.button, {backgroundColor:sortButtonColor[1]}]}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
                 </View>
                 <View
                   style={styles.columns}>
@@ -148,8 +166,8 @@ export default function Div({ navigation }) {
             ) :
             (<View style={styles.roundContainer2}>
               <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-around', marginVertical: '2%'}}>
-                <TouchableOpacity onPress={() => searchSorting(2)} style={styles.button}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => searchSorting(1)} style={styles.button}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => searchSorting(2)} style={[styles.button, {backgroundColor:sortButtonColor[0]}]}><Text style={styles.text}>리스크 정렬</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => searchSorting(1)} style={[styles.button, {backgroundColor:sortButtonColor[1]}]}><Text style={styles.text}>수익률 정렬</Text></TouchableOpacity>
               </View>
               <FlatList
                 style={styles.flatlistlist}
