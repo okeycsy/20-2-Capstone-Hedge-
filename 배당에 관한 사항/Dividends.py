@@ -129,7 +129,7 @@ for company in listed_company_list:
     print(count)
     #if count == limit:
     #    break
-    time.sleep(5)
+    time.sleep(2)
 
     for year in range(2019, 2020):
         result, dividend_info, se_list = download_dividend(api_key, company, str(year), '11011')
