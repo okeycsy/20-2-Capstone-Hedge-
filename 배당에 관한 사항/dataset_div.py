@@ -31,7 +31,7 @@ def dividend():
             # 비용
             cost = stock.tail(1).iloc[0]['Close']
             profit = row['유형1 당기']
-            rate = profit / cost * 100
+            rate = int(profit) / cost * 100
             if rate > 30:
                 return
 
